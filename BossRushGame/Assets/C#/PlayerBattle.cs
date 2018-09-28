@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBattle : MonoBehaviour {
-
-    private CombatChar combatValues;
-    private BattleSystem BS;
+public class PlayerBattle : MonoBehaviour
+{
+    public CharCombatValues enemy;
+    private CharCombatValues _combatValues;
+    private BattleSystem _BS;
     private Animator _animator;
 
     private bool Attacked = false;
@@ -15,20 +16,20 @@ public class PlayerBattle : MonoBehaviour {
 
     private void Start()
     {
-        combatValues = GetComponent<CombatChar>();
-        BS = FindObjectOfType<BattleSystem>();
+        _combatValues = GetComponent<CharCombatValues>();
+        _BS = FindObjectOfType<BattleSystem>();
         _animator = GetComponent<Animator>();
     }
 
     private void Update() //TODO: Redo everything
     {
-        if (!BS.PlayerTurn)
+        if (!_BS.PlayerTurn)
         {
             if (Input.GetButtonDown("Interact") && !Guard)
             {
                 Guard = true;
                 Timer = 0.1f;
-                combatValues.currentDP = combatValues.initDP + 1;
+                _combatValues.currentDP = _combatValues.defaultDP + 1;
             }
         }
         if (Timer >= 0)
@@ -37,13 +38,13 @@ public class PlayerBattle : MonoBehaviour {
         }
         else
         {
-            combatValues.currentDP = combatValues.initDP;
+            _combatValues.currentDP = _combatValues.defaultDP;
         }
     }
 
     public void InitiateAttack()
     {
-        if (BS.PlayerTurn)
+        if (_BS.PlayerTurn)
         {
             if(!Attacked)
             _animator.SetBool("Attack", true);
@@ -53,10 +54,10 @@ public class PlayerBattle : MonoBehaviour {
 
     private void Attack()
     {
-        if (combatValues.enemy == null)
+        if (enemy == null)
             return;
 
-        combatValues.enemy.TakeDamage(combatValues.currentAP);
+        enemy.TakeDamage(_combatValues.currentAP);
 
         _animator.SetBool("Attack", false);
     }
@@ -65,7 +66,7 @@ public class PlayerBattle : MonoBehaviour {
     {
         Attacked = false;
         Guard = false;
-        BS.ChangeTurn();
+        _BS.ChangeTurn();
     }
 
     public void Defend()

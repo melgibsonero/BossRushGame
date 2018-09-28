@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class MAD_AI : MonoBehaviour
 {
-    private CombatChar combatValues;
-    private BattleSystem BS;
+    public CharCombatValues enemy;
+    private CharCombatValues _combatValues;
+    private BattleSystem _BS;
     private Animator _animator;
     private bool Attacked = false;
 
     private void Start()
     {
-        combatValues = GetComponent<CombatChar>();
-        BS = FindObjectOfType<BattleSystem>();
+        _combatValues = GetComponent<CharCombatValues>();
+        _BS = FindObjectOfType<BattleSystem>();
         _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (!BS.PlayerTurn)
+        if (!_BS.PlayerTurn)
         {
             if (!Attacked)
             {
@@ -34,17 +35,17 @@ public class MAD_AI : MonoBehaviour
 
     public void Attack()
     {
-        if (combatValues.enemy == null)
+        if (enemy == null)
             return;
 
-        combatValues.enemy.TakeDamage(combatValues.currentAP);
+        enemy.TakeDamage(_combatValues.currentAP);
 
         _animator.SetBool("Attack", false);
     }
 
     private void ChangeTurn()
     {
-        BS.ChangeTurn();
+        _BS.ChangeTurn();
         Attacked = false;
     }
 
