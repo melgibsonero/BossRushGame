@@ -10,6 +10,9 @@ public class MAD_AI : MonoBehaviour
     private Animator _animator;
     private bool Attacked = false;
 
+    bool hasTarget;
+    bool isAlive = true;
+
     private void Start()
     {
         _combatValues = GetComponent<CharCombatValues>();
@@ -26,11 +29,27 @@ public class MAD_AI : MonoBehaviour
                 InitAttack();
             }
         }
+
+        if (_combatValues.currentHP<=0 && !_BS.AttackInSession)
+        {
+            isAlive = false;
+            _animator.SetBool("Dead", true);
+        }
     }
     public void InitAttack()
     {
         Attacked = true;
+        IsAttacking();
         _animator.SetBool("Attack", true);
+    }
+    public void IsAttacking()
+    {
+        _BS.AttackInSession = !_BS.AttackInSession;
+    }
+
+    public void DisableGO()
+    {
+        gameObject.SetActive(false);
     }
 
     public void Attack()
@@ -38,6 +57,7 @@ public class MAD_AI : MonoBehaviour
         if (enemy == null)
             return;
 
+        _BS.StopTime();
         enemy.TakeDamage(_combatValues.currentAP);
 
         _animator.SetBool("Attack", false);

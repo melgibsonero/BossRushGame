@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class CharCombatValues : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class CharCombatValues : MonoBehaviour
 
             if (currentHP < 0)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
             }
         }
 

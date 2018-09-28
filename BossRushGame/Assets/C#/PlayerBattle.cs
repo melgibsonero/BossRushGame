@@ -12,7 +12,9 @@ public class PlayerBattle : MonoBehaviour
     private bool Attacked = false;
     private bool Guard = false;
 
-    private float Timer;
+    private int multibounceHardCap;
+
+    public bool JumpWindow;
 
     private void Start()
     {
@@ -23,22 +25,18 @@ public class PlayerBattle : MonoBehaviour
 
     private void Update() //TODO: Redo everything
     {
-        if (!_BS.PlayerTurn)
+
+        if (JumpWindow)
         {
-            if (Input.GetButtonDown("Interact") && !Guard)
+            if (Input.GetButtonDown("Interact") && multibounceHardCap>0)
             {
-                Guard = true;
-                Timer = 0.1f;
-                _combatValues.currentDP = _combatValues.defaultDP + 1;
+                _animator.SetBool("ContinueAttack", true);
+                multibounceHardCap--;
             }
-        }
-        if (Timer >= 0)
-        {
-            Timer -= Time.deltaTime;
         }
         else
         {
-            _combatValues.currentDP = _combatValues.defaultDP;
+            _animator.SetBool("ContinueAttack", false);
         }
     }
 
@@ -46,10 +44,17 @@ public class PlayerBattle : MonoBehaviour
     {
         if (_BS.PlayerTurn)
         {
-            if(!Attacked)
+            if (!Attacked)
+            multibounceHardCap = Random.Range(3, 8);
             _animator.SetBool("Attack", true);
             Attacked = true;
+            IsAttacking();
         }
+    }
+    
+    public void IsAttacking()
+    {
+        _BS.AttackInSession = !_BS.AttackInSession;
     }
 
     private void Attack()
@@ -57,6 +62,7 @@ public class PlayerBattle : MonoBehaviour
         if (enemy == null)
             return;
 
+        _BS.StopTime();
         enemy.TakeDamage(_combatValues.currentAP);
 
         _animator.SetBool("Attack", false);
@@ -73,5 +79,10 @@ public class PlayerBattle : MonoBehaviour
     public void Defend()
     {
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawWireCube(transform.position, transform.localScale * 2);
     }
 }
