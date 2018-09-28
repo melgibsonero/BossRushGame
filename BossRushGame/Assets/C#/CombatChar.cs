@@ -3,7 +3,6 @@
 public class CombatChar : MonoBehaviour
 {
     public CombatChar enemy;
-    public bool myTurn;
 
     [Space(-10), Header("Health")]
     public int maxHP;
@@ -114,25 +113,6 @@ public class CombatChar : MonoBehaviour
         currentDP = initDP;
 
         UpdateColor();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (myTurn)
-                Attack();
-
-            myTurn = !myTurn;
-        }
-    }
-
-    private void Attack()
-    {
-        if (enemy == null)
-            return;
-
-        enemy.TakeDamage(currentAP);
     }
 
     private void UpdateColor()
