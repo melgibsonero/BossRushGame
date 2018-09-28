@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-public class CombatChar : MonoBehaviour
+public class CharCombatValues : MonoBehaviour
 {
-    public CombatChar enemy;
-    public bool myTurn;
-
     [Space(-10), Header("Health")]
     public int maxHP;
     public int currentHP;
@@ -14,11 +11,11 @@ public class CombatChar : MonoBehaviour
     public int currentMP;
 
     [Space(-10), Header("Attack")]
-    public int initAP;          // no buffs
+    public int defaultAP;       // no buffs
     public int currentAP;       // with buffs
 
     [Space(-10), Header("Defence")]
-    public int initDP;          // no buffs
+    public int defaultDP;       // no buffs
     public int currentDP;       // with buffs
 
     private int _totalDamage;
@@ -39,7 +36,7 @@ public class CombatChar : MonoBehaviour
             }
         }
 
-        UpdateColor();
+        _totalDamage = 0;
     }
 
     public void HealUp(int amount)
@@ -50,8 +47,6 @@ public class CombatChar : MonoBehaviour
         {
             currentHP = maxHP;
         }
-
-        UpdateColor();
     }
 
     #endregion
@@ -87,13 +82,7 @@ public class CombatChar : MonoBehaviour
     #endregion
 
     #region Buff methods
-
-    public void ResetBuffs(bool AP, bool DP)
-    {
-        if (AP) currentAP = initAP;
-        if (DP) currentDP = initDP;
-    }
-
+    
     public void AttackBuff(int buffValue)
     {
         currentAP += buffValue;
@@ -110,33 +99,7 @@ public class CombatChar : MonoBehaviour
     {
         currentHP = maxHP;
         currentMP = maxMP;
-        currentAP = initAP;
-        currentDP = initDP;
-
-        UpdateColor();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (myTurn)
-                Attack();
-
-            myTurn = !myTurn;
-        }
-    }
-
-    private void Attack()
-    {
-        if (enemy == null)
-            return;
-
-        enemy.TakeDamage(currentAP);
-    }
-
-    private void UpdateColor()
-    {
-        GetComponent<MeshRenderer>().material.color = Color.HSVToRGB((float)currentHP / maxHP * 0.333f, 1f, 1f);
+        currentAP = defaultAP;
+        currentDP = defaultDP;
     }
 }
