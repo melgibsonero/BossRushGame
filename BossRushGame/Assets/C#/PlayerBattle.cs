@@ -64,6 +64,7 @@ public class PlayerBattle : MonoBehaviour
 
     private void TurnSwap()
     {
+        _animator.SetBool("Attack", false);
         Attacked = false;
         Guard = false;
         _BS.ChangeTurn();

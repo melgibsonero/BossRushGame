@@ -45,6 +45,7 @@ public class MAD_AI : MonoBehaviour
 
     private void ChangeTurn()
     {
+        _animator.SetBool("Attack", false);
         _BS.ChangeTurn();
         Attacked = false;
     }
