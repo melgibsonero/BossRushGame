@@ -4,7 +4,7 @@ public class BaseBuff : MonoBehaviour
 {
     private BuffSystem _buffSystem;
 
-    private CharCombatValues _buffOwner;
+    protected CharCombatValues _buffOwner;
     private int _buffAP, _buffDP;
 
     protected void Init(CharCombatValues buffOwner, int buffAP, int buffDP)

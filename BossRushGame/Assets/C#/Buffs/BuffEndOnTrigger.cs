@@ -9,9 +9,9 @@
         _trigger = trigger;
     }
 
-    public void TriggerRemove(BuffSystem.TriggerEndBuff trigger)
+    public void TriggerRemove(BuffSystem.TriggerEndBuff trigger, CharCombatValues doer)
     {
-        if (_trigger == trigger)
+        if (_buffOwner == doer && _trigger == trigger)
             RemoveBuff();
     }
 }
