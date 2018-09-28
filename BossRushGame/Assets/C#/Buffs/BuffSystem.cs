@@ -11,4 +11,20 @@ public class BuffSystem : MonoBehaviour
     {
         Attack = 0
     }
+
+    public void EndBuffTrigger(TriggerEndBuff trigger, CharCombatValues doer)
+    {
+        foreach (BuffEndOnTrigger buff in _buffs)
+        {
+            buff.TriggerRemove(trigger, doer);
+        }
+    }
+
+    public void UpdateTurnCount()
+    {
+        foreach (BuffTurnLimit buff in _buffs)
+        {
+            buff.UpdateTurnCount();
+        }
+    }
 }
