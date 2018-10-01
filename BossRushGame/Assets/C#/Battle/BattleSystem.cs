@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleSystem : MonoBehaviour {
@@ -8,6 +7,9 @@ public class BattleSystem : MonoBehaviour {
     private bool playerTurn = true;
     public bool timeStopped = false;
     public bool AttackInSession;
+
+    public BattleUnitPlayer[] _playerBattles;
+    public BattleUnitEnemy[] _MAD_AIs;
 
     IEnumerator TimeStop()
     {
