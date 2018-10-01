@@ -2,9 +2,9 @@
 {
     private BuffSystem.TriggerEndBuff _trigger;
 
-    public void Init(CharCombatValues buffOwner, int buffAP, int buffDP, BuffSystem.TriggerEndBuff trigger)
+    public void Init(CharCombatValues buffOwner, int buffAP, int buffDP, bool isPlayerBuff, BuffSystem.TriggerEndBuff trigger)
     {
-        Init(buffOwner, buffAP, buffDP);
+        Init(buffOwner, buffAP, buffDP, isPlayerBuff);
 
         _trigger = trigger;
     }

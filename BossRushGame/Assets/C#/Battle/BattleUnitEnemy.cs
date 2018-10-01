@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BattleUnitEnemy : BattleUnitBase
 {
+    /*
     private bool Attacked = false;
 
     bool hasTarget;
     bool isAlive = true;
-    /*
+    
     private void Update()
     {
         if (!_BS.PlayerTurn)

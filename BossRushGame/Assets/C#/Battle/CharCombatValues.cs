@@ -5,6 +5,7 @@ public class CharCombatValues : MonoBehaviour
     [Space(-10), Header("Health")]
     public int maxHP;
     public int currentHP;
+    public bool IsDead { get { return currentHP <= 0; } }
 
     [Space(-10), Header("Mana")]
     public int maxMP;

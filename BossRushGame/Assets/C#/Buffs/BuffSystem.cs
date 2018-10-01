@@ -18,11 +18,12 @@ public class BuffSystem : MonoBehaviour
         }
     }
 
-    public void UpdateTurnCount()
+    public void UpdateTurnCount(bool playerBuffs)
     {
         foreach (BuffTurnLimit buff in _buffs)
         {
-            buff.UpdateTurnCount();
+            if (buff.isPlayerBuff == playerBuffs)
+                buff.UpdateTurnCount();
         }
     }
 }
