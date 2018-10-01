@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class BattleUnitEnemy : BattleUnitBase
 {
-    public void MyTurn()
-    {
-
-    }
-
     /*
     private bool Attacked = false;
 

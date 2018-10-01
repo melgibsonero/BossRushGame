@@ -6,6 +6,7 @@ public class BattleUnitBase : MonoBehaviour
 {
     protected CharCombatValues _combatValues;
     protected Animator _animator;
+    public bool isDoneForTurn;
 
     private void Start()
     {

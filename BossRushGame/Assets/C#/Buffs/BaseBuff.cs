@@ -6,14 +6,17 @@ public class BaseBuff : MonoBehaviour
 
     protected CharCombatValues _buffOwner;
     private int _buffAP, _buffDP;
+    public bool isPlayerBuff;
 
-    protected void Init(CharCombatValues buffOwner, int buffAP, int buffDP)
+    protected void Init(CharCombatValues buffOwner, int buffAP, int buffDP, bool isPlayerBuff)
     {
         _buffSystem = FindObjectOfType<BuffSystem>();
 
         _buffOwner = buffOwner;
         _buffAP = buffAP;
         _buffDP = buffDP;
+
+        this.isPlayerBuff = isPlayerBuff;
 
         AddBuff();
     }

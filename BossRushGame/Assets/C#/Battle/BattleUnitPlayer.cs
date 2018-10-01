@@ -27,12 +27,7 @@ public class BattleUnitPlayer : BattleUnitBase
             _interacted = false;
         }
     }
-
-    public void MyTurn()
-    {
-
-    }
-
+    
     #region button calls
 
     public void Attack()
