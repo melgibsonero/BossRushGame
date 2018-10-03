@@ -1,13 +1,9 @@
-﻿public class BuffEndOnTrigger : BaseBuff
+﻿using UnityEngine;
+
+public class BuffEndOnTrigger : BaseBuff
 {
+    [SerializeField]
     private BuffSystem.TriggerEndBuff _trigger;
-
-    public void Init(CharCombatValues buffOwner, int buffAP, int buffDP, bool isPlayerBuff, BuffSystem.TriggerEndBuff trigger)
-    {
-        Init(buffOwner, buffAP, buffDP, isPlayerBuff, trigger);
-
-        _trigger = trigger;
-    }
 
     public void TriggerRemove(BuffSystem.TriggerEndBuff trigger, CharCombatValues doer)
     {

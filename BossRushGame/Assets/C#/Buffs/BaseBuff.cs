@@ -4,30 +4,23 @@ public class BaseBuff : MonoBehaviour
 {
     [SerializeField, Range(-3, 3)]
     private int _buffAP, _buffDP;
-    [SerializeField, Range(0, 10)]
-    public int _manaCost;
 
     private BuffSystem _buffSystem;
-
     protected CharCombatValues _buffOwner;
+    public bool IsPlayerBuff { get { return _buffOwner.IsPlayer; } }
 
-    [HideInInspector]
-    public bool isPlayerBuff;
-
-    protected void Init(CharCombatValues buffOwner, int buffAP, int buffDP)
+    public void Act(GameObject go)
     {
         _buffSystem = FindObjectOfType<BuffSystem>();
 
-        _buffOwner = buffOwner;
-        _buffAP = buffAP;
-        _buffDP = buffDP;
+        _buffOwner = go.GetComponent<CharCombatValues>();
 
         AddBuff();
     }
 
     private void AddBuff()
     {
-        _buffSystem._buffs.Add(this);
+        _buffSystem.buffs.Add(this);
 
         _buffOwner.AttackBuff(_buffAP);
         _buffOwner.DefenceBuff(_buffDP);
@@ -35,7 +28,7 @@ public class BaseBuff : MonoBehaviour
 
     public void RemoveBuff()
     {
-        _buffSystem._buffs.Remove(this);
+        _buffSystem.buffs.Remove(this);
 
         _buffOwner.AttackBuff(-_buffAP);
         _buffOwner.DefenceBuff(-_buffDP);
