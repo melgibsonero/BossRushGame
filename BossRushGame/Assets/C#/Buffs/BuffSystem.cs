@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BuffSystem : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _buffTurnLimit, _buffEndOnTrigger;
     public List<BaseBuff> _buffs;
     
     public enum TriggerEndBuff

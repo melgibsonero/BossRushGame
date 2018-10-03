@@ -5,7 +5,6 @@ public class CharCombatValues : MonoBehaviour
     [Space(-10), Header("Health")]
     public int maxHP;
     public int currentHP;
-    public bool IsDead { get { return currentHP <= 0; } }
 
     [Space(-10), Header("Mana")]
     public int maxMP;
@@ -18,6 +17,9 @@ public class CharCombatValues : MonoBehaviour
     [Space(-10), Header("Defence")]
     public int defaultDP;       // no buffs
     public int currentDP;       // with buffs
+
+    public bool IsDead { get { return currentHP <= 0; } }
+    public bool IsPlayer { get { return GetComponent<BattleUnitPlayer>() != null; } }
 
     private int _totalDamage;
 

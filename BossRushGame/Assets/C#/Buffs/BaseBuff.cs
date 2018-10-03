@@ -2,21 +2,25 @@
 
 public class BaseBuff : MonoBehaviour
 {
+    [SerializeField, Range(-3, 3)]
+    private int _buffAP, _buffDP;
+    [SerializeField, Range(0, 10)]
+    public int _manaCost;
+
     private BuffSystem _buffSystem;
 
     protected CharCombatValues _buffOwner;
-    private int _buffAP, _buffDP;
+
+    [HideInInspector]
     public bool isPlayerBuff;
 
-    protected void Init(CharCombatValues buffOwner, int buffAP, int buffDP, bool isPlayerBuff)
+    protected void Init(CharCombatValues buffOwner, int buffAP, int buffDP)
     {
         _buffSystem = FindObjectOfType<BuffSystem>();
 
         _buffOwner = buffOwner;
         _buffAP = buffAP;
         _buffDP = buffDP;
-
-        this.isPlayerBuff = isPlayerBuff;
 
         AddBuff();
     }

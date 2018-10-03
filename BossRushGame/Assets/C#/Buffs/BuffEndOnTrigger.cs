@@ -4,7 +4,7 @@
 
     public void Init(CharCombatValues buffOwner, int buffAP, int buffDP, bool isPlayerBuff, BuffSystem.TriggerEndBuff trigger)
     {
-        Init(buffOwner, buffAP, buffDP, isPlayerBuff);
+        Init(buffOwner, buffAP, buffDP, isPlayerBuff, trigger);
 
         _trigger = trigger;
     }

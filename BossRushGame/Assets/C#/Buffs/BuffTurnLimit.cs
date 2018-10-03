@@ -4,7 +4,7 @@
 
     public void Init(CharCombatValues buffOwner, int buffAP, int buffDP, bool isPlayerBuff, int turnsLeft)
     {
-        Init(buffOwner, buffAP, buffDP, isPlayerBuff);
+        Init(buffOwner, buffAP, buffDP, isPlayerBuff, turnsLeft);
 
         _turnsLeft = turnsLeft;
     }
