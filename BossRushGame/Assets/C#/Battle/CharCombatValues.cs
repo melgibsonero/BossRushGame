@@ -3,19 +3,19 @@
 public class CharCombatValues : MonoBehaviour
 {
     [Space(-10), Header("Health")]
-    public int maxHP;
+    public int maxHP = 10;
     public int currentHP;
 
     [Space(-10), Header("Mana")]
-    public int maxMP;
+    public int maxMP = 5;
     public int currentMP;
 
     [Space(-10), Header("Attack")]
-    public int defaultAP;       // no buffs
+    public int defaultAP = 1;   // no buffs
     public int currentAP;       // with buffs
 
     [Space(-10), Header("Defence")]
-    public int defaultDP;       // no buffs
+    public int defaultDP = 0;   // no buffs
     public int currentDP;       // with buffs
 
     public bool IsDead { get { return currentHP <= 0; } }
@@ -33,9 +33,9 @@ public class CharCombatValues : MonoBehaviour
         {
             currentHP -= _totalDamage;
 
-            if (currentHP < 0)
+            if (currentHP <= 0)
             {
-                //gameObject.SetActive(false);
+                Debug.Log("dead");
             }
         }
 
@@ -89,6 +89,9 @@ public class CharCombatValues : MonoBehaviour
     public void AttackBuff(int buffValue)
     {
         currentAP += buffValue;
+
+        if (currentAP < 0)
+            currentAP = 0;
     }
 
     public void DefenceBuff(int buffValue)
