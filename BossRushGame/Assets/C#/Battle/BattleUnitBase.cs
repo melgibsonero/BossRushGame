@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharCombatValues))]
 public class BattleUnitBase : MonoBehaviour
 {
     protected CharCombatValues _combatValues;

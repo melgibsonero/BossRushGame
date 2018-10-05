@@ -8,7 +8,6 @@ public class BattleSystem_v2 : MonoBehaviour
     private BuffSystem _buffSystem;
     private BattleUnitPlayer[] _playerUnits;
     private BattleUnitEnemy[] _enemyUnits;
-    private int _unitIndex, _maxUnitIndex;
     private bool _playerTurn = true;
 
     public BattleUnitPlayer[] PlayerUnits { get { return _playerUnits; } }
@@ -19,8 +18,6 @@ public class BattleSystem_v2 : MonoBehaviour
         _buffSystem = GetComponent<BuffSystem>();
         _playerUnits = FindObjectsOfType<BattleUnitPlayer>();
         _enemyUnits = FindObjectsOfType<BattleUnitEnemy>();
-        _maxUnitIndex = _playerUnits.Length + _enemyUnits.Length;
-        _unitIndex = _maxUnitIndex;
 
         UpdateTurnLogic();
     }

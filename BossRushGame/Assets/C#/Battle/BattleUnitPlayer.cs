@@ -8,7 +8,7 @@ public class BattleUnitPlayer : BattleUnitBase
     private int _currentCombo;
 
     public bool interactWindow;
-    private bool _interacted;
+    public bool interacted;
 
     private void Update()
     {
@@ -17,14 +17,14 @@ public class BattleUnitPlayer : BattleUnitBase
             if (Input.GetButtonDown("Interact"))
             {
                 _currentCombo++;
-                _interacted = true;
+                interacted = true;
             }
         }
         else
         {
             maxCombo = Random.Range(3, 6);
             _currentCombo = 0;
-            _interacted = false;
+            interacted = false;
         }
     }
     

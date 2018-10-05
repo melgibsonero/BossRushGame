@@ -3,7 +3,7 @@
 public class BaseBuff : MonoBehaviour
 {
     [SerializeField, Range(-3, 3)]
-    private int _buffAP, _buffDP;
+    private int _buffAP = 0, _buffDP = 0;
 
     private BuffSystem _buffSystem;
     protected CharCombatValues _buffOwner;
