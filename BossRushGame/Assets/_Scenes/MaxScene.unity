@@ -1178,6 +1178,7 @@ MonoBehaviour:
   _showHighlights: 1
   HighlightAll: 0
   HighlightEnemies: 0
+  HighlightTeam: 0
   unitSlots: []
   currentHighlight: {fileID: 0}
 --- !u!114 &1662627112
@@ -1240,7 +1241,7 @@ MonoBehaviour:
   - {fileID: 114658002460123152, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
   unit: {fileID: 0}
   leftUnitSlot: {fileID: 151143636}
-  rightUnitSlot: {fileID: 0}
+  rightUnitSlot: {fileID: 734748321}
   isEnemy: 0
   SpawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1770265637

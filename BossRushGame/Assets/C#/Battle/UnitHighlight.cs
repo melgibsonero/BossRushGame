@@ -9,7 +9,8 @@ public class UnitHighlight : MonoBehaviour {
         enemy = 0,
         teammate = 1,
         multi = 2,
-        all = 3
+        all = 3,
+        team = 4
     }
 
 
@@ -17,8 +18,8 @@ public class UnitHighlight : MonoBehaviour {
     public bool _showHighlights = true;
 
     public bool HighlightAll = false; //Redundant?
-
     public bool HighlightEnemies = false; //Target only enemies
+    public bool HighlightTeam = false;
 
     [SerializeField]
     private UnitSlot[] unitSlots;
@@ -39,7 +40,7 @@ public class UnitHighlight : MonoBehaviour {
     public void Init(Targets targets = Targets.enemy)
     {
         _showHighlights = true;
-        HighlightAll = HighlightEnemies = false;
+        HighlightAll = HighlightEnemies = HighlightTeam = false;
         switch (targets)
         {
             case Targets.enemy:
@@ -75,12 +76,15 @@ public class UnitHighlight : MonoBehaviour {
                 currentHighlight = null;
                 Debug.Log("All targets highlighted");
                 break;
+            case Targets.team:
+                HighlightTeam = true;
+                currentHighlight = null;
+                Debug.Log("All team targetted");
+                break;
             default:
                 Debug.Log("invalid choice");
                 break;
         }
-        
-        UpdatePosition();
     }
 
     private void Update()
@@ -100,7 +104,6 @@ public class UnitHighlight : MonoBehaviour {
                     if (currentHighlight.leftUnitSlot != null)
                     {
                         currentHighlight = currentHighlight.leftUnitSlot;
-                        UpdatePosition();
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -108,7 +111,6 @@ public class UnitHighlight : MonoBehaviour {
                     if (currentHighlight.rightUnitSlot != null)
                     {
                         currentHighlight = currentHighlight.rightUnitSlot;
-                        UpdatePosition();
                     }
                 }   
             }
@@ -122,11 +124,6 @@ public class UnitHighlight : MonoBehaviour {
         {
             currentHighlight = null;
         }
-    }
-
-    private void UpdatePosition()
-    {
-        //currentHighlight.GetUnit().ShowHighlight();
     }
 
     public UnitSlot GetCurrentHighlight()

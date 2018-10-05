@@ -22,9 +22,4 @@ public class BattleUnitBase : MonoBehaviour
         Pointer.transform.localPosition = Pointer_Offset;
         Pointer.SetActive(true);
     }
-
-    public void ShowHighlight()
-    {
-        Pointer.SetActive(true);
-    }
 }

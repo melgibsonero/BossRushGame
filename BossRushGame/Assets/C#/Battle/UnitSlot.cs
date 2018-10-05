@@ -34,6 +34,10 @@ public class UnitSlot : MonoBehaviour {
                 {
                     return isEnemy;
                 }
+                else if (unitHighlight.HighlightTeam)
+                {
+                    return !isEnemy;
+                }
                 else
                 {
                     if (unitHighlight.GetCurrentHighlight() == null) unitHighlight.Init();
