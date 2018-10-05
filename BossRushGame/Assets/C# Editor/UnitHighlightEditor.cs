@@ -7,7 +7,9 @@ public class UnitHighlightEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        if(!Application.isPlaying) GUI.enabled = false;
+        DrawDefaultInspector();
+
+        if (!Application.isPlaying) GUI.enabled = false;
         UnitHighlight myScript = (UnitHighlight)target;
         if (GUILayout.Button("Target enemy"))
         {
@@ -28,9 +30,6 @@ public class UnitHighlightEditor : Editor
         if (GUILayout.Button("Target everything"))
         {
             myScript.Init(UnitHighlight.Targets.all);
-        }
-
-        GUI.enabled = true;
-        DrawDefaultInspector();
+        }        
     }
 }

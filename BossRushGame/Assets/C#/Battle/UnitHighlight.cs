@@ -17,8 +17,11 @@ public class UnitHighlight : MonoBehaviour {
     [SerializeField]
     public bool _showHighlights = true;
 
+    [HideInInspector]
     public bool HighlightAll = false; //Redundant?
+    [HideInInspector]
     public bool HighlightEnemies = false; //Target only enemies
+    [HideInInspector]
     public bool HighlightTeam = false;
 
     [SerializeField]
@@ -29,6 +32,9 @@ public class UnitHighlight : MonoBehaviour {
 
     private BaseBuff CurrentBuff;
     //private BaseAbility CurrentAbility;
+
+
+
 
     private void Start()
     {
@@ -99,14 +105,14 @@ public class UnitHighlight : MonoBehaviour {
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                if (GetAxisAsKeyDown("Horizontal", Invert:true))
                 {
                     if (currentHighlight.leftUnitSlot != null)
                     {
                         currentHighlight = currentHighlight.leftUnitSlot;
                     }
                 }
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (GetAxisAsKeyDown("Horizontal", Invert: false))
                 {
                     if (currentHighlight.rightUnitSlot != null)
                     {
@@ -146,6 +152,43 @@ public class UnitHighlight : MonoBehaviour {
                 //    CurrentAbility.Act(unit.gameObject);
                 //}
             }
+        }
+    }    
+    
+    
+    //Input related shit
+    bool _lastInputAxisState;
+    bool _lastInputAxisStateInvert;
+
+    protected bool GetAxisAsKeyDown(string axisName, bool Invert = false)
+    {
+        if (!Invert)
+        {
+            var currentInputValue = Input.GetAxis(axisName) > 0.1;
+
+            // prevent keep returning true when axis still pressed.
+            if (currentInputValue && _lastInputAxisState)
+            {
+                return false;
+            }
+
+            _lastInputAxisState = currentInputValue;
+
+            return currentInputValue;
+        }
+        else
+        {
+            var currentInputValue = Input.GetAxis(axisName) < -0.1;
+
+            // prevent keep returning true when axis still pressed.
+            if (currentInputValue && _lastInputAxisStateInvert)
+            {
+                return false;
+            }
+
+            _lastInputAxisStateInvert = currentInputValue;
+
+            return currentInputValue;
         }
     }
 }
