@@ -33,9 +33,9 @@ public class CharCombatValues : MonoBehaviour
         {
             currentHP -= _totalDamage;
 
-            if (currentHP < 0)
+            if (currentHP <= 0)
             {
-                //gameObject.SetActive(false);
+                Debug.Log("dead");
             }
         }
 
@@ -89,6 +89,9 @@ public class CharCombatValues : MonoBehaviour
     public void AttackBuff(int buffValue)
     {
         currentAP += buffValue;
+
+        if (currentAP < 0)
+            currentAP = 0;
     }
 
     public void DefenceBuff(int buffValue)
