@@ -31,10 +31,18 @@ public class UnitHighlight : MonoBehaviour {
 
 
     private BaseBuff CurrentBuff;
-    //private BaseAbility CurrentAbility;
+    private BaseAbility CurrentAbility;
 
 
+    public void SetBuff(BaseBuff buff)
+    {
+        CurrentBuff = buff;
+    }
 
+    public void SetAbility(BaseAbility ability)
+    {
+        CurrentAbility = ability;
+    }
 
     private void Start()
     {
@@ -147,10 +155,10 @@ public class UnitHighlight : MonoBehaviour {
                 {
                     CurrentBuff.Act(unit.gameObject);
                 }
-                //if(CurrentAbility != null) //Added already for later use
-                //{
-                //    CurrentAbility.Act(unit.gameObject);
-                //}
+                if (CurrentAbility != null) //Added already for later use
+                {
+                    CurrentAbility.Act(unit.gameObject);
+                }
             }
         }
     }    
