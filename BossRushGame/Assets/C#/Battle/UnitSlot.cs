@@ -40,7 +40,7 @@ public class UnitSlot : MonoBehaviour {
                 }
                 else
                 {
-                    if (unitHighlight.GetCurrentHighlight() == null) unitHighlight.Init();
+                    if (unitHighlight.GetCurrentHighlight() == null) return false;
                     return unitHighlight.GetCurrentHighlight().GetUnit() == unit;
                 }
             }

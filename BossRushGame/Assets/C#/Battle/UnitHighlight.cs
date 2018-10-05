@@ -15,7 +15,7 @@ public class UnitHighlight : MonoBehaviour {
 
 
     [SerializeField]
-    public bool _showHighlights = true;
+    public bool _showHighlights = false;
 
     [HideInInspector]
     public bool HighlightAll = false; //Redundant?
@@ -37,18 +37,18 @@ public class UnitHighlight : MonoBehaviour {
     public void SetBuff(BaseBuff buff)
     {
         CurrentBuff = buff;
+        Init(Targets.teammate);
     }
 
     public void SetAbility(BaseAbility ability)
     {
         CurrentAbility = ability;
+        Init(Targets.enemy);
     }
 
     private void Start()
     {
         unitSlots = FindObjectsOfType<UnitSlot>();
-        
-        Init(Targets.enemy);
     }
 
     public void Init(Targets targets = Targets.enemy)
@@ -153,14 +153,15 @@ public class UnitHighlight : MonoBehaviour {
             { Debug.Log(unit.name + " acted upon");
                 if (CurrentBuff != null)
                 {
-                    CurrentBuff.Act(unit.gameObject);
+                    CurrentBuff.Act(unit.GetUnit().gameObject);
                 }
                 if (CurrentAbility != null) //Added already for later use
                 {
-                    CurrentAbility.Act(unit.gameObject);
+                    CurrentAbility.Act(unit.GetUnit().gameObject);
                 }
             }
         }
+        _showHighlights = false;
     }    
     
     

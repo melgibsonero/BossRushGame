@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4461866061611612}
+  - component: {fileID: 114022157374612946}
   - component: {fileID: 33563772510118116}
   - component: {fileID: 23140402953608140}
   - component: {fileID: 136040675487955018}
@@ -85,6 +86,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1508738059240432}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114022157374612946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508738059240432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e314109fcc35ca24585bb6b645da0211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 2
+  currentHP: 0
+  maxMP: 0
+  currentMP: 0
+  defaultAP: 1
+  currentAP: 0
+  defaultDP: 0
+  currentDP: 0
 --- !u!114 &114143807577126844
 MonoBehaviour:
   m_ObjectHideFlags: 1

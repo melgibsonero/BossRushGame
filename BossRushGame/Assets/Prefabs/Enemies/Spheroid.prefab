@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4754960905412480}
+  - component: {fileID: 114914892028662748}
   - component: {fileID: 33559387441062866}
   - component: {fileID: 23922399010019718}
   - component: {fileID: 135471543503743760}
@@ -99,6 +100,25 @@ MonoBehaviour:
   isDoneForTurn: 0
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
   Pointer_Offset: {x: 0, y: 2, z: 0}
+--- !u!114 &114914892028662748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270828181317854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e314109fcc35ca24585bb6b645da0211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 2
+  currentHP: 0
+  maxMP: 0
+  currentMP: 0
+  defaultAP: 1
+  currentAP: 0
+  defaultDP: 0
+  currentDP: 0
 --- !u!135 &135471543503743760
 SphereCollider:
   m_ObjectHideFlags: 1
