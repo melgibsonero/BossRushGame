@@ -11,14 +11,14 @@ public class BattleSystem : MonoBehaviour {
     public BattleUnitPlayer[] _playerBattles;
     public BattleUnitEnemy[] _MAD_AIs;
 
-    IEnumerator TimeStop()
-    {
-        timeStopped = true;
-        Time.timeScale = 1f;
-        yield return new WaitForSecondsRealtime(0.2f);
-        Time.timeScale = 1;
-        timeStopped = false;
-    }
+    //IEnumerator TimeStop()
+    //{
+    //    timeStopped = true;
+    //    Time.timeScale = 1f;
+    //    yield return new WaitForSecondsRealtime(0.2f);
+    //    Time.timeScale = 1;
+    //    timeStopped = false;
+    //}
 
     public void StopTime()
     {
