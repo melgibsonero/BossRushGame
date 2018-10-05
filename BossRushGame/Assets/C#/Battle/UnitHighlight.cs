@@ -103,7 +103,6 @@ public class UnitHighlight : MonoBehaviour {
 
     private void Update()
     {
-        //If highlighting is not needed
         if (_showHighlights)
         {
             //If all need to be targetted
@@ -113,20 +112,22 @@ public class UnitHighlight : MonoBehaviour {
             }
             else
             {
-                if (GetAxisAsKeyDown("Horizontal", Invert:true))
-                {
-                    if (currentHighlight.leftUnitSlot != null)
+                if (currentHighlight != null) {
+                    if (GetAxisAsKeyDown("Horizontal", Invert: true))
                     {
-                        currentHighlight = currentHighlight.leftUnitSlot;
+                        if (currentHighlight.leftUnitSlot != null)
+                        {
+                            currentHighlight = currentHighlight.leftUnitSlot;
+                        }
+                    }
+                    if (GetAxisAsKeyDown("Horizontal", Invert: false))
+                    {
+                        if (currentHighlight.rightUnitSlot != null)
+                        {
+                            currentHighlight = currentHighlight.rightUnitSlot;
+                        }
                     }
                 }
-                if (GetAxisAsKeyDown("Horizontal", Invert: false))
-                {
-                    if (currentHighlight.rightUnitSlot != null)
-                    {
-                        currentHighlight = currentHighlight.rightUnitSlot;
-                    }
-                }   
             }
             if (Input.GetButtonDown("Interact"))
             {
@@ -161,8 +162,14 @@ public class UnitHighlight : MonoBehaviour {
                 }
             }
         }
+        Reset();
+    }
+    
+    private void Reset()
+    {
         _showHighlights = false;
-    }    
+        currentHighlight = null;
+    }
     
     
     //Input related shit
