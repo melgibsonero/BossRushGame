@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class UnitHighlight : MonoBehaviour {
 
+    public enum Targets
+    {
+        enemy = 0,
+        teammate = 1,
+        multi = 2,
+        all = 3
+    }
+
+
     [SerializeField]
     public bool _showHighlights = true;
 
-    public bool HighlightAll = false;
+    public bool HighlightAll = false; //Redundant?
+
+    public bool HighlightEnemies = false; //Target only enemies
+
     [SerializeField]
     private UnitSlot[] unitSlots;
     [SerializeField]
@@ -20,13 +32,54 @@ public class UnitHighlight : MonoBehaviour {
     private void Start()
     {
         unitSlots = FindObjectsOfType<UnitSlot>();
-        Init();
+        
+        Init(Targets.enemy);
     }
 
-    public void Init()
+    public void Init(Targets targets = Targets.enemy)
     {
-        //Make it so that initial highlight is targetting a right target(player, enemy or all)
-        currentHighlight = unitSlots[0];
+        _showHighlights = true;
+        HighlightAll = HighlightEnemies = false;
+        switch (targets)
+        {
+            case Targets.enemy:
+                Debug.Log("first enemy should be highlighted");
+                for(int i = 0; i<unitSlots.Length; i++)
+                {
+                    if(unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null)
+                    {
+                        currentHighlight = unitSlots[i];
+                        break;
+                    }
+                }
+                
+                break;
+            case Targets.teammate:
+                Debug.Log("Player should be highlighted?");
+                for (int i = 0; i < unitSlots.Length; i++)
+                {
+                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>() != null)
+                    {
+                        currentHighlight = unitSlots[i];
+                        break;
+                    }
+                }
+                break;
+            case Targets.multi:
+                Debug.Log("all enemies highlighted?");
+                HighlightEnemies = true;
+                currentHighlight = null;
+                break;
+            case Targets.all:
+                HighlightAll = true;
+                currentHighlight = null;
+                Debug.Log("All targets highlighted");
+                break;
+            default:
+                Debug.Log("invalid choice");
+                break;
+        }
+        
         UpdatePosition();
     }
 
@@ -36,7 +89,7 @@ public class UnitHighlight : MonoBehaviour {
         if (_showHighlights)
         {
             //If all need to be targetted
-            if (HighlightAll)
+            if (HighlightAll || HighlightEnemies)
             {
                 //Do something?
             }
@@ -57,12 +110,12 @@ public class UnitHighlight : MonoBehaviour {
                         currentHighlight = currentHighlight.rightUnitSlot;
                         UpdatePosition();
                     }
-                }
-
-                if (currentHighlight != null && Input.GetButtonDown("Interact"))
-                {
-                    ActTarget();
-                }
+                }   
+            }
+            if (Input.GetButtonDown("Interact"))
+            {
+                Debug.Log("interacted");
+                ActTarget();
             }
         }
         else
@@ -73,7 +126,7 @@ public class UnitHighlight : MonoBehaviour {
 
     private void UpdatePosition()
     {
-        currentHighlight.GetUnit().ShowHighlight();
+        //currentHighlight.GetUnit().ShowHighlight();
     }
 
     public UnitSlot GetCurrentHighlight()
@@ -83,13 +136,19 @@ public class UnitHighlight : MonoBehaviour {
 
     private void ActTarget()
     {
-        if(CurrentBuff != null)
+        foreach (UnitSlot unit in unitSlots)
         {
-            CurrentBuff.Act(currentHighlight.gameObject);
+            if (unit.IsHighlighted)
+            { Debug.Log(unit.name + " acted upon");
+                if (CurrentBuff != null)
+                {
+                    CurrentBuff.Act(unit.gameObject);
+                }
+                //if(CurrentAbility != null) //Added already for later use
+                //{
+                //    CurrentAbility.Act(unit.gameObject);
+                //}
+            }
         }
-        //if(CurrentAbility != null) //Added already for later use
-        //{
-        //    CurrentAbility.Act(currentHighlight.gameObject);
-        //}
     }
 }

@@ -14,17 +14,25 @@ public class UnitSlot : MonoBehaviour {
 
     private bool isHighlighted;
 
+    [SerializeField]
+    private bool isEnemy;
+
     public Vector3 SpawnOffset;
-    
-        
+
+
     public bool IsHighlighted
-    { get
+    {
+        get
         {
             if (unitHighlight._showHighlights)
             {
                 if (unitHighlight.HighlightAll)
                 {
                     return true;
+                }
+                else if(unitHighlight.HighlightEnemies)
+                {
+                    return isEnemy;
                 }
                 else
                 {
@@ -43,7 +51,8 @@ public class UnitSlot : MonoBehaviour {
     {
         unitHighlight = FindObjectOfType<UnitHighlight>();
         unit = UnitChoices[Random.Range(0, UnitChoices.Length-1)];
-        Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+        unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+        isEnemy = unit.GetComponent<BattleUnitEnemy>();
     }
 
     public BattleUnitBase GetUnit()

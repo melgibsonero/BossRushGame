@@ -125,7 +125,7 @@ GameObject:
   m_Layer: 0
   m_Name: UnitHolder (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -148,6 +148,7 @@ MonoBehaviour:
   unit: {fileID: 0}
   leftUnitSlot: {fileID: 2136594897}
   rightUnitSlot: {fileID: 1683774497}
+  isEnemy: 0
   SpawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!4 &151143637
 Transform:
@@ -525,7 +526,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.13052598, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 6, z: -10}
+  m_LocalPosition: {x: 0, y: 6.43, z: -11.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -730,6 +731,56 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 560644211}
   m_CullTransparentMesh: 0
+--- !u!1 &734748320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734748322}
+  - component: {fileID: 734748321}
+  m_Layer: 0
+  m_Name: UnitHolder (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &734748321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 734748320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15b9d3ba13cc524a9f3dbe2fe50be47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitChoices:
+  - {fileID: 114658002460123152, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
+  - {fileID: 114658002460123152, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
+  - {fileID: 114143807577126844, guid: 0b2b07410f0c0074da13d4f2e0e66acf, type: 2}
+  - {fileID: 114658002460123152, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
+  unit: {fileID: 0}
+  leftUnitSlot: {fileID: 1683774497}
+  rightUnitSlot: {fileID: 1422642208}
+  isEnemy: 0
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+--- !u!4 &734748322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 734748320}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1089082121}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &960913284
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,9 +1020,61 @@ Transform:
   - {fileID: 1558836733}
   - {fileID: 151143637}
   - {fileID: 1683774496}
+  - {fileID: 734748322}
+  - {fileID: 1422642207}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1422642206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422642207}
+  - component: {fileID: 1422642208}
+  m_Layer: 0
+  m_Name: UnitHolder (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1422642207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422642206}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1089082121}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1422642208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422642206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15b9d3ba13cc524a9f3dbe2fe50be47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitChoices:
+  - {fileID: 114658002460123152, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
+  - {fileID: 114658002460123152, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
+  - {fileID: 114143807577126844, guid: 0b2b07410f0c0074da13d4f2e0e66acf, type: 2}
+  - {fileID: 114658002460123152, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
+  unit: {fileID: 0}
+  leftUnitSlot: {fileID: 734748321}
+  rightUnitSlot: {fileID: 0}
+  isEnemy: 0
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1558836731
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +1087,7 @@ GameObject:
   m_Layer: 0
   m_Name: UnitHolder (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1004,6 +1107,7 @@ MonoBehaviour:
   unit: {fileID: 0}
   leftUnitSlot: {fileID: 0}
   rightUnitSlot: {fileID: 2136594897}
+  isEnemy: 0
   SpawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!4 &1558836733
 Transform:
@@ -1073,6 +1177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showHighlights: 1
   HighlightAll: 0
+  HighlightEnemies: 0
   unitSlots: []
   currentHighlight: {fileID: 0}
 --- !u!114 &1662627112
@@ -1100,7 +1205,7 @@ GameObject:
   m_Layer: 0
   m_Name: UnitHolder (4)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1136,6 +1241,7 @@ MonoBehaviour:
   unit: {fileID: 0}
   leftUnitSlot: {fileID: 151143636}
   rightUnitSlot: {fileID: 0}
+  isEnemy: 0
   SpawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1770265637
 GameObject:
@@ -1424,7 +1530,7 @@ GameObject:
   m_Layer: 0
   m_Name: UnitHolder (1)(player)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1444,6 +1550,7 @@ MonoBehaviour:
   unit: {fileID: 0}
   leftUnitSlot: {fileID: 1558836732}
   rightUnitSlot: {fileID: 151143636}
+  isEnemy: 0
   SpawnOffset: {x: 0, y: 0.5, z: 0}
 --- !u!4 &2136594898
 Transform:

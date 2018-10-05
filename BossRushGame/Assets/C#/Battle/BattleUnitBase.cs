@@ -25,6 +25,6 @@ public class BattleUnitBase : MonoBehaviour
 
     public void ShowHighlight()
     {
-        Pointer.SetActive(!Pointer.activeSelf);
+        Pointer.SetActive(true);
     }
 }
