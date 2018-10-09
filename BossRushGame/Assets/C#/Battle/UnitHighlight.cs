@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitHighlight : MonoBehaviour {
-
+public class UnitHighlight : MonoBehaviour
+{
     public enum Targets
     {
         enemy = 0,
         teammate = 1,
         allEnemies = 2,
         all = 3,
-        team = 4,
-        self = 5
+        team = 4
     }
-
-
+    
     [SerializeField]
     public bool _showHighlights = false;
 
@@ -24,18 +22,16 @@ public class UnitHighlight : MonoBehaviour {
     public bool HighlightEnemies = false; //Target only enemies
     [HideInInspector]
     public bool HighlightTeam = false;
-    [HideInInspector]
-    private bool SelfCast = false;
 
     [SerializeField]
     private UnitSlot[] unitSlots;
     [SerializeField]
     private UnitSlot currentHighlight;
 
-
+    private InputManager _inputManager;
     private BaseBuff CurrentBuff;
     private BaseAbility CurrentAbility;
-
+    bool _inputRight;
 
     public void SetBuff(BaseBuff buff)
     {
@@ -51,6 +47,7 @@ public class UnitHighlight : MonoBehaviour {
 
     private void Start()
     {
+        _inputManager = FindObjectOfType<InputManager>();
         unitSlots = FindObjectsOfType<UnitSlot>();
     }
 
@@ -93,11 +90,6 @@ public class UnitHighlight : MonoBehaviour {
                 HighlightTeam = true;
                 currentHighlight = null;
                 break;
-            case Targets.self:
-                SelfCast = true;
-                //CurrentHighlight = caster
-                Debug.Log("Selfcast, target self and remove controls");
-                break;
             default:
                 Debug.Log("invalid choice");
                 break;
@@ -115,24 +107,25 @@ public class UnitHighlight : MonoBehaviour {
             }
             else
             {
-                if (currentHighlight != null && !SelfCast) {
-                    if (GetAxisAsKeyDown("Horizontal", Invert: true))
-                    {
-                        if (currentHighlight.leftUnitSlot != null)
-                        {
-                            currentHighlight = currentHighlight.leftUnitSlot;
-                        }
-                    }
-                    if (GetAxisAsKeyDown("Horizontal", Invert: false))
+                if (currentHighlight != null && _inputManager.GetAxisDown(InputManager.Axis.Horizontal, out _inputRight))
+                {
+                    if (_inputRight)
                     {
                         if (currentHighlight.rightUnitSlot != null)
                         {
                             currentHighlight = currentHighlight.rightUnitSlot;
                         }
                     }
+                    else
+                    {
+                        if (currentHighlight.leftUnitSlot != null)
+                        {
+                            currentHighlight = currentHighlight.leftUnitSlot;
+                        }
+                    }
                 }
             }
-            if (Input.GetButtonDown("Interact"))
+            if (_inputManager.GetButtonDown(InputManager.Button.Interact))
             {
                 //Debug.Log("interacted");
                 ActTarget();

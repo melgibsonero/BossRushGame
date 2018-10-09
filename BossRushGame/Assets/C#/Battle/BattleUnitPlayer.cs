@@ -5,14 +5,19 @@ using UnityEngine;
 public class BattleUnitPlayer : BattleUnitBase
 {
     public int interactCounter;
-
     public bool interactWindow, interacted, isDefending;
+    private InputManager _inputManager;
+
+    private void Start()
+    {
+        _inputManager = FindObjectOfType<InputManager>();
+    }
 
     private void Update()
     {
         if (interactWindow)
         {
-            if (Input.GetButtonDown("Interact") && !interacted)
+            if (_inputManager.GetButtonDown(InputManager.Button.Interact) && !interacted)
             {
                 interactCounter++;
                 interacted = true;

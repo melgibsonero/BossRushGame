@@ -2492,6 +2492,7 @@ GameObject:
   - component: {fileID: 1662627111}
   - component: {fileID: 1662627112}
   - component: {fileID: 1662627109}
+  - component: {fileID: 1662627113}
   m_Layer: 0
   m_Name: BattleSystem
   m_TagString: Untagged
@@ -2553,6 +2554,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buffPrefabs: []
   buffs: []
+--- !u!114 &1662627113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1662627108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85abc265d699bae499f7dd141f0a5def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _axisDeadzone: 0.25
 --- !u!1 &1683774495
 GameObject:
   m_ObjectHideFlags: 0
