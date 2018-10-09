@@ -20,8 +20,6 @@ public class BattleSystem_v2 : MonoBehaviour
         _buffSystem = GetComponent<BuffSystem>();
         _playerUnits = FindObjectsOfType<BattleUnitPlayer>();
         _enemyUnits = FindObjectsOfType<BattleUnitEnemy>();
-
-        UpdateTurnLogic();
     }
 
     public void UpdateTurnLogic()

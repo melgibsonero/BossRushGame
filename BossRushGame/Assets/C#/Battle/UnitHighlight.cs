@@ -61,7 +61,6 @@ public class UnitHighlight : MonoBehaviour {
         switch (targets)
         {
             case Targets.enemy:
-                Debug.Log("first enemy should be highlighted");
                 for(int i = 0; i<unitSlots.Length; i++)
                 {
                     if(unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null)
@@ -73,7 +72,6 @@ public class UnitHighlight : MonoBehaviour {
                 
                 break;
             case Targets.teammate:
-                Debug.Log("Player should be highlighted?");
                 for (int i = 0; i < unitSlots.Length; i++)
                 {
                     if (unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>() != null)
@@ -84,19 +82,16 @@ public class UnitHighlight : MonoBehaviour {
                 }
                 break;
             case Targets.allEnemies:
-                Debug.Log("all enemies highlighted?");
                 HighlightEnemies = true;
                 currentHighlight = null;
                 break;
             case Targets.all:
                 HighlightAll = true;
                 currentHighlight = null;
-                Debug.Log("All targets highlighted");
                 break;
             case Targets.team:
                 HighlightTeam = true;
                 currentHighlight = null;
-                Debug.Log("All team targetted");
                 break;
             case Targets.self:
                 SelfCast = true;
@@ -139,7 +134,7 @@ public class UnitHighlight : MonoBehaviour {
             }
             if (Input.GetButtonDown("Interact"))
             {
-                Debug.Log("interacted");
+                //Debug.Log("interacted");
                 ActTarget();
             }
         }
