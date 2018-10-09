@@ -30,6 +30,8 @@ public class BattleSystem_v2 : MonoBehaviour
             
             _units[i].isDoneForTurn = _units[i] is BattleUnitEnemy;
         }
+
+        StartCoroutine("EnemyLoop");
     }
 
     public void UpdateTurnLogic()
@@ -122,5 +124,32 @@ public class BattleSystem_v2 : MonoBehaviour
 
         Debug.LogError("NULL");
         return null;
+    }
+
+    private CharCombatValues GetPlayerCCV()
+    {
+        foreach (BattleUnitPlayer unit in _units)
+        {
+            if (unit.IsDead)
+                continue;
+
+            return unit.CombatValues;
+        }
+
+        Debug.LogError("NULL");
+        return null;
+    }
+    
+    IEnumerator EnemyLoop()
+    {
+        while (true)
+        {
+            if (!_playerTurn)
+            {
+                (GetUnitTurn() as BattleUnitEnemy).ActTurn(GetPlayerCCV());
+            }
+
+            yield return new WaitForSecondsRealtime(1);
+        }
     }
 }
