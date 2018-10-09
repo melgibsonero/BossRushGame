@@ -4,40 +4,38 @@ using UnityEngine;
 
 public class BattleUnitPlayer : BattleUnitBase
 {
-    public int maxCombo;
-    private int _currentCombo;
+    public int interactCounter;
 
-    public bool interactWindow;
-    public bool interacted;
+    public bool interactWindow, interacted, isDefending;
 
     private void Update()
     {
-        if (interactWindow && _currentCombo < maxCombo)
+        if (interactWindow)
         {
-            if (Input.GetButtonDown("Interact"))
+            if (Input.GetButtonDown("Interact") && !interacted)
             {
-                _currentCombo++;
+                interactCounter++;
                 interacted = true;
             }
         }
         else
         {
-            maxCombo = Random.Range(3, 6);
-            _currentCombo = 0;
             interacted = false;
         }
+    }
+
+    public void StartTurn()
+    {
+        interactCounter = 0;
+        isDefending = false;
+        isDoneForTurn = false;
     }
     
     #region button calls
 
-    public void Attack()
-    {
-
-    }
-
     public void Defend()
     {
-
+        isDefending = true;
     }
 
     #endregion
