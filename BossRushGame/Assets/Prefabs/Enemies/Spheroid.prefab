@@ -112,7 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 114172345529552960, guid: 1b32a92da15ace34c9df059608bf45c3, type: 2}
-  maxHP: 2
+  HealthText: {fileID: 114172345529552960, guid: 265372afa6ec5b74fae988f368fd7f24,
+    type: 2}
+  maxHP: 5
   currentHP: 0
   maxMP: 0
   currentMP: 0

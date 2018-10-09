@@ -23,33 +23,34 @@ public class UnitHighlight : MonoBehaviour
     [HideInInspector]
     public bool HighlightTeam = false;
 
+
+    [SerializeField, Tooltip("Parent of Unit Holders")]
+    private GameObject UnitsParent;
     [SerializeField]
     private UnitSlot[] unitSlots;
     [SerializeField]
     private UnitSlot currentHighlight;
 
-    private InputManager _inputManager;
+
     private BaseBuff CurrentBuff;
     private BaseAbility CurrentAbility;
-    bool _inputRight;
 
-    public UnitSlot[] UnitSlots { get { return unitSlots; } }
 
     public void SetBuff(BaseBuff buff)
     {
-        CurrentBuff = buff;
-        Init(buff.InitTarget);
-    }
-
-    public void SetAbility(BaseAbility ability)
-    {
+        if(ability.GetComponent<BaseBuff>() != null)
+        {
+            Init(ability.GetComponent<BaseBuff>().InitTarget);
+        }
+        if (ability.GetComponent<BaseAbility>() != null)
+        {
+            Init(ability.GetComponent<BaseAbility>().InitTarget);
+        }
         CurrentAbility = ability;
-        Init(ability.InitTarget);
     }
 
     private void Start()
     {
-        _inputManager = FindObjectOfType<InputManager>();
         unitSlots = FindObjectsOfType<UnitSlot>();
     }
 
@@ -62,7 +63,7 @@ public class UnitHighlight : MonoBehaviour
             case Targets.enemy:
                 for(int i = 0; i<unitSlots.Length; i++)
                 {
-                    if(unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null)
+                    if(unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null && !unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>().IsDead)
                     {
                         currentHighlight = unitSlots[i];
                         break;
@@ -73,7 +74,7 @@ public class UnitHighlight : MonoBehaviour
             case Targets.teammate:
                 for (int i = 0; i < unitSlots.Length; i++)
                 {
-                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>() != null)
+                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>() != null && !unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>().IsDead)
                     {
                         currentHighlight = unitSlots[i];
                         break;
@@ -144,19 +145,20 @@ public class UnitHighlight : MonoBehaviour
         return currentHighlight;
     }
 
-    private void ActTarget()
+    public void ActTarget()
     {
         foreach (UnitSlot unit in unitSlots)
         {
             if (unit.IsHighlighted)
-            { Debug.Log(unit.name + " acted upon");
-                if (CurrentBuff != null)
+            {
+                Debug.Log(unit.name + " acted upon");
+                if (CurrentAbility.GetComponent<BaseBuff>() != null)
                 {
-                    CurrentBuff.Act(unit.GetUnit().gameObject);
+                    CurrentAbility.GetComponent<BaseBuff>().Act(unit.GetUnit().gameObject);
                 }
-                if (CurrentAbility != null) //Added already for later use
+                if (CurrentAbility.GetComponent<BaseAbility>() != null)
                 {
-                    CurrentAbility.Act(unit.GetUnit().gameObject);
+                    CurrentAbility.GetComponent<BaseAbility>().Act(unit.GetUnit().gameObject);
                 }
             }
         }
@@ -208,3 +210,14 @@ public class UnitHighlight : MonoBehaviour
 #endregion
 
 }
+
+    private InputManager _inputManager;
+    bool _inputRight;
+
+    [SerializeField]
+    private GameObject CurrentAbility;
+    public UnitSlot[] UnitSlots { get { return unitSlots; } }
+
+    public void SetAbility(GameObject ability)
+        _inputManager = FindObjectOfType<InputManager>();
+        unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();

@@ -6,6 +6,7 @@ public class CharCombatValues : MonoBehaviour
 {
     
     public TextMeshPro textMesh;
+    public TextMeshPro HealthText;
 
     [Space(-10), Header("Health")]
     public int maxHP = 10;
@@ -32,18 +33,18 @@ public class CharCombatValues : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _totalDamage = damage - currentDP;
-
+        _totalDamage = damage - currentDP;        
         if (_totalDamage > 0)
         {
             currentHP -= _totalDamage;
-            ShowDamageText(_totalDamage);
+            
 
             if (currentHP <= 0)
             {
                 Debug.Log("dead");
             }
         }
+        ShowDamageText(_totalDamage);
 
         _totalDamage = 0;
     }
@@ -52,6 +53,7 @@ public class CharCombatValues : MonoBehaviour
     {
         var damageText = Instantiate(textMesh, transform);
         damageText.text = "-" + damageTaken;
+        HealthText.text = currentHP + "/" + maxHP;
     }
 
     public void HealUp(int amount)
@@ -119,5 +121,8 @@ public class CharCombatValues : MonoBehaviour
         currentMP = maxMP;
         currentAP = defaultAP;
         currentDP = defaultDP;
+
+        HealthText = Instantiate(HealthText, transform);
+        HealthText.text = currentHP + "/" + maxHP;
     }
 }
