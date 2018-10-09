@@ -27,9 +27,8 @@ public class BattleSystem_v2 : MonoBehaviour
         {
             _unitSlots[i] = unitHolderParent.GetChild(i).GetComponent<UnitSlot>();
             _units[i] = _unitSlots[i].GetUnit();
-
-            if (_units[i] is BattleUnitPlayer)
-                _units[i].isDoneForTurn = false;
+            
+            _units[i].isDoneForTurn = _units[i] is BattleUnitEnemy;
         }
     }
 
@@ -84,6 +83,8 @@ public class BattleSystem_v2 : MonoBehaviour
                 Debug.Log("I thought that this would not come up :)");
                 continue;
             }
+
+            return;
         }
         #endregion
 
@@ -94,7 +95,7 @@ public class BattleSystem_v2 : MonoBehaviour
 
         foreach (BattleUnitBase unit in _units)
         {
-            if (_playerTurn)
+            if (!_playerTurn)
                 unit.isDoneForTurn = unit is BattleUnitPlayer;
             else
                 unit.isDoneForTurn = unit is BattleUnitEnemy;
