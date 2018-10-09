@@ -36,7 +36,7 @@ public class Breathe : MonoBehaviour {
         
         if (Rescale)
         {
-            meshRenderer.enabled = thisSlot.IsHighlighted;
+            if(thisSlot != null) meshRenderer.enabled = thisSlot.IsHighlighted;
             float localCurveHeight;
             if (thisSlot.IsHighlighted)
             {

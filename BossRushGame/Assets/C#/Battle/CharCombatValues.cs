@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
+using TMPro;
 
 public class CharCombatValues : MonoBehaviour
 {
+    
+    public TextMeshPro textMesh;
+
     [Space(-10), Header("Health")]
     public int maxHP = 10;
     public int currentHP;
@@ -32,6 +37,7 @@ public class CharCombatValues : MonoBehaviour
         if (_totalDamage > 0)
         {
             currentHP -= _totalDamage;
+            ShowDamageText(_totalDamage);
 
             if (currentHP <= 0)
             {
@@ -40,6 +46,12 @@ public class CharCombatValues : MonoBehaviour
         }
 
         _totalDamage = 0;
+    }
+
+    public void ShowDamageText(int damageTaken)
+    {
+        var damageText = Instantiate(textMesh, transform);
+        damageText.text = "-" + damageTaken;
     }
 
     public void HealUp(int amount)

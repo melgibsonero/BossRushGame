@@ -53,4 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buffAP: 0
   _buffDP: 1
+  InitTarget: 1
   _turnsLeft: 0

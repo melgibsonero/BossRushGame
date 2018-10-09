@@ -8,6 +8,8 @@ public class BaseBuff : MonoBehaviour
     private BuffSystem _buffSystem;
     protected CharCombatValues _buffOwner;
     public bool IsPlayerBuff { get { return _buffOwner.IsPlayer; } }
+    [SerializeField]
+    public UnitHighlight.Targets InitTarget;
 
     public void Act(GameObject go)
     {

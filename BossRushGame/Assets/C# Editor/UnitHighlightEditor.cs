@@ -25,7 +25,7 @@ public class UnitHighlightEditor : Editor
         }
         if (GUILayout.Button("Target all enemies"))
         {
-            myScript.Init(UnitHighlight.Targets.multi);
+            myScript.Init(UnitHighlight.Targets.allEnemies);
         }
         if (GUILayout.Button("Target everything"))
         {

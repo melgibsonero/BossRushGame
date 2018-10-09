@@ -8,9 +8,10 @@ public class UnitHighlight : MonoBehaviour {
     {
         enemy = 0,
         teammate = 1,
-        multi = 2,
+        allEnemies = 2,
         all = 3,
-        team = 4
+        team = 4,
+        self = 5
     }
 
 
@@ -23,6 +24,8 @@ public class UnitHighlight : MonoBehaviour {
     public bool HighlightEnemies = false; //Target only enemies
     [HideInInspector]
     public bool HighlightTeam = false;
+    [HideInInspector]
+    private bool SelfCast = false;
 
     [SerializeField]
     private UnitSlot[] unitSlots;
@@ -37,13 +40,13 @@ public class UnitHighlight : MonoBehaviour {
     public void SetBuff(BaseBuff buff)
     {
         CurrentBuff = buff;
-        Init(Targets.teammate);
+        Init(buff.InitTarget);
     }
 
     public void SetAbility(BaseAbility ability)
     {
         CurrentAbility = ability;
-        Init(Targets.enemy);
+        Init(ability.InitTarget);
     }
 
     private void Start()
@@ -80,7 +83,7 @@ public class UnitHighlight : MonoBehaviour {
                     }
                 }
                 break;
-            case Targets.multi:
+            case Targets.allEnemies:
                 Debug.Log("all enemies highlighted?");
                 HighlightEnemies = true;
                 currentHighlight = null;
@@ -94,6 +97,11 @@ public class UnitHighlight : MonoBehaviour {
                 HighlightTeam = true;
                 currentHighlight = null;
                 Debug.Log("All team targetted");
+                break;
+            case Targets.self:
+                SelfCast = true;
+                //CurrentHighlight = caster
+                Debug.Log("Selfcast, target self and remove controls");
                 break;
             default:
                 Debug.Log("invalid choice");
@@ -112,7 +120,7 @@ public class UnitHighlight : MonoBehaviour {
             }
             else
             {
-                if (currentHighlight != null) {
+                if (currentHighlight != null && !SelfCast) {
                     if (GetAxisAsKeyDown("Horizontal", Invert: true))
                     {
                         if (currentHighlight.leftUnitSlot != null)
@@ -170,8 +178,8 @@ public class UnitHighlight : MonoBehaviour {
         _showHighlights = false;
         currentHighlight = null;
     }
-    
-    
+
+    #region input shit 
     //Input related shit
     bool _lastInputAxisState;
     bool _lastInputAxisStateInvert;
@@ -207,4 +215,6 @@ public class UnitHighlight : MonoBehaviour {
             return currentInputValue;
         }
     }
+#endregion
+
 }
