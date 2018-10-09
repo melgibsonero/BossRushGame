@@ -31,13 +31,15 @@ public class UnitHighlight : MonoBehaviour
     [SerializeField]
     private UnitSlot currentHighlight;
 
+    private InputManager _inputManager;
+    bool _inputRight;
 
-    private BaseBuff CurrentBuff;
-    private BaseAbility CurrentAbility;
+    [SerializeField]
+    private GameObject CurrentAbility;
+    public UnitSlot[] UnitSlots { get { return unitSlots; } }
 
-
-    public void SetBuff(BaseBuff buff)
-    {
+    public void SetAbility(GameObject ability)
+    { 
         if(ability.GetComponent<BaseBuff>() != null)
         {
             Init(ability.GetComponent<BaseBuff>().InitTarget);
@@ -51,7 +53,8 @@ public class UnitHighlight : MonoBehaviour
 
     private void Start()
     {
-        unitSlots = FindObjectsOfType<UnitSlot>();
+        _inputManager = FindObjectOfType<InputManager>();
+        unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
     }
 
     public void Init(Targets targets = Targets.enemy)
@@ -211,13 +214,4 @@ public class UnitHighlight : MonoBehaviour
 
 }
 
-    private InputManager _inputManager;
-    bool _inputRight;
-
-    [SerializeField]
-    private GameObject CurrentAbility;
-    public UnitSlot[] UnitSlots { get { return unitSlots; } }
-
-    public void SetAbility(GameObject ability)
-        _inputManager = FindObjectOfType<InputManager>();
-        unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
+    

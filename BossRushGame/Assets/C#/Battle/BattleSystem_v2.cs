@@ -6,7 +6,9 @@ using UnityEngine;
 public class BattleSystem_v2 : MonoBehaviour
 {
     private BuffSystem _buffSystem;
+    [SerializeField]
     private UnitSlot[] _unitSlots;
+    [SerializeField]
     private BattleUnitBase[] _units;
     private bool _playerTurn = true;
     private int _playerCount, _enemyCount;
@@ -17,6 +19,8 @@ public class BattleSystem_v2 : MonoBehaviour
 
     private void Start()
     {
+        _unitSlots = new UnitSlot[unitHolderParent.childCount];
+        _units = new BattleUnitBase[unitHolderParent.childCount];
         _buffSystem = GetComponent<BuffSystem>();
 
         for (int i = 0; i < unitHolderParent.childCount; i++)

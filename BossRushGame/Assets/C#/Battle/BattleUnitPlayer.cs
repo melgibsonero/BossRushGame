@@ -8,8 +8,9 @@ public class BattleUnitPlayer : BattleUnitBase
     public bool interactWindow, interacted, isDefending;
     private InputManager _inputManager;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _inputManager = FindObjectOfType<InputManager>();
     }
 

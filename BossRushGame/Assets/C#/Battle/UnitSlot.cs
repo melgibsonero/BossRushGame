@@ -54,13 +54,18 @@ public class UnitSlot : MonoBehaviour {
     public void Start()
     {
         unitHighlight = FindObjectOfType<UnitHighlight>();
-        unit = UnitChoices[Random.Range(0, UnitChoices.Length-1)];
-        unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+        GetUnit();
         isEnemy = unit.GetComponent<BattleUnitEnemy>();
     }
 
+
     public BattleUnitBase GetUnit()
     {
+        if (unit == null)
+        {
+            unit = UnitChoices[Random.Range(0, UnitChoices.Length - 1)];
+            unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+        }
         return unit;
     }
 }

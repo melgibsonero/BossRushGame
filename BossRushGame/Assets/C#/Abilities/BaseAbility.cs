@@ -14,5 +14,8 @@ public class BaseAbility : MonoBehaviour
     public void Act(GameObject go)
     {
         go.GetComponent<CharCombatValues>().TakeDamage(damage);
+
+        //PURKKAAAAA
+        FindObjectOfType<BattleSystem_v2>().GetUnitTurn().EndTurn();
     }
 }

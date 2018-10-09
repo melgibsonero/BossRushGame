@@ -17,13 +17,14 @@ public class BattleUnitBase : MonoBehaviour
 
     public bool IsDead { get { return _combatValues.IsDead; } }
 
-    private void Start()
+    protected virtual void Start()
     {
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         _combatValues = GetComponent<CharCombatValues>();
         _animator = GetComponent<Animator>();
 
         Pointer = Instantiate(Pointer, transform);
+        Debug.Log(transform.name + " " + Pointer + "created");
         Pointer.transform.localPosition = Pointer_Offset;
         Pointer.SetActive(true);
     }
