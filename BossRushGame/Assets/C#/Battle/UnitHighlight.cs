@@ -33,6 +33,8 @@ public class UnitHighlight : MonoBehaviour
     private BaseAbility CurrentAbility;
     bool _inputRight;
 
+    public UnitSlot[] UnitSlots { get { return unitSlots; } }
+
     public void SetBuff(BaseBuff buff)
     {
         CurrentBuff = buff;

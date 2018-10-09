@@ -8,7 +8,7 @@ public class BattleUnitBase : MonoBehaviour
     protected BattleSystem_v2 _battleSystem;
     protected CharCombatValues _combatValues;
     protected Animator _animator;
-    public bool isDoneForTurn = false;
+    public bool isDoneForTurn = true;
 
     [SerializeField]
     public GameObject Pointer;

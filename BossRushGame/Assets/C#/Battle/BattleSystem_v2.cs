@@ -6,51 +6,57 @@ using UnityEngine;
 public class BattleSystem_v2 : MonoBehaviour
 {
     private BuffSystem _buffSystem;
-    private BattleUnitPlayer[] _playerUnits;
-    private BattleUnitEnemy[] _enemyUnits;
-    private bool _playerTurn = true, _battleOver;
-
-    public BattleUnitPlayer[] PlayerUnits { get { return _playerUnits; } }
-    public BattleUnitEnemy[] EnemyUnits { get { return _enemyUnits; } }
+    private UnitSlot[] _unitSlots;
+    private BattleUnitBase[] _units;
+    private bool _playerTurn = true;
+    private int _playerCount, _enemyCount;
+    
     public bool IsPlayerTurn { get { return _playerTurn; } }
-    public bool IsBattleOver { get { return _battleOver; } }
+
+    public Transform unitHolderParent;
 
     private void Start()
     {
         _buffSystem = GetComponent<BuffSystem>();
-        _playerUnits = FindObjectsOfType<BattleUnitPlayer>();
-        _enemyUnits = FindObjectsOfType<BattleUnitEnemy>();
+
+        for (int i = 0; i < unitHolderParent.childCount; i++)
+        {
+            _unitSlots[i] = unitHolderParent.GetChild(i).GetComponent<UnitSlot>();
+            _units[i] = _unitSlots[i].GetUnit();
+
+            if (_units[i] is BattleUnitPlayer)
+                _units[i].isDoneForTurn = false;
+        }
     }
 
     public void UpdateTurnLogic()
     {
         #region check win
 
-        _battleOver = true;
+        _playerCount = 0;
+        _enemyCount = 0;
 
-        foreach (BattleUnitBase unit in _playerUnits)
+        foreach (BattleUnitBase unit in _units)
         {
-            if (!unit.IsDead)
-                _battleOver = false;
+            if (unit.IsDead)
+                continue;
+
+            if (unit is BattleUnitPlayer)
+                _playerCount++;
+
+            if (unit is BattleUnitEnemy)
+                _enemyCount++;
         }
 
-        if (_battleOver)
+        if (_playerCount == 0)
         {
-            Debug.LogWarning("Enemy win");
+            Debug.Log("Player lost");
             Debug.Break();
         }
-        else
-            _battleOver = true;
 
-        foreach (BattleUnitBase unit in _enemyUnits)
+        if (_enemyCount == 0)
         {
-            if (!unit.IsDead)
-                _battleOver = false;
-        }
-
-        if (_battleOver)
-        {
-            Debug.LogWarning("Player win");
+            Debug.Log("Enemy lost");
             Debug.Break();
         }
 
@@ -58,23 +64,23 @@ public class BattleSystem_v2 : MonoBehaviour
 
         #region turn done logic
 
-        if (_playerTurn)
+        foreach (BattleUnitBase unit in _units)
         {
-            foreach (BattleUnitBase unit in _playerUnits)
-            {
-                if (!unit.isDoneForTurn)
-                    return;
-            }
-        }
-        else
-        {
-            foreach (BattleUnitBase unit in _enemyUnits)
-            {
-                if (!unit.isDoneForTurn)
-                    return;
-            }
-        }
+            if (unit.IsDead || unit.isDoneForTurn)
+                continue;
 
+            if (unit is BattleUnitPlayer && !_playerTurn)
+            {
+                Debug.Log("I thought that this would not come up :)");
+                continue;
+            }
+
+            if (unit is BattleUnitEnemy && _playerTurn)
+            {
+                Debug.Log("I thought that this would not come up :)");
+                continue;
+            }
+        }
         #endregion
 
         // switch turn
@@ -82,24 +88,34 @@ public class BattleSystem_v2 : MonoBehaviour
 
         #region start turn logic
 
-        if (_playerTurn)
+        foreach (BattleUnitBase unit in _units)
         {
-            foreach (BattleUnitPlayer unit in _playerUnits)
-            {
-                unit.StartTurn();
-            }
-        }
-        else
-        {
-            foreach (BattleUnitEnemy unit in _enemyUnits)
-            {
-                unit.StartTurn();
-            }
+            if (_playerTurn)
+                unit.isDoneForTurn = unit is BattleUnitPlayer;
+            else
+                unit.isDoneForTurn = unit is BattleUnitEnemy;
         }
 
         #endregion
-        
+
         // for turn based buffs
         _buffSystem.UpdateTurnCount(_playerTurn);
+    }
+
+    public BattleUnitBase GetUnitTurn()
+    {
+        for (int i = 0; i < _unitSlots.Length; i++)
+        {
+            if (_unitSlots[i].GetUnit().IsDead || _unitSlots[i].GetUnit().isDoneForTurn)
+                continue;
+
+            if (_playerTurn && _unitSlots[i].GetUnit() is BattleUnitPlayer)
+                return _unitSlots[i].GetUnit();
+            if (!_playerTurn && _unitSlots[i].GetUnit() is BattleUnitEnemy)
+                return _unitSlots[i].GetUnit();
+        }
+
+        Debug.LogError("NULL");
+        return null;
     }
 }
