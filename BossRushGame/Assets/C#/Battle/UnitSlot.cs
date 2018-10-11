@@ -12,8 +12,6 @@ public class UnitSlot : MonoBehaviour {
     public UnitSlot leftUnitSlot;
     public UnitSlot rightUnitSlot;
 
-    private bool isHighlighted;
-
     [SerializeField]
     private bool isEnemy;
 
@@ -24,7 +22,7 @@ public class UnitSlot : MonoBehaviour {
     {
         get
         {
-            if (unitHighlight._showHighlights)
+            if (!GetUnit().IsDead && unitHighlight._showHighlights)
             {
                 if (unitHighlight.HighlightAll)
                 {
