@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BaseAbility : MonoBehaviour
 {
-    [SerializeField]
     public UnitHighlight.Targets InitTarget;
 
     public BattleUnitBase Attacker; //Who attacks
@@ -14,6 +13,7 @@ public class BaseAbility : MonoBehaviour
     public void Act(GameObject go)
     {
         Attacker = FindObjectOfType<BattleSystem_v2>().GetUnitTurn();
+        damage = Attacker.CombatValues.currentAP;
         Defender = go.GetComponent<BattleUnitBase>();
 
         StartCoroutine("MoveToTarget");
@@ -26,11 +26,19 @@ public class BaseAbility : MonoBehaviour
         Vector3 endPos = Defender.transform.position;
         while (timer < 1)
         {
-            transform.position = Vector3.Lerp(startPos, endPos, timer);
-            yield return new WaitForEndOfFrame();
             timer += Time.deltaTime;
+            Attacker.transform.position = Vector3.Lerp(startPos, endPos, timer);
+            yield return new WaitForEndOfFrame();
+            
         }
         DealDamage();
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            Attacker.transform.position = Vector3.Lerp(startPos, endPos, timer);
+            yield return new WaitForEndOfFrame();
+            
+        }
         EndTurn();
     }
 
@@ -41,6 +49,7 @@ public class BaseAbility : MonoBehaviour
 
     private void EndTurn()
     {
-        FindObjectOfType<BattleSystem_v2>().GetUnitTurn().EndTurn();
+        Attacker.EndTurn();
+        Destroy(gameObject);
     }
 }

@@ -154,7 +154,7 @@ public class UnitHighlight : MonoBehaviour
         {
             if (unit.IsHighlighted)
             {
-                Debug.Log(unit.name + " acted upon");
+                CurrentAbility = Instantiate(CurrentAbility);
                 if (CurrentAbility.GetComponent<BaseBuff>() != null)
                 {
                     CurrentAbility.GetComponent<BaseBuff>().Act(unit.GetUnit().gameObject);

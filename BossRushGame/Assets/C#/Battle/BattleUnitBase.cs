@@ -15,6 +15,7 @@ public class BattleUnitBase : MonoBehaviour
     [SerializeField]
     private Vector3 Pointer_Offset;
 
+    public CharCombatValues CombatValues { get { return _combatValues; } }
     public bool IsDead { get { return _combatValues.IsDead; } }
 
     protected virtual void Start()
