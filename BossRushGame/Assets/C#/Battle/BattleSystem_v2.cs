@@ -130,14 +130,14 @@ public class BattleSystem_v2 : MonoBehaviour
         return GetUnitTurn();
     }
 
-    private CharCombatValues GetPlayerCCV()
+    private BattleUnitPlayer GetPlayerUnit()
     {
         foreach (BattleUnitPlayer unit in _units)
         {
             if (unit.IsDead)
                 continue;
 
-            return unit.CombatValues;
+            return unit;
         }
 
         Debug.LogError("NULL");
@@ -150,7 +150,7 @@ public class BattleSystem_v2 : MonoBehaviour
         {
             if (!_playerTurn)
             {
-                (GetUnitTurn() as BattleUnitEnemy).ActTurn(GetPlayerCCV());
+                (GetUnitTurn() as BattleUnitEnemy).ActTurn(GetPlayerUnit());
             }
 
             yield return new WaitForSecondsRealtime(1);
