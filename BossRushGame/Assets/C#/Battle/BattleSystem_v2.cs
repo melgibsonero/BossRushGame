@@ -111,6 +111,7 @@ public class BattleSystem_v2 : MonoBehaviour
 
     public BattleUnitBase GetUnitTurn()
     {
+        // find valid unit
         for (int i = 0; i < _unitSlots.Length; i++)
         {
             if (_unitSlots[i].GetUnit().IsDead || _unitSlots[i].GetUnit().isDoneForTurn)
@@ -122,8 +123,11 @@ public class BattleSystem_v2 : MonoBehaviour
                 return _unitSlots[i].GetUnit();
         }
 
-        Debug.LogError("NULL");
-        return null;
+        // if no valid unit
+        UpdateTurnLogic();
+
+        // find valid unit again
+        return GetUnitTurn();
     }
 
     private CharCombatValues GetPlayerCCV()
