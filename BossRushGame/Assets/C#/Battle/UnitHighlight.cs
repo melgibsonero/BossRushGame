@@ -66,7 +66,8 @@ public class UnitHighlight : MonoBehaviour
             case Targets.enemy:
                 for(int i = 0; i<unitSlots.Length; i++)
                 {
-                    if(unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null && !unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>().IsDead)
+                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null &&
+                        !unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>().IsDead)
                     {
                         currentHighlight = unitSlots[i];
                         break;
@@ -77,7 +78,8 @@ public class UnitHighlight : MonoBehaviour
             case Targets.teammate:
                 for (int i = 0; i < unitSlots.Length; i++)
                 {
-                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>() != null && !unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>().IsDead)
+                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>() != null && 
+                        !unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>().IsDead)
                     {
                         currentHighlight = unitSlots[i];
                         break;
@@ -86,7 +88,14 @@ public class UnitHighlight : MonoBehaviour
                 break;
             case Targets.allEnemies:
                 HighlightEnemies = true;
-                currentHighlight = null;
+                for (int i = 0; i < unitSlots.Length; i++)
+                {
+                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null)
+                    {
+                        currentHighlight = unitSlots[i];
+                        break;
+                    }
+                }
                 break;
             case Targets.all:
                 HighlightAll = true;

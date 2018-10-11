@@ -5,6 +5,8 @@ using UnityEngine;
 public class BaseAbility : MonoBehaviour
 {
     public UnitHighlight.Targets InitTarget;
+    [SerializeField]
+    private Vector3 WalkUpOffset = new Vector3(-2, 0, 0);
 
     public BattleUnitBase Attacker; //Who attacks
     public BattleUnitBase Defender; //Who gets attacked
@@ -23,7 +25,7 @@ public class BaseAbility : MonoBehaviour
     {
         float timer = 0;
         Vector3 startPos = Attacker.transform.position;
-        Vector3 endPos = Defender.transform.position;
+        Vector3 endPos = Defender.transform.position + WalkUpOffset;
         while (timer < 1)
         {
             timer += Time.deltaTime;

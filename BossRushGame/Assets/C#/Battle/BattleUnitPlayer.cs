@@ -8,8 +8,6 @@ public class BattleUnitPlayer : BattleUnitBase
     public bool interactWindow, interacted, isDefending;
     private InputManager _inputManager;
 
-    public CharCombatValues CombatValues { get { return _combatValues; } }
-
     protected override void Start()
     {
         base.Start();
