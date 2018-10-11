@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    IEnumerator MoveToPoint(Transform toMove, Vector3 from, Vector3 to, float timeInSeconds = 1)
+    public static IEnumerator MoveToPoint(Transform toMove, Vector3 from, Vector3 to, float timeInSeconds = 1)
     {
         // prevent infinite loop
         if (timeInSeconds <= 0)

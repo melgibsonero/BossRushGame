@@ -1563,7 +1563,7 @@ MonoBehaviour:
         m_MethodName: SetAbility
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1822613196676398, guid: 715d981007f33e046be13340748aadaf,
+          m_ObjectArgument: {fileID: 1706064630124994, guid: 931a80189dc95f94cb4d73d3fa035cdc,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
@@ -2255,6 +2255,48 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1443578408}
   m_CullTransparentMesh: 0
+--- !u!1001 &1551167080
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.8031428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.813859
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 9.422662
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385566311909674, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1558836731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,6 +2682,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67560862c9822ed41bd20dfc5401c74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitSlots: []
+  _units: []
   unitHolderParent: {fileID: 1089082121}
 --- !u!4 &1662627110
 Transform:

@@ -15,6 +15,9 @@ public class BattleUnitBase : MonoBehaviour
     [SerializeField]
     private Vector3 Pointer_Offset;
 
+    [SerializeField]
+    public GameObject AbilityInUse;
+
     public CharCombatValues CombatValues { get { return _combatValues; } }
     public bool IsDead { get { return _combatValues.IsDead; } }
 
@@ -34,5 +37,21 @@ public class BattleUnitBase : MonoBehaviour
         isDoneForTurn = true;
 
         _battleSystem.UpdateTurnLogic();
+    }
+
+    public void DealDamage()
+    {
+        if (AbilityInUse.GetComponent<BaseAbility>() != null)
+        {
+            AbilityInUse.GetComponent<BaseAbility>().DealDamage();
+        }
+    }
+
+    public void Retreat()
+    {
+        if (AbilityInUse.GetComponent<BaseAbility>() != null)
+        {
+            AbilityInUse.GetComponent<BaseAbility>().Retreat();
+        }
     }
 }

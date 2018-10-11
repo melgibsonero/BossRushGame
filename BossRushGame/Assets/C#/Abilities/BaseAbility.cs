@@ -5,43 +5,20 @@ using UnityEngine;
 public class BaseAbility : MonoBehaviour
 {
     public UnitHighlight.Targets InitTarget;
-    [SerializeField]
-    private Vector3 WalkUpOffset = new Vector3(-2, 0, 0);
+
+    protected Animator battleUnitAnimator;
 
     public BattleUnitBase Attacker; //Who attacks
     public BattleUnitBase Defender; //Who gets attacked
-    public int damage;
 
-    public void Act(GameObject go)
+    private int damage;
+
+    public virtual void Act(GameObject go)
     {
         Attacker = FindObjectOfType<BattleSystem_v2>().GetUnitTurn();
         damage = Attacker.CombatValues.currentAP;
         Defender = go.GetComponent<BattleUnitBase>();
-
-        StartCoroutine("MoveToTarget");
-    }
-
-    public IEnumerator MoveToTarget()
-    {
-        float timer = 0;
-        Vector3 startPos = Attacker.transform.position;
-        Vector3 endPos = Defender.transform.position + WalkUpOffset;
-        while (timer < 1)
-        {
-            timer += Time.deltaTime;
-            Attacker.transform.position = Vector3.Lerp(startPos, endPos, timer);
-            yield return new WaitForEndOfFrame();
-            
-        }
-        DealDamage();
-        while (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            Attacker.transform.position = Vector3.Lerp(startPos, endPos, timer);
-            yield return new WaitForEndOfFrame();
-            
-        }
-        EndTurn();
+        battleUnitAnimator = Attacker.GetComponent<Animator>();
     }
 
     public void DealDamage()
@@ -49,9 +26,11 @@ public class BaseAbility : MonoBehaviour
         Defender.GetComponent<CharCombatValues>().TakeDamage(damage);
     }
 
-    private void EndTurn()
+    protected void EndTurn()
     {
         Attacker.EndTurn();
         Destroy(gameObject);
     }
+
+    public virtual void Retreat() { }
 }

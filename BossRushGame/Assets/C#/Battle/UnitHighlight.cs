@@ -32,6 +32,7 @@ public class UnitHighlight : MonoBehaviour
     private UnitSlot currentHighlight;
 
     private InputManager _inputManager;
+    private BattleSystem_v2 _battleSystem;
     bool _inputRight;
 
     [SerializeField]
@@ -54,6 +55,7 @@ public class UnitHighlight : MonoBehaviour
     private void Start()
     {
         _inputManager = FindObjectOfType<InputManager>();
+        _battleSystem = FindObjectOfType<BattleSystem_v2>();
         unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
     }
 
@@ -164,6 +166,7 @@ public class UnitHighlight : MonoBehaviour
             if (unit.IsHighlighted)
             {
                 CurrentAbility = Instantiate(CurrentAbility);
+                _battleSystem.GetUnitTurn().AbilityInUse = CurrentAbility;
                 if (CurrentAbility.GetComponent<BaseBuff>() != null)
                 {
                     CurrentAbility.GetComponent<BaseBuff>().Act(unit.GetUnit().gameObject);
