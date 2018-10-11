@@ -25,7 +25,6 @@ public class BattleUnitBase : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         Pointer = Instantiate(Pointer, transform);
-        Debug.Log(transform.name + " " + Pointer + "created");
         Pointer.transform.localPosition = Pointer_Offset;
         Pointer.SetActive(true);
     }

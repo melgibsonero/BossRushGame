@@ -37,12 +37,6 @@ public class CharCombatValues : MonoBehaviour
         if (_totalDamage > 0)
         {
             currentHP -= _totalDamage;
-            
-
-            if (currentHP <= 0)
-            {
-                Debug.Log("dead");
-            }
         }
         ShowDamageText(_totalDamage);
 

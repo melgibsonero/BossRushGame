@@ -9,9 +9,9 @@ public class BattleUnitEnemy : BattleUnitBase
         isDoneForTurn = false;
     }
 
-    public void ActTurn(CharCombatValues target)
+    public void ActTurn(BattleUnitPlayer target)
     {
-        target.TakeDamage(_combatValues.currentAP);
+        target.CombatValues.TakeDamage(_combatValues.currentAP);
 
         EndTurn();
     }
