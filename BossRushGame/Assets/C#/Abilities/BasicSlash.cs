@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicSlash : BaseAbility {
-
-
+public class BasicSlash : BaseAbility
+{
     private Vector3 startPos;
     private Vector3 endPos;
-
-
+    
     [SerializeField]
     private Vector3 WalkUpOffset = new Vector3(-2, 0, 0);
 

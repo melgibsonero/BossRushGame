@@ -56,13 +56,13 @@ public class BattleSystem_v2 : MonoBehaviour
         if (_playerCount == 0)
         {
             Debug.Log("Player lost");
-            Debug.Break();
+            GameManager.ReloadScene();
         }
 
         if (_enemyCount == 0)
         {
             Debug.Log("Enemy lost");
-            Debug.Break();
+            GameManager.ReloadScene();
         }
 
         #endregion
@@ -155,5 +155,12 @@ public class BattleSystem_v2 : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(1);
         }
+    }
+
+
+    // button method
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

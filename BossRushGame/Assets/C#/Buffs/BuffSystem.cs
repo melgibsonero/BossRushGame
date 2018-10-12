@@ -3,31 +3,39 @@ using UnityEngine;
 
 public class BuffSystem : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] _buffPrefabs;
     public List<BaseBuff> buffs;
 
     private UnitHighlight _unitHighlight;
     
     public enum TriggerEndBuff
     {
-        Attack = 0
+        Slash = 0,
+        Crush = 1
     }
 
     public void EndBuffTrigger(TriggerEndBuff trigger, CharCombatValues doer)
     {
-        foreach (BuffEndOnTrigger buff in buffs)
+        // from N to 0 so we can remove buffs from list during for loop
+        for (int i = buffs.Count -1; i >= 0; i--)
         {
-            buff.TriggerRemove(trigger, doer);
+            // check type
+            if (buffs[i] is BuffEndOnTrigger)
+                (buffs[i] as BuffEndOnTrigger).TriggerRemove(trigger, doer);
         }
     }
 
     public void UpdateTurnCount(bool playerBuffs)
     {
-        foreach (BuffTurnLimit buff in buffs)
+        // from N to 0 so we can remove buffs from list during for loop
+        for (int i = buffs.Count -1; i >= 0; i--)
         {
-            if (buff.IsPlayerBuff == playerBuffs)
-                buff.UpdateTurnCount();
+            // enemy buffs don't update on player turn and vice versa
+            if (buffs[i].IsPlayerBuff != playerBuffs)
+                continue;
+
+            // check type
+            if (buffs[i] is BuffTurnLimit)
+                (buffs[i] as BuffTurnLimit).UpdateTurnCount();
         }
     }
 }

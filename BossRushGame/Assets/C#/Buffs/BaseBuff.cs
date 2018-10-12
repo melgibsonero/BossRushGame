@@ -26,6 +26,8 @@ public class BaseBuff : MonoBehaviour
 
         _buffOwner.AttackBuff(_buffAP);
         _buffOwner.DefenceBuff(_buffDP);
+
+        _buffSystem.GetComponent<BattleSystem_v2>().GetUnitTurn().EndTurn();
     }
 
     public void RemoveBuff()

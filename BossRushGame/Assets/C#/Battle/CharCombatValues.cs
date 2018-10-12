@@ -33,11 +33,13 @@ public class CharCombatValues : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _totalDamage = damage - currentDP;        
+        _totalDamage = damage - currentDP;
+
         if (_totalDamage > 0)
-        {
             currentHP -= _totalDamage;
-        }
+        else
+            _totalDamage = 0;
+
         ShowDamageText(_totalDamage);
 
         _totalDamage = 0;
@@ -55,9 +57,7 @@ public class CharCombatValues : MonoBehaviour
         currentHP += amount;
 
         if (currentHP > maxHP)
-        {
             currentHP = maxHP;
-        }
     }
 
     #endregion

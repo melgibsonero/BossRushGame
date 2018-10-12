@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
     public static IEnumerator MoveToPoint(Transform toMove, Vector3 from, Vector3 to, float timeInSeconds = 1)
     {
@@ -17,5 +18,10 @@ public class GameManager : MonoBehaviour
             toMove.position = Vector3.Lerp(from, to, timer);
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public static void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

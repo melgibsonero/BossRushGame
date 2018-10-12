@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BaseAbility : MonoBehaviour
 {
+    public BuffSystem.TriggerEndBuff attackType;
+
     public UnitHighlight.Targets InitTarget;
 
     protected Animator battleUnitAnimator;
@@ -19,6 +21,8 @@ public class BaseAbility : MonoBehaviour
         damage = Attacker.CombatValues.currentAP;
         Defender = go.GetComponent<BattleUnitBase>();
         battleUnitAnimator = Attacker.GetComponent<Animator>();
+
+        FindObjectOfType<BuffSystem>().EndBuffTrigger(attackType, Attacker.CombatValues);
     }
 
     public void DealDamage()

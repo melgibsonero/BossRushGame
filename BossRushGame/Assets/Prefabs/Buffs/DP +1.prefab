@@ -54,4 +54,4 @@ MonoBehaviour:
   _buffAP: 0
   _buffDP: 1
   InitTarget: 1
-  _turnsLeft: 0
+  _turnsLeft: 1
