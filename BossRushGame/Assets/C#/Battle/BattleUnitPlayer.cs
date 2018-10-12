@@ -20,6 +20,7 @@ public class BattleUnitPlayer : BattleUnitBase
         {
             if (_inputManager.GetButtonDown(InputManager.Button.Interact) && !interacted)
             {
+                Debug.Log("success!");
                 interactCounter++;
                 interacted = true;
             }
@@ -28,6 +29,7 @@ public class BattleUnitPlayer : BattleUnitBase
         {
             interacted = false;
         }
+        
     }
 
     public void StartTurn()
