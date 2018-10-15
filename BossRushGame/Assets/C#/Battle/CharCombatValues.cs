@@ -48,7 +48,14 @@ public class CharCombatValues : MonoBehaviour
     public void ShowDamageText(int damageTaken)
     {
         var damageText = Instantiate(textMesh, transform);
-        damageText.text = "-" + damageTaken;
+        if (damageTaken == 0)
+        {
+            damageText.text = "BLOCK";
+        }
+        else
+        {
+            damageText.text = "-" + damageTaken;
+        }
         HealthText.text = currentHP + "/" + maxHP;
     }
 
