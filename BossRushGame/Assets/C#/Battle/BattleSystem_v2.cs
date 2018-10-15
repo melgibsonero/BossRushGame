@@ -97,10 +97,11 @@ public class BattleSystem_v2 : MonoBehaviour
 
         foreach (BattleUnitBase unit in _units)
         {
-            if (!_playerTurn)
-                unit.isDoneForTurn = unit is BattleUnitPlayer;
-            else
-                unit.isDoneForTurn = unit is BattleUnitEnemy;
+            if (_playerTurn && unit is BattleUnitPlayer)
+                (unit as BattleUnitPlayer).StartTurn();
+
+            if (!_playerTurn && unit is BattleUnitEnemy)
+                (unit as BattleUnitEnemy).StartTurn();
         }
 
         #endregion
