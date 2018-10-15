@@ -6,7 +6,9 @@ public class BasicSMASH : BaseAbility
 {
     private static Vector3 startPos;
     private static Vector3 endPos;
-    
+
+    public float WaveSpeed = 0.15f;
+
     [SerializeField]
     private Vector3 WalkUpOffset = new Vector3(-3, 0, 0);
 
@@ -32,8 +34,8 @@ public class BasicSMASH : BaseAbility
         {
             if (Targets[t] != null)
             {
-                Targets[t].GetComponent<CharCombatValues>().TakeDamage(damage);
-                yield return new WaitForSeconds(0.15f);
+                Targets[t].GetComponent<CharCombatValues>().TakeDamage(damage+1);
+                yield return new WaitForSeconds(WaveSpeed);
             }
         }
     }
