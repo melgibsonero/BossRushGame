@@ -26,7 +26,7 @@ public class BasicSlash : BaseAbility
     {
         float timer = 0;
         startPos = Attacker.transform.position;
-        endPos = Defender.transform.position + WalkUpOffset;
+        endPos = Target.transform.position + WalkUpOffset;
         while (timer < 1)
         {
             timer += Time.deltaTime;

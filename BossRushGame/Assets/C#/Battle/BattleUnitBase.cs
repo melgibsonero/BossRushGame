@@ -18,6 +18,20 @@ public class BattleUnitBase : MonoBehaviour
     [SerializeField]
     public GameObject AbilityInUse;
 
+    public UnitSlot GetUnitSlot
+    { get
+        {
+            var slots = FindObjectsOfType<UnitSlot>();
+            foreach (var slot in slots)
+            {
+                if (slot.GetUnit() == this)
+                {
+                    return slot;
+                }
+            }
+            return null;
+        }
+    }
     public CharCombatValues CombatValues { get { return _combatValues; } }
     public bool IsDead { get { return _combatValues.IsDead; } }
 

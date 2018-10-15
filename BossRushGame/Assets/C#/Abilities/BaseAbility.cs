@@ -11,23 +11,28 @@ public class BaseAbility : MonoBehaviour
     protected Animator battleUnitAnimator;
 
     public BattleUnitBase Attacker; //Who attacks
-    public BattleUnitBase Defender; //Who gets attacked
+    public BattleUnitBase Target; //Who gets attacked
 
-    private int damage;
+    public BattleUnitBase[] Targets;
 
-    public virtual void Act(GameObject go)
+    protected int damage;
+
+    public virtual void Act(GameObject go = null)
     {
         Attacker = FindObjectOfType<BattleSystem_v2>().GetUnitTurn();
         damage = Attacker.CombatValues.currentAP;
-        Defender = go.GetComponent<BattleUnitBase>();
+        Target = go.GetComponent<BattleUnitBase>();
         battleUnitAnimator = Attacker.GetComponent<Animator>();
-
-        FindObjectOfType<BuffSystem>().EndBuffTrigger(attackType, Attacker.CombatValues);
     }
 
-    public void DealDamage()
+    public void SetTargetList(BattleUnitBase[] targets)
     {
-        Defender.GetComponent<CharCombatValues>().TakeDamage(damage);
+        Targets = targets;
+    }
+
+    public virtual void DealDamage()
+    {
+        Target.GetComponent<CharCombatValues>().TakeDamage(damage);
     }
 
     protected void EndTurn()

@@ -195,20 +195,43 @@ public class UnitHighlight : MonoBehaviour
 
     public void ActTarget()
     {
-        foreach (UnitSlot unit in unitSlots)
+        if (!HighlightAll && !HighlightEnemies && !HighlightTeam)
         {
-            if (unit.IsHighlighted)
+            foreach (UnitSlot unit in unitSlots)
             {
-                CurrentAbility = Instantiate(CurrentAbility);
-                _battleSystem.GetUnitTurn().AbilityInUse = CurrentAbility;
-                if (CurrentAbility.GetComponent<BaseBuff>() != null)
+                if (unit.IsHighlighted)
                 {
-                    CurrentAbility.GetComponent<BaseBuff>().Act(unit.GetUnit().gameObject);
+                    CurrentAbility = Instantiate(CurrentAbility);
+                    _battleSystem.GetUnitTurn().AbilityInUse = CurrentAbility;
+                    if (CurrentAbility.GetComponent<BaseBuff>() != null)
+                    {
+                        CurrentAbility.GetComponent<BaseBuff>().Act(unit.GetUnit().gameObject);
+                    }
+                    if (CurrentAbility.GetComponent<BaseAbility>() != null)
+                    {
+                        CurrentAbility.GetComponent<BaseAbility>().Act(unit.GetUnit().gameObject);
+                    }
                 }
-                if (CurrentAbility.GetComponent<BaseAbility>() != null)
+            }
+        }
+        else
+        {
+            CurrentAbility = Instantiate(CurrentAbility);
+            _battleSystem.GetUnitTurn().AbilityInUse = CurrentAbility;
+            BattleUnitBase[] targets = new BattleUnitBase[unitSlots.Length];
+            var index = 0;
+            for (int u = 0; u<unitSlots.Length; u++)
+            {
+                if (unitSlots[u].IsHighlighted)
                 {
-                    CurrentAbility.GetComponent<BaseAbility>().Act(unit.GetUnit().gameObject);
+                    targets[index] = unitSlots[u].GetUnit();
+                    index++;
                 }
+            }
+            if (CurrentAbility.GetComponent<BaseAbility>() != null)
+            {
+                CurrentAbility.GetComponent<BaseAbility>().SetTargetList(targets);
+                CurrentAbility.GetComponent<BaseAbility>().Act();
             }
         }
         Reset();
