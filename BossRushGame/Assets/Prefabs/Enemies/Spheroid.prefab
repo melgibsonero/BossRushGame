@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23922399010019718}
   - component: {fileID: 135471543503743760}
   - component: {fileID: 114658002460123152}
+  - component: {fileID: 95619645502058214}
   m_Layer: 0
   m_Name: Spheroid
   m_TagString: Untagged
@@ -86,6 +87,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270828181317854}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &95619645502058214
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270828181317854}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114658002460123152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +119,7 @@ MonoBehaviour:
   isDoneForTurn: 0
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
   Pointer_Offset: {x: 0, y: 2, z: 0}
+  AbilityInUse: {fileID: 0}
 --- !u!114 &114914892028662748
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2491,7 +2491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitChoices:
-  - {fileID: 114609310763390488, guid: 7cbeb9a1bc906554799e934c8b52cbc2, type: 2}
+  - {fileID: 114972687506505340, guid: 3c9b7f02331bcb744b306a3c1374e02d, type: 2}
   unit: {fileID: 0}
   leftUnitSlot: {fileID: 0}
   rightUnitSlot: {fileID: 2136594897}
@@ -3361,7 +3361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitChoices:
-  - {fileID: 114609310763390488, guid: 7cbeb9a1bc906554799e934c8b52cbc2, type: 2}
+  - {fileID: 114972687506505340, guid: 3c9b7f02331bcb744b306a3c1374e02d, type: 2}
   unit: {fileID: 0}
   leftUnitSlot: {fileID: 1558836732}
   rightUnitSlot: {fileID: 151143636}

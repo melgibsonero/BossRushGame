@@ -23,17 +23,24 @@ public class BattleUnitPlayer : BattleUnitBase
                 Debug.Log("success!");
                 interactCounter++;
                 interacted = true;
+                
             }
         }
         else
         {
-            interacted = false;
+            //interacted = false;
         }
-        
+        _animator.SetBool("Interacted", interacted);
+    }
+
+    public void ClearInteract()
+    {
+        interacted = false;
     }
 
     public void StartTurn()
     {
+        interacted = false;
         interactCounter = 0;
         isDefending = false;
         isDoneForTurn = false;
