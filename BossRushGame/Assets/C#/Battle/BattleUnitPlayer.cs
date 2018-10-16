@@ -18,6 +18,7 @@ public class BattleUnitPlayer : BattleUnitBase
     {
         if (interactWindow)
         {
+            Debug.Log("Window open, press now");
             if (_inputManager.GetButtonDown(InputManager.Button.Interact) && !interacted)
             {
                 Debug.Log("success!");

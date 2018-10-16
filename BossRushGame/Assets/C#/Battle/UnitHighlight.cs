@@ -130,55 +130,20 @@ public class UnitHighlight : MonoBehaviour
                     {
                         if (currentHighlight.rightUnitSlot != null)
                         {
-                            //if (!currentHighlight.rightUnitSlot.GetUnit().IsDead)
-                            //{
-                                currentHighlight = currentHighlight.rightUnitSlot;
-                            //}
-                            //else
-                            //{
-                            //    foreach (var unit in unitSlots)
-                            //    {
-                            //        if (!unit.rightUnitSlot.GetUnit().IsDead)
-                            //        {
-                            //            currentHighlight = unit.rightUnitSlot;
-                            //        }
-                            //        else
-                            //        {
-                            //            currentHighlight = unit;
-                            //        }
-                            //    }
-                            //}
+                            currentHighlight = currentHighlight.rightUnitSlot;
                         }
                     }
                     else
                     {
                         if (currentHighlight.leftUnitSlot != null)
                         {
-                            //if (!currentHighlight.leftUnitSlot.GetUnit().IsDead)
-                            //{
-                                currentHighlight = currentHighlight.leftUnitSlot;
-                            //}
-                            //else
-                            //{
-                            //    foreach (var unit in unitSlots)
-                            //    {
-                            //        if (!unit.leftUnitSlot.GetUnit().IsDead)
-                            //        {
-                            //            currentHighlight = unit.leftUnitSlot;
-                            //        }
-                            //        else
-                            //        {
-                            //            currentHighlight = unit;
-                            //        }
-                            //    }
-                            //}
+                            currentHighlight = currentHighlight.leftUnitSlot;
                         }
                     }
                 }
             }
             if (_inputManager.GetButtonDown(InputManager.Button.Interact))
             {
-                //Debug.Log("interacted");
                 ActTarget();
             }
         }

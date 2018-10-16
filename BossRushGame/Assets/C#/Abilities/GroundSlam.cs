@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicSMASH : BaseAbility
+public class GroundSlam : BaseAbility
 {
     private static Vector3 startPos;
     private static Vector3 endPos;

@@ -10,10 +10,14 @@ public class BattleUnitBase : MonoBehaviour
     protected Animator _animator;
     public bool isDoneForTurn;
 
+    [Tooltip("Where attacks are targetted to"), SerializeField]
+    private GameObject PointofAttack;
+    public Vector3 GetPointofAttack { get { return (PointofAttack != null) ? PointofAttack.transform.position : transform.position; } }
+
     [SerializeField]
     public GameObject Pointer;
-    [SerializeField]
-    private Vector3 Pointer_Offset;
+
+    private static Vector3 Pointer_Offset = new Vector3(0,0.2f,0);
 
     [SerializeField]
     public GameObject AbilityInUse;
@@ -37,12 +41,17 @@ public class BattleUnitBase : MonoBehaviour
 
     protected virtual void Start()
     {
+        if (PointofAttack == null)
+        {
+            Debug.Log(gameObject.name + " missing point of attack");
+        }
+
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         _combatValues = GetComponent<CharCombatValues>();
         _animator = GetComponent<Animator>();
 
         Pointer = Instantiate(Pointer, transform);
-        Pointer.transform.localPosition = Pointer_Offset;
+        Pointer.transform.position = (PointofAttack!=null)? PointofAttack.transform.position + Pointer_Offset : transform.position + Pointer_Offset;
         Pointer.SetActive(true);
     }
 
@@ -66,6 +75,15 @@ public class BattleUnitBase : MonoBehaviour
         if (AbilityInUse.GetComponent<BaseAbility>() != null)
         {
             AbilityInUse.GetComponent<BaseAbility>().Retreat();
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (PointofAttack != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(PointofAttack.transform.position, 0.1f);
         }
     }
 }
