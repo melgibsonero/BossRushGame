@@ -14,6 +14,7 @@ public class ButtonText : MonoBehaviour
         _buttons = FindObjectsOfType<Button>();
         foreach (Button button in _buttons)
         {
+            if(button.GetComponentInChildren<Text>()!=null)
             button.GetComponentInChildren<Text>().text = " " + button.name;
         }
     }

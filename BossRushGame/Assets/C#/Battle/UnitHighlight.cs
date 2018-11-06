@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UnitHighlight : MonoBehaviour
 {
@@ -35,12 +37,15 @@ public class UnitHighlight : MonoBehaviour
     private BattleSystem_v2 _battleSystem;
     bool _inputRight;
 
+    public EventSystem es;
+
     [SerializeField]
     private GameObject CurrentAbility;
     public UnitSlot[] UnitSlots { get { return unitSlots; } }
 
     public void SetAbility(GameObject ability)
-    { 
+    {
+        
         if(ability.GetComponent<BaseBuff>() != null)
         {
             Init(ability.GetComponent<BaseBuff>().InitTarget);
@@ -52,8 +57,14 @@ public class UnitHighlight : MonoBehaviour
         CurrentAbility = ability;
     }
 
+    public void ToggleActionButtons()
+    {
+
+    }
+
     private void Start()
     {
+        es = EventSystem.current;
         _inputManager = FindObjectOfType<InputManager>();
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
