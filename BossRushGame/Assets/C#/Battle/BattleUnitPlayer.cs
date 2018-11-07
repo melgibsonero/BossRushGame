@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleUnitPlayer : BattleUnitBase
 {
+    public ItemWeapon Slash, Crush;
+
     public int interactCounter;
     public bool interactWindow, interacted, isDefending;
     private InputManager _inputManager;
