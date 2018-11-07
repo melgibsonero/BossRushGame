@@ -5,15 +5,19 @@ using UnityEngine;
 public class Breathe : MonoBehaviour {
 
     private Vector3 originalSize;
+    private Vector3 originalPosition;
 
     public bool Rescale = false;
 
-    public bool bypassButtonSelected = false;
+    public bool FloatUpDown = false;
 
     public float CurveHeight = 1f;
 
     [SerializeField]
-    private AnimationCurve curve;
+    private AnimationCurve curveRescale;
+
+    [SerializeField]
+    private AnimationCurve curveFloater;
 
     private UnitSlot thisSlot;
 
@@ -27,6 +31,7 @@ public class Breathe : MonoBehaviour {
     private void Start()
     {
         originalSize = transform.localScale;
+        originalPosition = transform.localPosition;
         randomStart = (isRandomStart) ? Random.Range(0f, 0.8f) : 0; 
         thisSlot = GetComponentInParent<UnitSlot>();
         meshRenderer = GetComponent<MeshRenderer>();
@@ -36,22 +41,37 @@ public class Breathe : MonoBehaviour {
         
         if (Rescale)
         {
-            if(thisSlot != null) meshRenderer.enabled = thisSlot.IsHighlighted;
             float localCurveHeight;
-            if (thisSlot.IsHighlighted)
+            if (thisSlot != null)
             {
-                localCurveHeight = CurveHeight;
+                meshRenderer.enabled = thisSlot.IsHighlighted;
+                if (thisSlot.IsHighlighted)
+                {
+                    localCurveHeight = CurveHeight;
+                }
+                else
+                {
+                    localCurveHeight = 0;
+                }
             }
             else
             {
-                localCurveHeight = 0;
+                localCurveHeight = CurveHeight;
             }
+
             float RescaleTimer = Mathf.PingPong(Time.unscaledTime + randomStart, 1);
-            transform.localScale = originalSize * (1 + curve.Evaluate(RescaleTimer) * localCurveHeight);
+            transform.localScale = originalSize * (1 + curveRescale.Evaluate(RescaleTimer) * localCurveHeight);
         }
         else
         {
             transform.localScale = originalSize;
+        }
+        if (FloatUpDown)
+        {
+            float localCurveHeight;
+            localCurveHeight = CurveHeight;
+            float RescaleTimer = Mathf.PingPong(Time.time + randomStart, 1);
+            transform.localPosition = originalPosition * (1 + curveFloater.Evaluate(RescaleTimer) * localCurveHeight);
         }
 	}
 }
