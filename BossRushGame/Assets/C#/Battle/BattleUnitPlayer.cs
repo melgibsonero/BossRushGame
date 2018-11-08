@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleUnitPlayer : BattleUnitBase
 {
-    public ItemWeapon Slash, Crush;
+    public MonoBehaviour[] activeItems;
 
     public int interactCounter;
     public bool interactWindow, defendWindow, interacted, isDefending;
