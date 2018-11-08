@@ -39,4 +39,9 @@ public class BaseBuff : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    private void Start()
+    {
+        Debug.Log(name);
+    }
 }
