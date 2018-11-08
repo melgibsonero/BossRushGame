@@ -34,9 +34,9 @@ public class UIController : MonoBehaviour {
         }
         oldSelected = currentlySelected;
         currentlySelected = eventSystem.currentSelectedGameObject;
+
         if(currentlySelected == null)
         {
-            eventSystem = EventSystem.current;
             eventSystem.SetSelectedGameObject(oldSelected);
         }
 	}

@@ -17,8 +17,11 @@ public class BattleSystem_v2 : MonoBehaviour
 
     public Transform unitHolderParent;
 
+    private UnitHighlight _unitHighlight;
+
     private void Start()
     {
+        _unitHighlight = GetComponent<UnitHighlight>();
         _unitSlots = new UnitSlot[unitHolderParent.childCount];
         _units = new BattleUnitBase[unitHolderParent.childCount];
         _buffSystem = GetComponent<BuffSystem>();
@@ -104,6 +107,10 @@ public class BattleSystem_v2 : MonoBehaviour
                 (unit as BattleUnitEnemy).StartTurn();
         }
 
+        if (_playerTurn)
+        {
+            _unitHighlight.ToggleActionButtons(true);
+        }
         #endregion
 
         // for turn based buffs
