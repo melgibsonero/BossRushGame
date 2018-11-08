@@ -7,7 +7,7 @@ public class BattleUnitPlayer : BattleUnitBase
     public ItemWeapon Slash, Crush;
 
     public int interactCounter;
-    public bool interactWindow, interacted, isDefending;
+    public bool interactWindow, defendWindow, interacted, isDefending;
     private InputManager _inputManager;
 
     protected override void Start()
@@ -18,7 +18,7 @@ public class BattleUnitPlayer : BattleUnitBase
 
     private void Update()
     {
-        if (interactWindow)
+        if (interactWindow || defendWindow && isDefending)
         {
             Debug.Log("Window open, press now");
             if (_inputManager.GetButtonDown(InputManager.Button.Interact) && !interacted)

@@ -59,6 +59,9 @@ public class BattleUnitBase : MonoBehaviour
     {
         isDoneForTurn = true;
 
+        if (this is BattleUnitPlayer)
+            (this as BattleUnitPlayer).ClearInteract();
+
         _battleSystem.UpdateTurnLogic();
     }
 

@@ -131,7 +131,7 @@ public class BattleSystem_v2 : MonoBehaviour
         return GetUnitTurn();
     }
 
-    private BattleUnitPlayer GetPlayerUnit()
+    public BattleUnitPlayer GetPlayerUnit()
     {
         foreach (BattleUnitPlayer unit in _units)
         {
@@ -151,7 +151,8 @@ public class BattleSystem_v2 : MonoBehaviour
         {
             if (!_playerTurn)
             {
-                (GetUnitTurn() as BattleUnitEnemy).ActTurn(GetPlayerUnit());
+                Debug.Log("Replace me with animation calls :)");
+                (GetUnitTurn() as BattleUnitEnemy).ActTurn();
             }
 
             yield return new WaitForSecondsRealtime(1);
