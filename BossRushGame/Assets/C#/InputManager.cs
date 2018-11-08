@@ -20,10 +20,11 @@ public class InputManager : MonoBehaviour
 
     // To add / remove button: add / remove string and enum
     private bool[] _buttonOverwrites;
-    private string[] _buttonNames = { "Interact" };
+    private string[] _buttonNames = { "Interact", "Cancel" };
     public enum Button
     {
-        Interact = 0
+        Interact = 0,
+        Cancel = 1
     }
     private bool _result;
 
