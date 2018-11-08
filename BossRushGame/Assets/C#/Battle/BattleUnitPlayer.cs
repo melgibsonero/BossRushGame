@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleUnitPlayer : BattleUnitBase
 {
-    public MonoBehaviour[] activeItems;
+    private List<MonoBehaviour> _activeItems = new List<MonoBehaviour>();
 
     public int interactCounter;
     public bool interactWindow, defendWindow, interacted, isDefending;
@@ -49,7 +49,34 @@ public class BattleUnitPlayer : BattleUnitBase
         isDefending = false;
         isDoneForTurn = false;
     }
-    
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+
+        ClearInteract();
+
+        #region HP and MP regen
+
+        // HP
+        int regenAmount = 0;
+        foreach (ItemRegenHP regen in _activeItems)
+        {
+            regenAmount += regen.GetRegenAmount();
+        }
+        _combatValues.HealUp(regenAmount);
+
+        // MP
+        regenAmount = 0;
+        foreach (ItemRegenMP regen in _activeItems)
+        {
+            regenAmount += regen.GetRegenAmount();
+        }
+        _combatValues.GetMana(regenAmount);
+
+        #endregion
+    }
+
     #region button calls
 
     public void Defend()

@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class ItemRegenHP : MonoBehaviour
 {
-    public int amount, rounds;
+    [SerializeField]
+    private int _amount, _rounds;
 
     public int GetRegenAmount()
     {
-        if (amount != 0)
-            rounds--;
+        if (_amount != 0)
+            _rounds--;
 
-        if (rounds < 0)
-            amount = 0;
+        if (_rounds < 0)
+            _amount = 0;
 
-        return amount;
+        return _amount;
     }
 }
