@@ -44,7 +44,7 @@ public class UnitHighlight : MonoBehaviour
     public EventSystem es;
 
     [SerializeField]
-    private UIController _fidgetspinner;
+    private UIController _actionButtonWheel;
 
     [SerializeField]
     private GameObject CurrentAbility;
@@ -73,7 +73,7 @@ public class UnitHighlight : MonoBehaviour
     {
         if (!active)
         {
-            es.SetSelectedGameObject(null);
+            //es.SetSelectedGameObject(null);
             yield return new WaitForEndOfFrame();
             ReadInputs = true;
         }
@@ -81,30 +81,30 @@ public class UnitHighlight : MonoBehaviour
         {
             ReadInputs = false;
         }
-        Vector3 startPos = _fidgetspinner.transform.position;
+        Vector3 startPos = _actionButtonWheel.transform.position;
         Vector3 endPos;
         if (active)
         {
-             endPos = _fidgetspinner.transform.position + new Vector3(ActionButtonHideDistance, 0, 0);
-            _fidgetspinner.gameObject.SetActive(active);
+             endPos = _actionButtonWheel.transform.position + new Vector3(ActionButtonHideDistance, 0, 0);
+            _actionButtonWheel.gameObject.SetActive(active);
         }
         else
         {
-            endPos = _fidgetspinner.transform.position + new Vector3(-ActionButtonHideDistance, 0, 0);
+            endPos = _actionButtonWheel.transform.position + new Vector3(-ActionButtonHideDistance, 0, 0);
         }
         for (int i = 0; i <= 15; i++)
         {
-            _fidgetspinner.transform.position = Vector3.Lerp(startPos, endPos, i / 15f);
+            _actionButtonWheel.transform.position = Vector3.Lerp(startPos, endPos, i / 15f);
             yield return new WaitForEndOfFrame();
         }
-        _fidgetspinner.gameObject.SetActive(active);
+        _actionButtonWheel.gameObject.SetActive(active);
         es.UpdateModules();
     }
 
     private void Start()
     {
         es = EventSystem.current;
-        _fidgetspinner = FindObjectOfType<UIController>();
+        _actionButtonWheel = FindObjectOfType<UIController>();
         _inputManager = FindObjectOfType<InputManager>();
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
@@ -203,7 +203,6 @@ public class UnitHighlight : MonoBehaviour
             if (ReadInputs && _inputManager.GetButtonDown(InputManager.Button.Cancel))
             {
                 Reset();
-                ToggleActionButtons(true);
             }
         }
         else
