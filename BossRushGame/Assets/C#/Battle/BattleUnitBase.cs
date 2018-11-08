@@ -55,12 +55,9 @@ public class BattleUnitBase : MonoBehaviour
         Pointer.SetActive(true);
     }
 
-    public void EndTurn()
+    public virtual void EndTurn()
     {
         isDoneForTurn = true;
-
-        if (this is BattleUnitPlayer)
-            (this as BattleUnitPlayer).ClearInteract();
 
         _battleSystem.UpdateTurnLogic();
     }

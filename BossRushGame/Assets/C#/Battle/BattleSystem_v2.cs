@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BuffSystem)), RequireComponent(typeof(InputManager))]
+[RequireComponent(typeof(InputManager))]
 public class BattleSystem_v2 : MonoBehaviour
 {
     private BuffSystem _buffSystem;

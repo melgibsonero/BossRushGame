@@ -22,10 +22,17 @@ public class ButtonText : MonoBehaviour
 
                 if (_current.name.Contains("Icon"))
                     _current.GetComponent<Image>().sprite = button.icon;
+
                 if (_current.name.Contains("Name"))
                     _current.GetComponent<TextMeshProUGUI>().text = button.name;
+
                 if (_current.name.Contains("MP cost"))
-                    _current.GetComponent<TextMeshProUGUI>().text = button.manaCost + " MP";
+                {
+                    if (button.manaCost == 0)
+                        _current.GetComponent<TextMeshProUGUI>().text = "";
+                    else
+                        _current.GetComponent<TextMeshProUGUI>().text = button.manaCost + " MP";
+                }
             }
         }
     }

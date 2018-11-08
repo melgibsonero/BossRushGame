@@ -38,4 +38,9 @@ public class BuffSystem : MonoBehaviour
                 (buffs[i] as BuffTurnLimit).UpdateTurnCount();
         }
     }
+
+    private void Start()
+    {
+        Debug.Log(name);
+    }
 }
