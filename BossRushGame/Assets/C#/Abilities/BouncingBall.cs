@@ -29,7 +29,7 @@ public class BouncingBall : BaseAbility {
         ballAnimator = GetComponent<Animator>();
 
         Attacker = FindObjectOfType<BattleSystem_v2>().GetUnitTurn();
-        damage = Attacker.CombatValues.currentAP;
+        damage = Attacker.CombatValues.CurrentAP;
         battleUnitAnimator = Attacker.GetComponent<Animator>();
 
         _playerStartPos = Attacker.transform.position;

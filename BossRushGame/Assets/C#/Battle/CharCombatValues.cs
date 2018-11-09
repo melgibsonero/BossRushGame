@@ -10,22 +10,30 @@ public class CharCombatValues : MonoBehaviour
 
     [Space(-10), Header("Health")]
     public int maxHP = 10;
-    public int currentHP;
+    private int currentHP;
 
     [Space(-10), Header("Mana")]
     public int maxMP = 5;
-    public int currentMP;
+    private int currentMP;
 
     [Space(-10), Header("Attack")]
     public int defaultAP = 1;   // no buffs
-    public int currentAP;       // with buffs
+    private int currentAP;       // with buffs
 
     [Space(-10), Header("Defence")]
     public int defaultDP = 0;   // no buffs
-    public int currentDP;       // with buffs
+    private int currentDP;       // with buffs
 
     public bool IsDead { get { return currentHP <= 0; } }
     public bool IsPlayer { get { return GetComponent<BattleUnitPlayer>() != null; } }
+
+    public int CurrentHP{get{return currentHP;}set{currentHP = value;}}
+
+    public int CurrentMP{get{return currentMP;}set{currentMP = value;}}
+
+    public int CurrentAP{get{return currentAP;}set{currentAP = value;}}
+
+    public int CurrentDP{get{return currentDP;}set{currentDP = value;}}
 
     private int _totalDamage;
 

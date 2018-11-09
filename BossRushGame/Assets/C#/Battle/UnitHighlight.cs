@@ -25,10 +25,7 @@ public class UnitHighlight : MonoBehaviour
     [HideInInspector]
     public bool HighlightTeam = false;
 
-    private bool ReadInputs = false;
-
-    public int ActionButtonHideDistance = 500;
-
+    public bool ReadInputs = false;
 
     [SerializeField, Tooltip("Parent of Unit Holders")]
     private GameObject UnitsParent;
@@ -45,6 +42,8 @@ public class UnitHighlight : MonoBehaviour
 
     [SerializeField]
     private UIController _actionButtonWheel;
+
+    private BattleStateMachine bsMachine;
 
     [SerializeField]
     private GameObject CurrentAbility;
@@ -64,42 +63,7 @@ public class UnitHighlight : MonoBehaviour
         CurrentAbility = ability;
     }
 
-    public void ToggleActionButtons(bool active)
-    {
-        StartCoroutine(HideActionButtons(active));
-    }
-
-    private IEnumerator HideActionButtons(bool active)
-    {
-        if (!active)
-        {
-            //es.SetSelectedGameObject(null);
-            yield return new WaitForEndOfFrame();
-            ReadInputs = true;
-        }
-        else
-        {
-            ReadInputs = false;
-        }
-        Vector3 startPos = _actionButtonWheel.transform.position;
-        Vector3 endPos;
-        if (active)
-        {
-             endPos = _actionButtonWheel.transform.position + new Vector3(ActionButtonHideDistance, 0, 0);
-            _actionButtonWheel.gameObject.SetActive(active);
-        }
-        else
-        {
-            endPos = _actionButtonWheel.transform.position + new Vector3(-ActionButtonHideDistance, 0, 0);
-        }
-        for (int i = 0; i <= 15; i++)
-        {
-            _actionButtonWheel.transform.position = Vector3.Lerp(startPos, endPos, i / 15f);
-            yield return new WaitForEndOfFrame();
-        }
-        _actionButtonWheel.gameObject.SetActive(active);
-        es.UpdateModules();
-    }
+    
 
     private void Start()
     {
@@ -108,11 +72,12 @@ public class UnitHighlight : MonoBehaviour
         _inputManager = FindObjectOfType<InputManager>();
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
+        bsMachine = FindObjectOfType<BattleStateMachine>();
     }
 
     public void Init(Targets targets = Targets.enemy)
     {
-        ToggleActionButtons(false);
+        bsMachine.TransitionToState(BattleStateMachine.MenuState.Targetting);
 
         _showHighlights = true;
         HighlightAll = HighlightEnemies = HighlightTeam = false;
@@ -195,15 +160,6 @@ public class UnitHighlight : MonoBehaviour
                     }
                 }
             }
-            if (ReadInputs  && _inputManager.GetButtonDown(InputManager.Button.Interact))
-            {
-                Debug.Log("acting");
-                ActTarget();
-            }
-            if (ReadInputs && _inputManager.GetButtonDown(InputManager.Button.Cancel))
-            {
-                Reset();
-            }
         }
         else
         {
@@ -218,6 +174,7 @@ public class UnitHighlight : MonoBehaviour
 
     public void ActTarget()
     {
+        bsMachine.TransitionToState(BattleStateMachine.MenuState.Attacking);
         if (!HighlightAll && !HighlightEnemies && !HighlightTeam)
         {
             foreach (UnitSlot unit in unitSlots)
@@ -260,7 +217,7 @@ public class UnitHighlight : MonoBehaviour
         Reset();
     }
     
-    private void Reset()
+    public void Reset()
     {
         _showHighlights = false;
         currentHighlight = null;

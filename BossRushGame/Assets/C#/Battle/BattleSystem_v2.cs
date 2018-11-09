@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(InputManager))]
 public class BattleSystem_v2 : MonoBehaviour
 {
-    private BuffSystem _buffSystem;
     [SerializeField]
     private UnitSlot[] _unitSlots;
     [SerializeField]
@@ -18,13 +17,14 @@ public class BattleSystem_v2 : MonoBehaviour
     public Transform unitHolderParent;
 
     private UnitHighlight _unitHighlight;
+    private BattleStateMachine bsMachine;
 
     private void Start()
     {
+        bsMachine = FindObjectOfType<BattleStateMachine>();
         _unitHighlight = GetComponent<UnitHighlight>();
         _unitSlots = new UnitSlot[unitHolderParent.childCount];
         _units = new BattleUnitBase[unitHolderParent.childCount];
-        _buffSystem = GetComponent<BuffSystem>();
 
         for (int i = 0; i < unitHolderParent.childCount; i++)
         {
@@ -109,12 +109,9 @@ public class BattleSystem_v2 : MonoBehaviour
 
         if (_playerTurn)
         {
-            _unitHighlight.ToggleActionButtons(true);
+            bsMachine.TransitionToState(BattleStateMachine.MenuState.ActionButtons);
         }
         #endregion
-
-        // for turn based buffs
-        _buffSystem.UpdateTurnCount(_playerTurn);
     }
 
     public BattleUnitBase GetUnitTurn()
@@ -150,6 +147,12 @@ public class BattleSystem_v2 : MonoBehaviour
 
         Debug.LogError("NULL");
         return null;
+    }
+
+    public void PlayerDefend()
+    {
+        bsMachine.TransitionToState(BattleStateMachine.MenuState.Attacking);
+        GetPlayerUnit().Defend();
     }
     
     IEnumerator EnemyLoop()

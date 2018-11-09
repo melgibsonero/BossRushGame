@@ -20,7 +20,7 @@ public class BattleUnitEnemy : BattleUnitBase
 
     public void ActTurn()
     {
-        _player.CombatValues.TakeDamage(_combatValues.currentAP);
+        _player.CombatValues.TakeDamage(_combatValues.CurrentAP);
 
         EndTurn();
     }
@@ -40,7 +40,7 @@ public class BattleUnitEnemy : BattleUnitBase
         }
         else
         {
-            _player.CombatValues.TakeDamage(_combatValues.currentAP);
+            _player.CombatValues.TakeDamage(_combatValues.CurrentAP);
         }
 
         _player.ClearInteract();

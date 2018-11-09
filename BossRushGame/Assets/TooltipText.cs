@@ -4,33 +4,34 @@ using UnityEngine;
 
 public class TooltipText : MonoBehaviour {
 
-    [SerializeField, TextArea]
-    private string _infoHeaderText = "";
-    [SerializeField, TextArea]
-    private string _infoTextBody = "";
+    [SerializeField, TextArea, Tooltip("Text that explains briefly what ability does")]
+    private string _InfoQuickTooltip = "";
+    [SerializeField, TextArea, Tooltip("Brief tutorial how the skill is used")]
+    private string _InfoTutorialText = "";
 
-    public string InfoHeaderText
+
+    public string InfoTutorial
     {
         get
         {
-            return _infoHeaderText;
+            return _InfoTutorialText;
         }
 
         set
         {
-            _infoHeaderText = value;
+            _InfoTutorialText = value;
         }
     }
-    public string InfoTextBody
+    public string InfoTooltip
     {
         get
         {
-            return _infoTextBody;
+            return _InfoQuickTooltip;
         }
 
         set
         {
-            _infoTextBody = value;
+            _InfoQuickTooltip = value;
         }
     }
 }

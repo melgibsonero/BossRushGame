@@ -11,11 +11,12 @@ public class UIController : MonoBehaviour {
         None = 0,
         Slash = 1,
         Crush = 2,
-        Item = 3
+        Item = 3,
+        JustHide = 4
     }
 
     private EventSystem eventSystem;
-    private UnitHighlight _unitHighlight;
+    private BattleStateMachine bsMachine;
 
     public Button[] buttonList;
 
@@ -29,6 +30,11 @@ public class UIController : MonoBehaviour {
     public GameObject CrushList;
     public GameObject ItemList;
 
+    public GameObject currentList;
+
+    //Last selected item when going to targettting. Get parent from item, get enum from parent, ???, profit
+    public GameObject lastSelectedItem;
+
     public GameObject currentlySelected;
     [SerializeField]
     private GameObject oldSelected;
@@ -36,8 +42,8 @@ public class UIController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         eventSystem = EventSystem.current;
-        _unitHighlight = FindObjectOfType<UnitHighlight>();
         buttonList = GetComponentsInChildren<Button>();
+        bsMachine = FindObjectOfType<BattleStateMachine>();
 	}
 	
 	// Update is called once per frame
@@ -61,27 +67,6 @@ public class UIController : MonoBehaviour {
             }
         }
 	}
-
-    public void OpenList(int Type)
-    {
-        List type = (List)Type;
-        if (type != List.None)
-        {
-            _unitHighlight.ToggleActionButtons(false);
-            ListOpen = true;
-            SlashList.SetActive(type == List.Slash);
-            CrushList.SetActive(type == List.Crush);
-            ItemList.SetActive(type == List.Item);
-
-            Button[] abilities = GetListFromEnum(type).GetComponentsInChildren<Button>();
-            OrganizeList(abilities);
-            eventSystem.SetSelectedGameObject(abilities[0].gameObject);
-        }
-        else
-        {
-            _unitHighlight.ToggleActionButtons(true);
-        }
-    }
 
     private void OrganizeList(Button[] abilities)
     {
@@ -114,9 +99,51 @@ public class UIController : MonoBehaviour {
         
     }
 
+    public void OpenList(int Type)
+    {
+        List type = (List)Type;
+        if (type != List.None && type != List.JustHide)
+        {
+            //Transition to Ability List
+            bsMachine.TransitionToState(BattleStateMachine.MenuState.AbilityList);
+            currentList = currentlySelected;
+            ListOpen = true;
+            SlashList.SetActive(type == List.Slash);
+            CrushList.SetActive(type == List.Crush);
+            ItemList.SetActive(type == List.Item);
+
+            Button[] abilities = GetListFromEnum(type).GetComponentsInChildren<Button>();
+            OrganizeList(abilities);
+            eventSystem.SetSelectedGameObject(abilities[0].gameObject);
+        }
+        else if (type == List.JustHide)
+        {
+            //Just hide lists and action buttons
+            ListOpen = true;
+            currentList = currentlySelected;
+            SlashList.SetActive(type == List.Slash);
+            CrushList.SetActive(type == List.Crush);
+            ItemList.SetActive(type == List.Item);
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.UpdateModules();
+        }
+        else
+        {
+            //Hide Lists
+            bsMachine.TransitionToState(BattleStateMachine.MenuState.ActionButtons);
+            ListOpen = false;
+            currentlySelected = currentList;
+            eventSystem.SetSelectedGameObject(currentlySelected);
+            eventSystem.UpdateModules();
+            SlashList.SetActive(type == List.Slash);
+            CrushList.SetActive(type == List.Crush);
+            ItemList.SetActive(type == List.Item);
+        }
+    }
+
     private GameObject GetListFromEnum(List number)
     {
-        if(number == List.Slash)
+        if (number == List.Slash)
         {
             return SlashList;
         }
@@ -131,6 +158,22 @@ public class UIController : MonoBehaviour {
         return null;
     }
 
+    public List GetEnumFromList(GameObject list)
+    {
+        if (list == SlashList)
+        {
+            return List.Slash;
+        }
+        if (list == CrushList)
+        {
+            return List.Crush;
+        }
+        if (list == ItemList)
+        {
+            return List.Item;
+        }
+        return List.None;
+    }
 
     IEnumerator RotateIcons(int direction)
     {

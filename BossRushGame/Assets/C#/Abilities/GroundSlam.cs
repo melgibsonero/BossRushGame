@@ -15,11 +15,11 @@ public class GroundSlam : BaseAbility
     public override void Act(GameObject go)
     {
         Attacker = FindObjectOfType<BattleSystem_v2>().GetUnitTurn();
-        damage = Attacker.CombatValues.currentAP;
+        damage = Attacker.CombatValues.CurrentAP;
         battleUnitAnimator = Attacker.GetComponent<Animator>();
 
         startPos = Attacker.transform.position;
-        endPos = FindObjectOfType<UnitHighlight>().UnitSlots[2].transform.position + WalkUpOffset;
+        endPos = FindObjectOfType<UnitHighlight>().UnitSlots[1].transform.position + WalkUpOffset;
         StartCoroutine("MoveToTarget");
     }
 

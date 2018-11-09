@@ -74,6 +74,8 @@ public class BattleUnitPlayer : BattleUnitBase
         }
         _combatValues.GetMana(regenAmount);
 
+        _bsMachine.TransitionToState(BattleStateMachine.MenuState.EnemyTurn);
+
         #endregion
     }
 
@@ -82,6 +84,9 @@ public class BattleUnitPlayer : BattleUnitBase
     public void Defend()
     {
         isDefending = true;
+        //TODO:Fix me
+        Debug.Log("Defending " + gameObject.name);
+        EndTurn();
     }
 
     #endregion

@@ -7,6 +7,7 @@ public class BattleUnitBase : MonoBehaviour
 {
     protected BattleSystem_v2 _battleSystem;
     protected CharCombatValues _combatValues;
+    protected BattleStateMachine _bsMachine;
     protected Animator _animator;
     public bool isDoneForTurn;
 
@@ -48,6 +49,7 @@ public class BattleUnitBase : MonoBehaviour
 
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         _combatValues = GetComponent<CharCombatValues>();
+        _bsMachine = FindObjectOfType<BattleStateMachine>();
         _animator = GetComponent<Animator>();
 
         Pointer = Instantiate(Pointer, transform);

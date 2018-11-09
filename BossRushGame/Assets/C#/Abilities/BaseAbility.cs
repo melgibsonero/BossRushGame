@@ -20,7 +20,7 @@ public class BaseAbility : MonoBehaviour
     public virtual void Act(GameObject go = null)
     {
         Attacker = FindObjectOfType<BattleSystem_v2>().GetUnitTurn();
-        damage = Attacker.CombatValues.currentAP;
+        damage = Attacker.CombatValues.CurrentAP;
         Target = go.GetComponent<BattleUnitBase>();
         battleUnitAnimator = Attacker.GetComponent<Animator>();
     }
