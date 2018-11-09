@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(InputManager))]
 public class BattleSystem_v2 : MonoBehaviour
 {
-    private BuffSystem _buffSystem;
     [SerializeField]
     private UnitSlot[] _unitSlots;
     [SerializeField]
@@ -24,7 +23,6 @@ public class BattleSystem_v2 : MonoBehaviour
         _unitHighlight = GetComponent<UnitHighlight>();
         _unitSlots = new UnitSlot[unitHolderParent.childCount];
         _units = new BattleUnitBase[unitHolderParent.childCount];
-        _buffSystem = GetComponent<BuffSystem>();
 
         for (int i = 0; i < unitHolderParent.childCount; i++)
         {
@@ -33,8 +31,6 @@ public class BattleSystem_v2 : MonoBehaviour
             
             _units[i].isDoneForTurn = _units[i] is BattleUnitEnemy;
         }
-
-        StartCoroutine("EnemyLoop");
     }
 
     public void UpdateTurnLogic()
@@ -111,10 +107,11 @@ public class BattleSystem_v2 : MonoBehaviour
         {
             _unitHighlight.ToggleActionButtons(true);
         }
+        else
+        {
+            StartCoroutine("EnemyLoop");
+        }
         #endregion
-
-        // for turn based buffs
-        _buffSystem.UpdateTurnCount(_playerTurn);
     }
 
     public BattleUnitBase GetUnitTurn()
@@ -154,15 +151,11 @@ public class BattleSystem_v2 : MonoBehaviour
     
     IEnumerator EnemyLoop()
     {
-        while (true)
+        while (GetUnitTurn() is BattleUnitEnemy)
         {
-            if (!_playerTurn)
-            {
-                Debug.Log("Replace me with animation calls :)");
-                (GetUnitTurn() as BattleUnitEnemy).ActTurn();
-            }
+            (GetUnitTurn() as BattleUnitEnemy).StartAnimation();
 
-            yield return new WaitForSecondsRealtime(1);
+            yield return new WaitForSecondsRealtime(1.2f);
         }
     }
 

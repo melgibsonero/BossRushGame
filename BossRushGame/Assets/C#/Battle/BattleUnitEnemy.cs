@@ -18,18 +18,16 @@ public class BattleUnitEnemy : BattleUnitBase
         isDoneForTurn = false;
     }
 
-    public void ActTurn()
+    public void StartAnimation()
     {
-        _player.CombatValues.TakeDamage(_combatValues.currentAP);
-
-        EndTurn();
+        _animator.SetBool("Attack", true);
     }
 
     #region Animation methods
     
-    public void SetPlayerDefendWindow(bool value)
+    public void SetPlayerDefendWindow(int value)
     {
-        _player.defendWindow = value;
+        _player.defendWindow = value == 1;
     }
 
     public void HitPlayer()
@@ -46,7 +44,12 @@ public class BattleUnitEnemy : BattleUnitBase
         _player.ClearInteract();
     }
 
-    // EndTurn() from base
+    public override void EndTurn()
+    {
+        _animator.SetBool("Attack", false);
+
+        base.EndTurn();
+    }
 
     #endregion
 }
