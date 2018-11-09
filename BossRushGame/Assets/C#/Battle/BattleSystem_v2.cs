@@ -33,8 +33,6 @@ public class BattleSystem_v2 : MonoBehaviour
             
             _units[i].isDoneForTurn = _units[i] is BattleUnitEnemy;
         }
-
-        StartCoroutine("EnemyLoop");
     }
 
     public void UpdateTurnLogic()
@@ -111,6 +109,10 @@ public class BattleSystem_v2 : MonoBehaviour
         {
             bsMachine.TransitionToState(BattleStateMachine.MenuState.ActionButtons);
         }
+        else
+        {
+            StartCoroutine("EnemyLoop");
+        }
         #endregion
     }
 
@@ -157,15 +159,11 @@ public class BattleSystem_v2 : MonoBehaviour
     
     IEnumerator EnemyLoop()
     {
-        while (true)
+        while (GetUnitTurn() is BattleUnitEnemy)
         {
-            if (!_playerTurn)
-            {
-                Debug.Log("Replace me with animation calls :)");
-                (GetUnitTurn() as BattleUnitEnemy).ActTurn();
-            }
+            (GetUnitTurn() as BattleUnitEnemy).StartAnimation();
 
-            yield return new WaitForSecondsRealtime(1);
+            yield return new WaitForSecondsRealtime(1.2f);
         }
     }
 

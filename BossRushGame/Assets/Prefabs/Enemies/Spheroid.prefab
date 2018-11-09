@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270828181317854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.683173, y: -2.8144035, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4656999324554926}
@@ -125,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 1270828181317854}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d60fd8c46f059d45bb29d294908edd0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -148,7 +148,6 @@ MonoBehaviour:
   isDoneForTurn: 0
   PointofAttack: {fileID: 1599854181186904}
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
-  Pointer_Offset: {x: 0, y: 2, z: 0}
   AbilityInUse: {fileID: 0}
 --- !u!114 &114914892028662748
 MonoBehaviour:
