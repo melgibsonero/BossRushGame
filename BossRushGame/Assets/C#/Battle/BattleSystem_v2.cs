@@ -15,14 +15,11 @@ public class BattleSystem_v2 : MonoBehaviour
     public bool IsPlayerTurn { get { return _playerTurn; } }
 
     public Transform unitHolderParent;
-
-    private UnitHighlight _unitHighlight;
     private BattleStateMachine bsMachine;
 
     private void Start()
     {
         bsMachine = FindObjectOfType<BattleStateMachine>();
-        _unitHighlight = GetComponent<UnitHighlight>();
         _unitSlots = new UnitSlot[unitHolderParent.childCount];
         _units = new BattleUnitBase[unitHolderParent.childCount];
 

@@ -9,8 +9,6 @@ public class InfoTextController : MonoBehaviour {
     [SerializeField]
     private GameObject _background;
 
-    private BattleStateMachine bsMachine;
-
     [SerializeField]
     private TextMeshProUGUI Header;
     [SerializeField]
@@ -23,7 +21,6 @@ public class InfoTextController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _eventSystem = EventSystem.current;
-        bsMachine = FindObjectOfType<BattleStateMachine>();
 	}
 	
 	// Update is called once per frame

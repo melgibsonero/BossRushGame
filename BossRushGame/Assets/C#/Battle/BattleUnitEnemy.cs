@@ -20,7 +20,8 @@ public class BattleUnitEnemy : BattleUnitBase
 
     public void StartAnimation()
     {
-        _player.CombatValues.TakeDamage(_combatValues.currentAP);
+        Debug.Log("attempting to attack, send help");
+        _animator.Play("jump");
 
         EndTurn();
     }
@@ -54,6 +55,4 @@ public class BattleUnitEnemy : BattleUnitBase
     }
 
     #endregion
-}
-
-        _animator.SetBool("Attack", true);
+}

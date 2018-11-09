@@ -90,11 +90,8 @@ public class BattleStateMachine : MonoBehaviour {
     {
         if (state == currentState)
         {
-            Debug.Log("Same state, returning");
             return;
         }
-
-        Debug.Log("Changing from " + currentState + " to " + state);
         switch (state)
         {
             case MenuState.EnemyTurn:

@@ -164,13 +164,9 @@ MonoBehaviour:
   HealthText: {fileID: 114172345529552960, guid: 265372afa6ec5b74fae988f368fd7f24,
     type: 2}
   maxHP: 5
-  currentHP: 0
   maxMP: 0
-  currentMP: 0
   defaultAP: 1
-  currentAP: 0
   defaultDP: 0
-  currentDP: 0
 --- !u!135 &135471543503743760
 SphereCollider:
   m_ObjectHideFlags: 1

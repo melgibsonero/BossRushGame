@@ -10,15 +10,11 @@ public class ActionButton : MonoBehaviour {
     public int location;
 
     private EventSystem es;
-    private UIController uiController;
-    private Button thisButton;
     [SerializeField]
     private GameObject buttonText;
 
     void Start () {
         es = EventSystem.current;
-        uiController = GetComponentInParent<UIController>();
-        thisButton = GetComponent<Button>();
         if(buttonText == null) buttonText = GetComponentInChildren<TextMeshProUGUI>(true).gameObject;
 	}
 	

@@ -149,13 +149,9 @@ MonoBehaviour:
   HealthText: {fileID: 114172345529552960, guid: 265372afa6ec5b74fae988f368fd7f24,
     type: 2}
   maxHP: 3
-  currentHP: 0
   maxMP: 0
-  currentMP: 0
   defaultAP: 2
-  currentAP: 0
   defaultDP: 0
-  currentDP: 0
 --- !u!114 &114143807577126844
 MonoBehaviour:
   m_ObjectHideFlags: 1

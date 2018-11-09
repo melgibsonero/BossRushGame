@@ -40,9 +40,6 @@ public class UnitHighlight : MonoBehaviour
 
     public EventSystem es;
 
-    [SerializeField]
-    private UIController _actionButtonWheel;
-
     private BattleStateMachine bsMachine;
 
     [SerializeField]
@@ -68,7 +65,6 @@ public class UnitHighlight : MonoBehaviour
     private void Start()
     {
         es = EventSystem.current;
-        _actionButtonWheel = FindObjectOfType<UIController>();
         _inputManager = FindObjectOfType<InputManager>();
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
