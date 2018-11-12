@@ -179,6 +179,7 @@ public class UnitHighlight : MonoBehaviour
                 {
                     CurrentAbility = Instantiate(CurrentAbility);
                     _battleSystem.GetUnitTurn().AbilityInUse = CurrentAbility;
+                    _battleSystem.GetUnitTurn().CombatValues.UseMana(CurrentAbility.GetComponent<BaseAbility>().ManaCost);
                     if (CurrentAbility.GetComponent<BaseBuff>() != null)
                     {
                         CurrentAbility.GetComponent<BaseBuff>().Act(unit.GetUnit().gameObject);

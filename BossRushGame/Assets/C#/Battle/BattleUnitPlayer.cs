@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BattleUnitPlayer : BattleUnitBase
 {
+    public ItemWeapon SlashWeapon;
+    public ItemWeapon CrushWeapon;
+
     private List<MonoBehaviour> _activeItems = new List<MonoBehaviour>();
 
     public int interactCounter;

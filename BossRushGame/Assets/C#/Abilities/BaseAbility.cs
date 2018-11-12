@@ -15,12 +15,29 @@ public class BaseAbility : MonoBehaviour
 
     public BattleUnitBase[] Targets;
 
-    protected int damage;
+    public int ManaCost = 0;
+    public int damage;
 
+    
     public virtual void Act(GameObject go = null)
     {
         Attacker = FindObjectOfType<BattleSystem_v2>().GetUnitTurn();
-        damage = Attacker.CombatValues.CurrentAP;
+        var isPlayer = Attacker.GetComponent<BattleUnitPlayer>();
+        if (isPlayer != null)
+        {
+            if(attackType == BuffSystem.TriggerEndBuff.Slash)
+            {
+                damage = isPlayer.SlashWeapon.damage;
+            }
+            else
+            {
+                damage = isPlayer.CrushWeapon.damage;
+            }
+        }
+        else
+        {
+            damage = Attacker.CombatValues.CurrentAP;
+        }
         Target = go.GetComponent<BattleUnitBase>();
         battleUnitAnimator = Attacker.GetComponent<Animator>();
     }

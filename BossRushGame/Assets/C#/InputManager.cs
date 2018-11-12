@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
             _axes[i, OLD] = _axes[i, NEW];
 
             // set new input
-            _axes[i, NEW] = Input.GetAxis(_axesNames[i]);
+            _axes[i, NEW] = Input.GetAxisRaw(_axesNames[i]);
         }
 
         #endregion

@@ -21,10 +21,18 @@ public class UIController : MonoBehaviour {
     public Button[] buttonList;
 
     public float TurnTime = 0.2f;
+    private float _rotTimer = 0f;
 
-    public int ButtonHeight = 66;
+    [SerializeField]
+    private Transform[] rotations;
+    //
+    [SerializeField]
+    private int id = 0;
+    //
+
 
     public bool ListOpen = false;
+    private bool isVisible = true;
 
     public GameObject SlashList;
     public GameObject CrushList;
@@ -39,6 +47,23 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private GameObject oldSelected;
 
+    public bool IsVisible
+    {
+        get
+        {
+            return isVisible;
+        }
+
+        set
+        {
+            isVisible = value;
+            foreach (var button in buttonList)
+            {
+                button.gameObject.SetActive(value);
+            }
+        }
+    }
+
     // Use this for initialization
     void Start () {
         eventSystem = EventSystem.current;
@@ -48,22 +73,45 @@ public class UIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!ListOpen)
+        if (IsVisible)
         {
-            if (eventSystem && oldSelected != null && oldSelected != currentlySelected && currentlySelected != null)
+            if (!ListOpen)
             {
-                int dir1 = oldSelected.GetComponent<ActionButton>().location;
-                int dir2 = currentlySelected.GetComponent<ActionButton>().location;
-                int direction = dir2 - dir1;
-                if (System.Math.Abs(direction) > 1) direction = -System.Math.Sign(direction);
-                StartCoroutine(RotateIcons(direction));
-            }
-            oldSelected = currentlySelected;
-            currentlySelected = eventSystem.currentSelectedGameObject;
+                if (eventSystem && oldSelected != null && oldSelected != currentlySelected && currentlySelected != null)
+                {
+                    int dir1 = oldSelected.GetComponent<ActionButton>().location;
+                    int dir2 = currentlySelected.GetComponent<ActionButton>().location;
+                    int direction = dir2 - dir1;
+                    if (System.Math.Abs(direction) > 1) direction = -System.Math.Sign(direction);
+                    _rotTimer = 0;
+                    id -= direction;
+                    if (id >= rotations.Length)
+                    {
+                        id = 0;
+                    }
+                    if(id < 0)
+                    {
+                        id += rotations.Length;
+                    }
+                }
+                oldSelected = currentlySelected;
+                currentlySelected = eventSystem.currentSelectedGameObject;
 
-            if (currentlySelected == null)
+                if (lastSelectedItem != null || currentlySelected == null)
+                {
+                    lastSelectedItem = null;
+                    eventSystem.SetSelectedGameObject(oldSelected);
+                }
+            }
+
+            
+            _rotTimer += Time.deltaTime/TurnTime;
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotations[id].rotation, _rotTimer);
+
+            foreach (var button in buttonList)
             {
-                eventSystem.SetSelectedGameObject(oldSelected);
+                button.transform.up = Vector3.up;
             }
         }
 	}
@@ -91,6 +139,7 @@ public class UIController : MonoBehaviour {
                 tempNavigation.selectOnDown = abilities[i + 1];
             }
 
+            var ButtonHeight = (abilities[i].transform as RectTransform).rect.height;
             new_y = (i - multi) * ButtonHeight + ButtonHeight / 2f;
             abilities[i].navigation = tempNavigation;
             abilities[i].transform.position = abilities[i].transform.parent.position - new Vector3(0, new_y, 0);
@@ -173,19 +222,5 @@ public class UIController : MonoBehaviour {
             return List.Item;
         }
         return List.None;
-    }
-
-    IEnumerator RotateIcons(int direction)
-    {
-        for (int i = 0; i < 15; i++)
-        {
-            transform.Rotate(new Vector3(0, 0, direction*6));
-            foreach (var button in buttonList)
-            {
-                button.transform.Rotate(new Vector3(0, 0, -direction*6));
-            }
-            yield return new WaitForEndOfFrame();
-        }
-
     }
 }

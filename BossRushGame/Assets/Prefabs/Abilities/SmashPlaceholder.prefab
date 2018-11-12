@@ -56,4 +56,7 @@ MonoBehaviour:
   Attacker: {fileID: 0}
   Target: {fileID: 0}
   Targets: []
+  ManaCost: 6
+  damage: 0
+  WaveSpeed: 0.15
   WalkUpOffset: {x: -3, y: 0, z: 0}

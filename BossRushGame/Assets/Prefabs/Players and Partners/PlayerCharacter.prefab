@@ -174,13 +174,9 @@ MonoBehaviour:
   HealthText: {fileID: 114172345529552960, guid: 265372afa6ec5b74fae988f368fd7f24,
     type: 2}
   maxHP: 5
-  currentHP: 0
   maxMP: 5
-  currentMP: 0
   defaultAP: 1
-  currentAP: 0
   defaultDP: 1
-  currentDP: 0
 --- !u!114 &114972687506505340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,10 +189,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDoneForTurn: 0
+  PointofAttack: {fileID: 0}
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
-  Pointer_Offset: {x: 0, y: 2, z: 0}
   AbilityInUse: {fileID: 0}
+  SlashWeapon: {fileID: 114738054776824420, guid: 0902112abe713ef4aad58f8856b861e2,
+    type: 2}
+  CrushWeapon: {fileID: 114653364344724290, guid: 77b08649836316141a7ca609fa1a5551,
+    type: 2}
   interactCounter: 0
+  failWindow: 0
+  failedInteract: 0
   interactWindow: 0
   interacted: 0
+  defendWindow: 0
   isDefending: 0

@@ -149,6 +149,8 @@ MonoBehaviour:
   Attacker: {fileID: 0}
   Target: {fileID: 0}
   Targets: []
+  ManaCost: 6
+  damage: 0
   interactWindow: 0
   interacted: 0
   BallOfDeath: {fileID: 1099525904883532}

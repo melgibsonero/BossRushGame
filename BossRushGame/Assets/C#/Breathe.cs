@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Breathe : MonoBehaviour {
 
@@ -46,6 +47,17 @@ public class Breathe : MonoBehaviour {
             {
                 meshRenderer.enabled = thisSlot.IsHighlighted;
                 if (thisSlot.IsHighlighted)
+                {
+                    localCurveHeight = CurveHeight;
+                }
+                else
+                {
+                    localCurveHeight = 0;
+                }
+            }
+            else if(GetComponentInParent<Canvas>())
+            {
+                if(EventSystem.current.currentSelectedGameObject == gameObject)
                 {
                     localCurveHeight = CurveHeight;
                 }

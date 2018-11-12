@@ -124,8 +124,9 @@ public class BattleStateMachine : MonoBehaviour {
 
     public void ToggleActionButtons(bool active)
     {
-        if (_uiController.gameObject.activeSelf != active)
+        if (_uiController.IsVisible != active)
         {
+            _uiController.IsVisible = active;
             StartCoroutine(HideActionButtons(active));
         }
     }
@@ -138,7 +139,6 @@ public class BattleStateMachine : MonoBehaviour {
         {
             startPos = WheelHiddenPos;
             endPos = WheelActivePos;
-            _uiController.gameObject.SetActive(active);
         }
         else
         {
@@ -152,6 +152,5 @@ public class BattleStateMachine : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         _uiController.transform.position = endPos;
-        _uiController.gameObject.SetActive(active);
     }
 }

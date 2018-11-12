@@ -27,13 +27,13 @@ public class CharCombatValues : MonoBehaviour
     public bool IsDead { get { return currentHP <= 0; } }
     public bool IsPlayer { get { return GetComponent<BattleUnitPlayer>() != null; } }
 
-    public int CurrentHP{get{return currentHP;}set{currentHP = value;}}
+    public int CurrentHP{get{return currentHP;}}
 
-    public int CurrentMP{get{return currentMP;}set{currentMP = value;}}
+    public int CurrentMP{get{return currentMP;}}
 
-    public int CurrentAP{get{return currentAP;}set{currentAP = value;}}
+    public int CurrentAP{get{return currentAP;}}
 
-    public int CurrentDP{get{return currentDP;}set{currentDP = value;}}
+    public int CurrentDP{get{return currentDP;}}
 
     private int _totalDamage;
 
@@ -91,6 +91,8 @@ public class CharCombatValues : MonoBehaviour
         else
         {
             currentMP -= amount;
+            Debug.Log("Used mana for " + amount);
+            Debug.Log("Total mana: " + CurrentMP);
             return true;
         }
     }
