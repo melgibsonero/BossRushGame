@@ -9,48 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1035938809985818}
+  m_RootGameObject: {fileID: 1355908784235516}
   m_IsPrefabAsset: 1
---- !u!1 &1035938809985818
+--- !u!1 &1355908784235516
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4445606763594246}
-  - component: {fileID: 114609197873058760}
+  - component: {fileID: 4494792429906716}
+  - component: {fileID: 114653364344724290}
   m_Layer: 0
-  m_Name: AP -1
+  m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4445606763594246
+--- !u!4 &4494792429906716
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1035938809985818}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1355908784235516}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114609197873058760
+--- !u!114 &114653364344724290
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1035938809985818}
+  m_GameObject: {fileID: 1355908784235516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb23fbbab38d134aac6a58bb75ef6ad, type: 3}
+  m_Script: {fileID: 11500000, guid: ef248c687479ab8489d4488b58364bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buffAP: -1
-  _buffDP: 0
-  _trigger: 0
+  weaponType: 1
+  damage: 1

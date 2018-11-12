@@ -126,12 +126,7 @@ public class BattleStateMachine : MonoBehaviour {
     {
         if (_uiController.gameObject.activeSelf != active)
         {
-            Debug.Log("action buttons " + active);
             StartCoroutine(HideActionButtons(active));
-        }
-        else
-        {
-            Debug.Log("Action button not changed");
         }
     }
 

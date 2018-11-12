@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(InputManager))]
 public class BattleSystem_v2 : MonoBehaviour
@@ -153,9 +154,18 @@ public class BattleSystem_v2 : MonoBehaviour
         bsMachine.TransitionToState(BattleStateMachine.MenuState.Attacking);
         GetPlayerUnit().Defend();
     }
+
+    public void AddActiveItem(MonoBehaviour item)
+    {
+        GetPlayerUnit().AddActiveItem(item);
+
+        GetPlayerUnit().EndTurn();
+    }
     
     IEnumerator EnemyLoop()
     {
+        yield return new WaitForSecondsRealtime(0.5f);
+
         while (GetUnitTurn() is BattleUnitEnemy)
         {
             (GetUnitTurn() as BattleUnitEnemy).StartAnimation();
@@ -163,8 +173,7 @@ public class BattleSystem_v2 : MonoBehaviour
             yield return new WaitForSecondsRealtime(1.2f);
         }
     }
-
-
+    
     // button method
     public void ExitGame()
     {

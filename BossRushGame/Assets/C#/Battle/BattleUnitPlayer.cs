@@ -7,7 +7,10 @@ public class BattleUnitPlayer : BattleUnitBase
     private List<MonoBehaviour> _activeItems = new List<MonoBehaviour>();
 
     public int interactCounter;
-    public bool interactWindow, defendWindow, interacted, isDefending;
+    public bool 
+        failWindow, failedInteract, 
+        interactWindow, interacted, 
+        defendWindow, isDefending;
     private InputManager _inputManager;
 
     protected override void Start()
@@ -20,20 +23,23 @@ public class BattleUnitPlayer : BattleUnitBase
     {
         if (interactWindow || defendWindow && isDefending)
         {
-            Debug.Log("Window open, press now");
-            if (_inputManager.GetButtonDown(InputManager.Button.Interact) && !interacted)
+            if (_inputManager.GetButtonDown(InputManager.Button.Interact) && !interacted && !failedInteract)
             {
-                Debug.Log("success!");
                 interactCounter++;
                 interacted = true;
                 UpdateAnimation();
             }
+        }
+        else if (failWindow && _inputManager.GetButtonDown(InputManager.Button.Interact))
+        {
+            failedInteract = true;
         }
     }
 
     public void ClearInteract()
     {
         interacted = false;
+        failedInteract = false;
         UpdateAnimation();
     }
 
@@ -60,17 +66,19 @@ public class BattleUnitPlayer : BattleUnitBase
 
         // HP
         int regenAmount = 0;
-        foreach (ItemRegenHP regen in _activeItems)
+        foreach (MonoBehaviour regen in _activeItems)
         {
-            regenAmount += regen.GetRegenAmount();
+            if (regen is ItemRegenHP)
+                regenAmount += (regen as ItemRegenHP).GetRegenAmount();
         }
         _combatValues.HealUp(regenAmount);
 
         // MP
         regenAmount = 0;
-        foreach (ItemRegenMP regen in _activeItems)
+        foreach (MonoBehaviour regen in _activeItems)
         {
-            regenAmount += regen.GetRegenAmount();
+            if (regen is ItemRegenMP)
+                regenAmount += (regen as ItemRegenMP).GetRegenAmount();
         }
         _combatValues.GetMana(regenAmount);
 
@@ -87,6 +95,41 @@ public class BattleUnitPlayer : BattleUnitBase
         //TODO:Fix me
         Debug.Log("Defending " + gameObject.name);
         EndTurn();
+    }
+
+    public void AddActiveItem(MonoBehaviour item)
+    {
+        #region use old items if possible
+
+        if (item is ItemRegenHP)
+        {
+            foreach (MonoBehaviour regen in _activeItems)
+            {
+                if (regen is ItemRegenHP && (regen as ItemRegenHP).CanBeUsed)
+                {
+                    (regen as ItemRegenHP).amount = (item as ItemRegenHP).amount;
+                    (regen as ItemRegenHP).rounds = (item as ItemRegenHP).rounds;
+                    return;
+                }
+            }
+        }
+
+        if (item is ItemRegenMP)
+        {
+            foreach (MonoBehaviour regen in _activeItems)
+            {
+                if (regen is ItemRegenMP && (regen as ItemRegenMP).CanBeUsed)
+                {
+                    (regen as ItemRegenMP).amount = (item as ItemRegenMP).amount;
+                    (regen as ItemRegenMP).rounds = (item as ItemRegenMP).rounds;
+                    return;
+                }
+            }
+        }
+
+        #endregion
+
+        _activeItems.Add(item);
     }
 
     #endregion

@@ -20,10 +20,7 @@ public class BattleUnitEnemy : BattleUnitBase
 
     public void StartAnimation()
     {
-        Debug.Log("attempting to attack, send help");
         _animator.Play("jump");
-
-        EndTurn();
     }
 
     #region Animation methods
@@ -49,10 +46,11 @@ public class BattleUnitEnemy : BattleUnitBase
 
     public override void EndTurn()
     {
+
         _animator.SetBool("Attack", false);
 
         base.EndTurn();
     }
-
+    
     #endregion
 }

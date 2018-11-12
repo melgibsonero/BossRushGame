@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ItemRegenMP : MonoBehaviour
 {
-    [SerializeField]
-    private int _amount, _rounds;
+    public bool CanBeUsed { get { return amount == 0; } }
+    public int amount, rounds;
 
     public int GetRegenAmount()
     {
-        if (_amount != 0)
-            _rounds--;
+        if (amount != 0)
+            rounds--;
 
-        if (_rounds < 0)
-            _amount = 0;
+        if (rounds < 0)
+            amount = 0;
 
-        return _amount;
+        return amount;
     }
 }
