@@ -15,6 +15,9 @@ public class UIController : MonoBehaviour {
         JustHide = 4
     }
 
+    [SerializeField]
+    private Canvas _canvas;
+
     private EventSystem eventSystem;
     private BattleStateMachine bsMachine;
 
@@ -66,6 +69,7 @@ public class UIController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        _canvas = GetComponentInParent<Canvas>();
         eventSystem = EventSystem.current;
         buttonList = GetComponentsInChildren<Button>();
         bsMachine = FindObjectOfType<BattleStateMachine>();
@@ -139,7 +143,7 @@ public class UIController : MonoBehaviour {
                 tempNavigation.selectOnDown = abilities[i + 1];
             }
 
-            var ButtonHeight = (abilities[i].transform as RectTransform).rect.height;
+            var ButtonHeight = (abilities[i].transform as RectTransform).rect.height * _canvas.transform.localScale.y;
             new_y = (i - multi) * ButtonHeight + ButtonHeight / 2f;
             abilities[i].navigation = tempNavigation;
             abilities[i].transform.position = abilities[i].transform.parent.position - new Vector3(0, new_y, 0);

@@ -19,6 +19,9 @@ public class BattleStateMachine : MonoBehaviour {
     [SerializeField]
     private MenuState currentStateforEditor;
 
+
+    [SerializeField]
+    private bool Transitioning = false;
     private bool ReadInputs = false;
     private float inputBlockTimer = 0f;
 
@@ -54,7 +57,7 @@ public class BattleStateMachine : MonoBehaviour {
         }
         ReadInputs = inputBlockTimer >= 0;
         currentStateforEditor = currentState;
-        if (_inputManager.GetButtonDown(InputManager.Button.Cancel))
+        if (_inputManager.GetButtonDown(InputManager.Button.Cancel) && !Transitioning)
         {
             switch (currentState)
             {
@@ -62,7 +65,7 @@ public class BattleStateMachine : MonoBehaviour {
                     Debug.Log("enemy turn, cant do shit");
                     break;
                 case MenuState.ActionButtons:
-
+                    ToggleActionButtons(true);
                     break;
                 case MenuState.AbilityList:
                     TransitionToState(MenuState.ActionButtons);
@@ -126,25 +129,30 @@ public class BattleStateMachine : MonoBehaviour {
     {
         if (_uiController.IsVisible != active)
         {
-            _uiController.IsVisible = active;
             StartCoroutine(HideActionButtons(active));
         }
     }
 
     private IEnumerator HideActionButtons(bool active)
     {
+        Transitioning = true;
         Vector3 startPos;
-        Vector3 endPos;
+        Vector3 endPos;  
+
         if (active)
         {
+            _uiController.IsVisible = active;
+            //
             startPos = WheelHiddenPos;
             endPos = WheelActivePos;
         }
         else
         {
+            //
             startPos = WheelActivePos;
             endPos = WheelHiddenPos;
         }
+
         _uiController.transform.position = startPos;
         for (int i = 0; i <= 15; i++)
         {
@@ -152,5 +160,7 @@ public class BattleStateMachine : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         _uiController.transform.position = endPos;
+        _uiController.IsVisible = active;
+        Transitioning = false;
     }
 }

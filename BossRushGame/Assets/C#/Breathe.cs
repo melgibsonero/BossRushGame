@@ -27,6 +27,9 @@ public class Breathe : MonoBehaviour {
     [SerializeField]
     private bool isRandomStart;
 
+    [SerializeField]
+    private bool alwaysRescale;
+
     private float randomStart;
 
     private void Start()
@@ -57,7 +60,7 @@ public class Breathe : MonoBehaviour {
             }
             else if(GetComponentInParent<Canvas>())
             {
-                if(EventSystem.current.currentSelectedGameObject == gameObject)
+                if(EventSystem.current.currentSelectedGameObject == gameObject || alwaysRescale)
                 {
                     localCurveHeight = CurveHeight;
                 }
