@@ -142,17 +142,11 @@ public class UnitHighlight : MonoBehaviour
                 {
                     if (_inputRight)
                     {
-                        if (currentHighlight.rightUnitSlot != null)
-                        {
-                            currentHighlight = currentHighlight.rightUnitSlot;
-                        }
+                        currentHighlight = GetRightUnitSlot(currentHighlight);
                     }
                     else
                     {
-                        if (currentHighlight.leftUnitSlot != null)
-                        {
-                            currentHighlight = currentHighlight.leftUnitSlot;
-                        }
+                        currentHighlight = GetLeftUnitSlot(currentHighlight);
                     }
                 }
             }
@@ -161,6 +155,62 @@ public class UnitHighlight : MonoBehaviour
         {
             currentHighlight = null;
         }
+    }
+
+
+    /// <summary>
+    /// Searches alive target from right
+    /// </summary>
+    /// <param name="current"></param>
+    /// <returns></returns>
+    public UnitSlot GetRightUnitSlot(UnitSlot current)
+    {
+        UnitSlot oldCurrent = current;
+        while (current.rightUnitSlot != null)
+        {
+            //If right of current is not dead, return that
+            if (!current.rightUnitSlot.GetUnit().IsDead)
+            {
+                //Debug.Log("Found target");
+                return current.rightUnitSlot;
+            }
+            //If it is, move to it and check it's right.
+            else
+            {
+                //Debug.Log("Right one is dead, trying right of right");
+                current = current.rightUnitSlot;
+            }
+            //Hopefully repeat until you find a not dead one or reach rightmost.
+        }
+        //Debug.Log("Did not find a target, dont move");
+        return oldCurrent;
+    }
+    /// <summary>
+    /// Searches alive target from left
+    /// </summary>
+    /// <param name="current"></param>
+    /// <returns></returns>
+    public UnitSlot GetLeftUnitSlot(UnitSlot current)
+    {
+        UnitSlot oldCurrent = current;
+        while (current.leftUnitSlot != null)
+        {
+            //If left of current is not dead, return that
+            if (!current.leftUnitSlot.GetUnit().IsDead)
+            {
+                //Debug.Log("Found target");
+                return current.leftUnitSlot;
+            }
+            //If it is, move to it and check it's left.
+            else
+            {
+                //Debug.Log("Left one is dead, trying left of left");
+                current = current.leftUnitSlot;
+            }
+            //Hopefully repeat until you find a not dead one or reach leftmost.
+        }
+        //Debug.Log("Did not find a target, dont move");
+        return oldCurrent;
     }
 
     public UnitSlot GetCurrentHighlight()

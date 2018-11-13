@@ -2154,6 +2154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ability: {fileID: 1706064630124994, guid: 34878eee263a2dd45b59afb3712d0166, type: 2}
+  ManaCost: 0
 --- !u!114 &268919035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2817,6 +2818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ability: {fileID: 1706064630124994, guid: 7de259babfa9667498377710c96348c3, type: 2}
+  ManaCost: 0
 --- !u!114 &345968967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4951,7 +4953,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -5533,6 +5535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ability: {fileID: 1926336870765432, guid: f742f34a329124d42a4bf6140a062481, type: 2}
+  ManaCost: 0
 --- !u!114 &764399315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5973,6 +5976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ability: {fileID: 1706064630124994, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+  ManaCost: 0
 --- !u!114 &799729598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9514,6 +9518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ability: {fileID: 1706064630124994, guid: 931a80189dc95f94cb4d73d3fa035cdc, type: 2}
+  ManaCost: 0
 --- !u!114 &1444748206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9815,7 +9820,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}

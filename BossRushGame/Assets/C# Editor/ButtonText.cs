@@ -10,8 +10,8 @@ public class ButtonText : MonoBehaviour
 
     private void Update()
     {
-        if (Application.isPlaying)
-            return;
+        //if (Application.isPlaying)
+        //    return;
         
         _buttons = FindObjectsOfType<ButtonNameToText>();
         foreach (ButtonNameToText button in _buttons)

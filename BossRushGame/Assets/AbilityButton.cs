@@ -14,6 +14,7 @@ public class AbilityButton : MonoBehaviour {
 
     public GameObject Ability;
 
+    [SerializeField]
     private int ManaCost;
 
     Color _originalNormal;
