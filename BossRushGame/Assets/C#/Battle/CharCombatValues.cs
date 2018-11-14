@@ -97,7 +97,7 @@ public class CharCombatValues : MonoBehaviour
         }
     }
 
-    public void GetMana(int amount)
+    public void GainMana(int amount)
     {
         currentMP += amount;
 

@@ -83,7 +83,7 @@ public class BattleUnitPlayer : BattleUnitBase
             if (regen is ItemRegenMP)
                 regenAmount += (regen as ItemRegenMP).GetRegenAmount();
         }
-        _combatValues.GetMana(regenAmount);
+        _combatValues.GainMana(regenAmount);
 
         _bsMachine.TransitionToState(BattleStateMachine.MenuState.EnemyTurn);
 
