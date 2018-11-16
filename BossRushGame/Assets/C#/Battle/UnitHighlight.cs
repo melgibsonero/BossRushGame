@@ -48,11 +48,6 @@ public class UnitHighlight : MonoBehaviour
 
     public void SetAbility(GameObject ability)
     {
-        
-        if(ability.GetComponent<BaseBuff>() != null)
-        {
-            Init(ability.GetComponent<BaseBuff>().InitTarget);
-        }
         if (ability.GetComponent<BaseAbility>() != null)
         {
             Init(ability.GetComponent<BaseAbility>().InitTarget);
@@ -229,11 +224,7 @@ public class UnitHighlight : MonoBehaviour
                 {
                     CurrentAbility = Instantiate(CurrentAbility);
                     _battleSystem.GetUnitTurn().AbilityInUse = CurrentAbility;
-                    _battleSystem.GetUnitTurn().CombatValues.UseMana(CurrentAbility.GetComponent<BaseAbility>().ManaCost);
-                    if (CurrentAbility.GetComponent<BaseBuff>() != null)
-                    {
-                        CurrentAbility.GetComponent<BaseBuff>().Act(unit.GetUnit().gameObject);
-                    }
+
                     if (CurrentAbility.GetComponent<BaseAbility>() != null)
                     {
                         CurrentAbility.GetComponent<BaseAbility>().Act(unit.GetUnit().gameObject);
@@ -261,6 +252,9 @@ public class UnitHighlight : MonoBehaviour
                 CurrentAbility.GetComponent<BaseAbility>().Act();
             }
         }
+
+        _battleSystem.GetUnitTurn().CombatValues.UseMana(CurrentAbility.GetComponent<BaseAbility>().ManaCost);
+
         Reset();
     }
     

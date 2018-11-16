@@ -54,7 +54,7 @@ public class AbilityButton : MonoBehaviour {
 
     public void UseAbility()
     {
-        if (ManaCost < _player.CombatValues.CurrentMP)
+        if (ManaCost <= _player.CombatValues.CurrentMP)
         {            
             _unitHighlight.SetAbility(Ability);
         }

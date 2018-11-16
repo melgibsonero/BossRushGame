@@ -155,9 +155,11 @@ public class BattleSystem_v2 : MonoBehaviour
         GetPlayerUnit().Defend();
     }
 
-    public void AddActiveItem(MonoBehaviour item)
+    public void AddActiveItem(GameObject item)
     {
-        GetPlayerUnit().AddActiveItem(item);
+        GameObject ItemInstance = Instantiate(item, transform.GetChild(0));
+
+        GetPlayerUnit().AddActiveItem(ItemInstance.GetComponent<MonoBehaviour>());
 
         GetPlayerUnit().EndTurn();
     }

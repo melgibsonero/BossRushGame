@@ -24,10 +24,25 @@ public class BattleUnitEnemy : BattleUnitBase
     }
 
     #region Animation methods
-    
-    public void SetPlayerDefendWindow(int value)
+
+    public void FailWindowOpen()
     {
-        _player.defendWindow = value == 1;
+        _player.failWindow = true;
+    }
+
+    public void FailWindowClose()
+    {
+        _player.failWindow = false;
+    }
+
+    public void DefendWindowOpen()
+    {
+        _player.defendWindow = true;
+    }
+
+    public void DefendWindowClose()
+    {
+        _player.defendWindow = false;
     }
 
     public void HitPlayer()

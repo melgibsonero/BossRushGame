@@ -174,7 +174,7 @@ MonoBehaviour:
   HealthText: {fileID: 114172345529552960, guid: 265372afa6ec5b74fae988f368fd7f24,
     type: 2}
   maxHP: 5
-  maxMP: 5
+  maxMP: 12
   defaultAP: 1
   defaultDP: 1
 --- !u!114 &114972687506505340

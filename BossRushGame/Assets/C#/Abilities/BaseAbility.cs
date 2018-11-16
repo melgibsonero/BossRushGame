@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseAbility : MonoBehaviour
 {
-    public BuffSystem.TriggerEndBuff attackType;
+    public ItemWeapon.WeaponType attackType;
 
     public UnitHighlight.Targets InitTarget;
 
@@ -25,7 +25,7 @@ public class BaseAbility : MonoBehaviour
         var isPlayer = Attacker.GetComponent<BattleUnitPlayer>();
         if (isPlayer != null)
         {
-            if(attackType == BuffSystem.TriggerEndBuff.Slash)
+            if(attackType == ItemWeapon.WeaponType.Slash)
             {
                 damage = isPlayer.SlashWeapon.damage;
             }
