@@ -7,7 +7,7 @@ public class UICurveLerp : MonoBehaviour
     [Header("Gizmo stuff")]
     public bool initDone = false;
     public Color curveColor;
-    public bool hideLines;
+    public bool hideCurve, hideLines;
     public float angleTolerance = 1f;
     
     [Header("Curve stuff")]
@@ -24,6 +24,8 @@ public class UICurveLerp : MonoBehaviour
     {
         if (!initDone || _curvePoints == null)
             InitCurvePoints();
+
+        if (hideCurve) return;
 
         #region draw curve
 
