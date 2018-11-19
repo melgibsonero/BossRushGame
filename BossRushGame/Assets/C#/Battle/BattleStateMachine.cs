@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BattleStateMachine : MonoBehaviour {
-
+public class BattleStateMachine : MonoBehaviour
+{
     public enum MenuState
     {
         EnemyTurn = 0,
@@ -14,18 +14,15 @@ public class BattleStateMachine : MonoBehaviour {
         Attacking = 4
     }
 
-    public static MenuState currentState = MenuState.ActionButtons;
+    public static MenuState currentState = MenuState.EnemyTurn;
 
     [SerializeField]
     private MenuState currentStateforEditor;
 
-
-    [SerializeField]
-    private bool Transitioning = false;
+    public bool TransitionDone { get { return panelCurve.done && listCurve.done && itemCurve.done; } }
+    public UICurveLerp panelCurve, listCurve, itemCurve;
     private bool ReadInputs = false;
     private float inputBlockTimer = 0f;
-
-    public int ActionButtonHideDistance = 500;
 
     InputManager _inputManager;
     UIController _uiController;
@@ -35,9 +32,6 @@ public class BattleStateMachine : MonoBehaviour {
     [SerializeField]
     UIController.List LastListEnum;
 
-    Vector3 WheelActivePos;
-    Vector3 WheelHiddenPos;
-
     // Use this for initialization
     void Start () {
         _inputManager = FindObjectOfType<InputManager>();
@@ -45,8 +39,7 @@ public class BattleStateMachine : MonoBehaviour {
         _unitHighlight = FindObjectOfType<UnitHighlight>();
         _eventSystem = EventSystem.current;
 
-        WheelActivePos = _uiController.transform.position;
-        WheelHiddenPos = _uiController.transform.position + new Vector3(-ActionButtonHideDistance, 0, 0);
+        TransitionToState(MenuState.ActionButtons);
     }
 	
 	// Update is called once per frame
@@ -57,7 +50,7 @@ public class BattleStateMachine : MonoBehaviour {
         }
         ReadInputs = inputBlockTimer >= 0;
         currentStateforEditor = currentState;
-        if (_inputManager.GetButtonDown(InputManager.Button.Cancel) && !Transitioning)
+        if (_inputManager.GetButtonDown(InputManager.Button.Cancel) && TransitionDone)
         {
             switch (currentState)
             {
@@ -65,7 +58,6 @@ public class BattleStateMachine : MonoBehaviour {
                     Debug.Log("enemy turn, cant do shit");
                     break;
                 case MenuState.ActionButtons:
-                    ToggleActionButtons(true);
                     break;
                 case MenuState.AbilityList:
                     TransitionToState(MenuState.ActionButtons);
@@ -99,18 +91,38 @@ public class BattleStateMachine : MonoBehaviour {
         {
             case MenuState.EnemyTurn:
                 currentState = MenuState.EnemyTurn;
+                // curve
+                panelCurve.hide = true;
+                listCurve.hide = true;
+                itemCurve.hide = false;
+                // other
                 break;
             case MenuState.ActionButtons:
                 currentState = MenuState.ActionButtons;
-                ToggleActionButtons(true);
+                // curve
+                panelCurve.hide = false;
+                listCurve.hide = true;
+                itemCurve.hide = false;
+                // other
                 _uiController.OpenList(0);
                 break;
             case MenuState.AbilityList:
                 currentState = MenuState.AbilityList;
-                ToggleActionButtons(false);
+                // curve
+                panelCurve.hide = false;
+                listCurve.hide = false;
+                itemCurve.hide = false;
+                // other
                 break;
             case MenuState.Targetting:
                 currentState = MenuState.Targetting;
+                // curve
+                panelCurve.hide = false;
+                listCurve.hide = false;
+                itemCurve.hide = true;
+                itemCurve.target = _eventSystem.currentSelectedGameObject.transform;
+                itemCurve.SetCurveStartPos(itemCurve.target.position);
+                // other
                 _uiController.lastSelectedItem = _eventSystem.currentSelectedGameObject;
                 LastListEnum = _uiController.GetEnumFromList(_uiController.lastSelectedItem.transform.parent.gameObject);
                 _uiController.OpenList(4);
@@ -118,49 +130,20 @@ public class BattleStateMachine : MonoBehaviour {
                 break;
             case MenuState.Attacking:
                 currentState = MenuState.Attacking;
+                // curve
+                panelCurve.hide = true;
+                listCurve.hide = true;
+                itemCurve.hide = false;
+                itemCurve.target = null;
+                // other
                 _eventSystem.SetSelectedGameObject(gameObject);
                 _uiController.OpenList(4);
-                ToggleActionButtons(false);
                 break;
         }
     }
 
-    public void ToggleActionButtons(bool active)
+    public void SetList(Transform list)
     {
-        if (_uiController.IsVisible != active)
-        {
-            StartCoroutine(HideActionButtons(active));
-        }
-    }
-
-    private IEnumerator HideActionButtons(bool active)
-    {
-        Transitioning = true;
-        Vector3 startPos;
-        Vector3 endPos;  
-
-        if (active)
-        {
-            _uiController.IsVisible = active;
-            //
-            startPos = WheelHiddenPos;
-            endPos = WheelActivePos;
-        }
-        else
-        {
-            //
-            startPos = WheelActivePos;
-            endPos = WheelHiddenPos;
-        }
-
-        _uiController.transform.position = startPos;
-        for (int i = 0; i <= 15; i++)
-        {
-            _uiController.transform.position = Vector3.Lerp(startPos, endPos, i / 15f);
-            yield return new WaitForEndOfFrame();
-        }
-        _uiController.transform.position = endPos;
-        _uiController.IsVisible = active;
-        Transitioning = false;
+        listCurve.target = list;
     }
 }

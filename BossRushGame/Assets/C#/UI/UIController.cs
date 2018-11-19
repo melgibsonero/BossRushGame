@@ -161,9 +161,9 @@ public class UIController : MonoBehaviour {
             bsMachine.TransitionToState(BattleStateMachine.MenuState.AbilityList);
             currentList = currentlySelected;
             ListOpen = true;
-            SlashList.SetActive(type == List.Slash);
-            CrushList.SetActive(type == List.Crush);
-            ItemList.SetActive(type == List.Item);
+            //SlashList.SetActive(type == List.Slash);
+            //CrushList.SetActive(type == List.Crush);
+            //ItemList.SetActive(type == List.Item);
 
             Button[] abilities = GetListFromEnum(type).GetComponentsInChildren<Button>();
             OrganizeList(abilities);
@@ -174,9 +174,9 @@ public class UIController : MonoBehaviour {
             //Just hide lists and action buttons
             ListOpen = true;
             currentList = currentlySelected;
-            SlashList.SetActive(type == List.Slash);
-            CrushList.SetActive(type == List.Crush);
-            ItemList.SetActive(type == List.Item);
+            //SlashList.SetActive(type == List.Slash);
+            //CrushList.SetActive(type == List.Crush);
+            //ItemList.SetActive(type == List.Item);
             eventSystem.SetSelectedGameObject(null);
             eventSystem.UpdateModules();
         }
@@ -188,9 +188,9 @@ public class UIController : MonoBehaviour {
             currentlySelected = currentList;
             eventSystem.SetSelectedGameObject(currentlySelected);
             eventSystem.UpdateModules();
-            SlashList.SetActive(type == List.Slash);
-            CrushList.SetActive(type == List.Crush);
-            ItemList.SetActive(type == List.Item);
+            //SlashList.SetActive(type == List.Slash);
+            //CrushList.SetActive(type == List.Crush);
+            //ItemList.SetActive(type == List.Item);
         }
     }
 
