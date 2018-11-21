@@ -47,7 +47,7 @@ public class BattleUnitEnemy : BattleUnitBase
 
     public void HitPlayer()
     {
-        if (_player.interacted)
+        if (!_player.failedInteract && _player.interacted)
         {
             Debug.Log("Player defended");
         }

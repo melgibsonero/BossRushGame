@@ -152,9 +152,8 @@ public class UIController : MonoBehaviour {
         
     }
 
-    public void OpenList(int Type)
+    public void OpenList(List type)
     {
-        List type = (List)Type;
         if (type != List.None && type != List.JustHide)
         {
             //Transition to Ability List

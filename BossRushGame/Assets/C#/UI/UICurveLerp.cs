@@ -12,15 +12,15 @@ public class UICurveLerp : MonoBehaviour
     
     [Header("Curve stuff")]
     public Transform target;
-    [Range(0.01f, 10f)]
+    [Range(0.1f, 1f)]
     public float timeInSec = 1f;
-    public bool hide, done, clearTargetAtZero;
 
+    private bool _show, _done, _nullTarget;
     private Transform[] _curvePoints;
     private int _curveCount, _index;
     private float _totalTime, _maxClamp, _angle;
     
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (!initDone || _curvePoints == null)
             InitCurvePoints();
@@ -97,53 +97,61 @@ public class UICurveLerp : MonoBehaviour
     {
         InitCurvePoints();
 
-        hide = true;
-        _totalTime = _maxClamp;
+        enabled = false;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (hide)
+        if (_show)
             _totalTime += Time.deltaTime * _curveCount / timeInSec;
         else
             _totalTime -= Time.deltaTime * _curveCount / timeInSec;
 
         #region transition end logic
 
-        done = false;
+        _done = false;
 
         if (_totalTime < 0)
         {
             _totalTime = 0f;
-            done = true;
+            _done = true;
         }
         if (_totalTime > _maxClamp)
         {
             _totalTime = _maxClamp;
-            done = true;
+            _done = true;
         }
 
         #endregion
-
-        if (target == null) return;
-
+        
         // jump to next curve
         if ((int)_totalTime % 2 == 1)
         {
-            if (hide) _totalTime++;
+            if (_show) _totalTime++;
             else _totalTime--;
         }
 
         _index = (int)_totalTime;
 
-        target.position = MathHelp.GetCurvePosition(
-            _curvePoints[_index].position,
-            _curvePoints[_index + 1].position,
-            _curvePoints[_index + 2].position,
-            _totalTime - _index);
+        if (target != null)
+        {
+            target.position = MathHelp.GetCurvePosition(
+                _curvePoints[_index].position,
+                _curvePoints[_index + 1].position,
+                _curvePoints[_index + 2].position,
+                _totalTime - _index);
+        }
 
-        if (_totalTime == 0 && clearTargetAtZero)
+        if (_done)
+        {
+            enabled = false;
+
+            if (_nullTarget)
+            {
                 target = null;
+                _nullTarget = false;
+            }
+        }
     }
 
     private void InitCurvePoints()
@@ -160,9 +168,9 @@ public class UICurveLerp : MonoBehaviour
             else
                 _curvePoints[i].name = "Middle";
             if (i == 0)
-                _curvePoints[i].name = "Start";
+                _curvePoints[i].name = "Hide";
             if (i == _curvePoints.Length - 1)
-                _curvePoints[i].name = "End";
+                _curvePoints[i].name = "Show";
             
             #endregion
         }
@@ -176,5 +184,12 @@ public class UICurveLerp : MonoBehaviour
     public void SetCurveStartPos(Vector3 pos)
     {
         _curvePoints[0].position = pos;
+    }
+
+    public void WakeUp(bool show, bool nullTarget = false)
+    {
+        enabled = true;
+        _show = show;
+        _nullTarget = nullTarget;
     }
 }

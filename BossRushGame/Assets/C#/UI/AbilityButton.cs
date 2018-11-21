@@ -10,12 +10,11 @@ public class AbilityButton : MonoBehaviour {
     UnitHighlight _unitHighlight;
     BattleUnitPlayer _player;
     Button _thisButton;
-    ButtonNameToText _nameText;
+    ButtonOnClickSetter _nameText;
 
     public GameObject Ability;
 
-    [SerializeField]
-    private int ManaCost;
+    public int ManaCost;
 
     Color _originalNormal;
     Color _originalHighlight;
@@ -26,7 +25,7 @@ public class AbilityButton : MonoBehaviour {
         _unitHighlight = FindObjectOfType<UnitHighlight>();
         _player = FindObjectOfType<BattleUnitPlayer>();
         _thisButton = GetComponent<Button>();
-        _nameText = GetComponent<ButtonNameToText>();
+        _nameText = GetComponent<ButtonOnClickSetter>();
 
         ManaCost = Ability.GetComponent<BaseAbility>().ManaCost;
 
@@ -35,9 +34,8 @@ public class AbilityButton : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        _nameText.manaCost = ManaCost;
-
+	void Update ()
+    {
         var colors = _thisButton.colors;
         if (ManaCost > _player.CombatValues.CurrentMP)
         {

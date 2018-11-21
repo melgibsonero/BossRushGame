@@ -157,6 +157,8 @@ public class BattleSystem_v2 : MonoBehaviour
 
     public void AddActiveItem(GameObject item)
     {
+        bsMachine.TransitionToState(BattleStateMachine.MenuState.Attacking);
+
         GameObject ItemInstance = Instantiate(item, transform.GetChild(0));
 
         GetPlayerUnit().AddActiveItem(ItemInstance.GetComponent<MonoBehaviour>());
@@ -166,7 +168,7 @@ public class BattleSystem_v2 : MonoBehaviour
     
     IEnumerator EnemyLoop()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
 
         while (GetUnitTurn() is BattleUnitEnemy)
         {
