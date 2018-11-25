@@ -15,11 +15,13 @@ public class BasicSlash : BaseAbility
         base.Act(go);
 
         StartCoroutine("MoveToTarget");
+        battleUnitAnimator.Play("MagicianWalk", 0);
     }
 
     public override void Retreat()
     {
         StartCoroutine("RetreatBack");
+        battleUnitAnimator.Play("MagicianWalk", 0);
     }
 
     private IEnumerator MoveToTarget()
@@ -34,7 +36,7 @@ public class BasicSlash : BaseAbility
             yield return new WaitForEndOfFrame();
 
         }
-        battleUnitAnimator.Play("SlashPlaceholder", 0);
+        battleUnitAnimator.Play("DoubleStab", 0);
     }
 
     private IEnumerator RetreatBack()
@@ -47,6 +49,7 @@ public class BasicSlash : BaseAbility
             yield return new WaitForEndOfFrame();
 
         }
+        battleUnitAnimator.Play("MagicianStanding", 0);
         EndTurn();
     }
 }
