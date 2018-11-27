@@ -58,4 +58,4 @@ MonoBehaviour:
   Targets: []
   ManaCost: 0
   damage: 0
-  WalkUpOffset: {x: -2, y: 0, z: 0}
+  WalkUpOffset: {x: -2, y: 0.8, z: 0}

@@ -673,7 +673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1483440678095210
 GameObject:
   m_ObjectHideFlags: 1
@@ -1028,7 +1028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1755661579472974
 GameObject:
   m_ObjectHideFlags: 1
@@ -1569,7 +1569,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1491238888133508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.408278, y: -1.1, z: -0.63704515}
+  m_LocalPosition: {x: -8.408278, y: 0.64, z: -0.63704515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4934417066233890}
@@ -2680,8 +2680,8 @@ MonoBehaviour:
   textMesh: {fileID: 114172345529552960, guid: 1b32a92da15ace34c9df059608bf45c3, type: 2}
   HealthText: {fileID: 114172345529552960, guid: 265372afa6ec5b74fae988f368fd7f24,
     type: 2}
-  maxHP: 5
-  maxMP: 12
+  maxHP: 10
+  maxMP: 10
   defaultAP: 1
   defaultDP: 1
 --- !u!114 &114540588963823846
