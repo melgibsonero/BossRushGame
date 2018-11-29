@@ -1570,7 +1570,7 @@ Transform:
   m_GameObject: {fileID: 1491238888133508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.408278, y: 0.64, z: -0.63704515}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 4934417066233890}
   - {fileID: 4828417762082848}
@@ -2634,7 +2634,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: b9711db5bcb03bb4da3d5d782a7aeef0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2678,8 +2678,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 114172345529552960, guid: 1b32a92da15ace34c9df059608bf45c3, type: 2}
-  HealthText: {fileID: 114172345529552960, guid: 265372afa6ec5b74fae988f368fd7f24,
-    type: 2}
   maxHP: 10
   maxMP: 10
   defaultAP: 1

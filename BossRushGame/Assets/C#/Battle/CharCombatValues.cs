@@ -6,7 +6,6 @@ public class CharCombatValues : MonoBehaviour
 {
     
     public TextMeshPro textMesh;
-    public TextMeshPro HealthText;
 
     [Space(-10), Header("Health")]
     public int maxHP = 10;
@@ -64,7 +63,6 @@ public class CharCombatValues : MonoBehaviour
         {
             damageText.text = "-" + damageTaken;
         }
-        HealthText.text = currentHP + "/" + maxHP;
     }
 
     public void HealUp(int amount)
@@ -132,8 +130,5 @@ public class CharCombatValues : MonoBehaviour
         currentMP = maxMP;
         currentAP = defaultAP;
         currentDP = defaultDP;
-
-        HealthText = Instantiate(HealthText, transform);
-        HealthText.text = currentHP + "/" + maxHP;
     }
 }

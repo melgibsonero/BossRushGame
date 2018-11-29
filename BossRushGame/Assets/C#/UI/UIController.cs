@@ -127,12 +127,17 @@ public class UIController : MonoBehaviour {
         for(int i = 0; i<abilities.Length; i++)
         {
             var tempNavigation = abilities[i].navigation;
-            if (i == 0)
+            if (abilities.Length <= 1)
+            {
+                tempNavigation.selectOnUp = null;
+                tempNavigation.selectOnDown = null;
+            }
+            else if (i == 0)
             {
                 tempNavigation.selectOnUp = null;
                 tempNavigation.selectOnDown = abilities[i + 1];
             }
-            else if(i == abilities.Length - 1)
+            else if (i == abilities.Length - 1)
             {
                 tempNavigation.selectOnUp = abilities[i - 1];
                 tempNavigation.selectOnDown = null;
