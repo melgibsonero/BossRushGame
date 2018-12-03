@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-[RequireComponent(typeof(InputManager))]
 public class BattleSystem_v2 : MonoBehaviour
 {
     [SerializeField]
@@ -17,10 +15,12 @@ public class BattleSystem_v2 : MonoBehaviour
 
     public Transform unitHolderParent;
     private BattleStateMachine bsMachine;
+    private WaveManager _waveManager;
 
     private void Start()
     {
         bsMachine = FindObjectOfType<BattleStateMachine>();
+        _waveManager = FindObjectOfType<WaveManager>();
         _unitSlots = new UnitSlot[unitHolderParent.childCount];
         _units = new BattleUnitBase[unitHolderParent.childCount];
 
@@ -54,14 +54,14 @@ public class BattleSystem_v2 : MonoBehaviour
 
         if (_playerCount == 0)
         {
-            Debug.Log("Player lost");
+            Debug.Log("Player lost, reloading scene");
             GameManager.ReloadScene();
         }
 
         if (_enemyCount == 0)
         {
-            Debug.Log("Enemy lost");
-            GameManager.ReloadScene();
+            Debug.Log("Enemy lost, loading new wave");
+            _waveManager.NextWave();
         }
 
         #endregion

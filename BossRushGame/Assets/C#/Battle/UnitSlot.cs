@@ -2,44 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSlot : MonoBehaviour {
-
-    public BattleUnitBase[] UnitChoices;
+public class UnitSlot : MonoBehaviour
+{
     [SerializeField]
-    private BattleUnitBase unit;
-    private UnitHighlight unitHighlight;
+    private BattleUnitBase _unit;
+    private UnitHighlight _unitHighlight;
 
     public UnitSlot leftUnitSlot;
     public UnitSlot rightUnitSlot;
 
     [SerializeField]
-    private bool isEnemy;
+    private bool _isEnemy;
 
     public Vector3 SpawnOffset;
-
-
+    
     public bool IsHighlighted
     {
         get
         {
-            if (!GetUnit().IsDead && unitHighlight._showHighlights)
+            if (!GetUnit().IsDead && _unitHighlight._showHighlights)
             {
-                if (unitHighlight.HighlightAll)
+                if (_unitHighlight.HighlightAll)
                 {
                     return true;
                 }
-                else if(unitHighlight.HighlightEnemies)
+                else if(_unitHighlight.HighlightEnemies)
                 {
-                    return isEnemy;
+                    return _isEnemy;
                 }
-                else if (unitHighlight.HighlightTeam)
+                else if (_unitHighlight.HighlightTeam)
                 {
-                    return !isEnemy;
+                    return !_isEnemy;
                 }
                 else
                 {
-                    if (unitHighlight.GetCurrentHighlight() == null) return false;
-                    return unitHighlight.GetCurrentHighlight().GetUnit() == unit;
+                    if (_unitHighlight.GetCurrentHighlight() == null) return false;
+                    return _unitHighlight.GetCurrentHighlight().GetUnit() == _unit;
                 }
             }
             else
@@ -51,12 +49,10 @@ public class UnitSlot : MonoBehaviour {
 
     public void Start()
     {
-        unitHighlight = FindObjectOfType<UnitHighlight>();
-        GetUnit();
-        isEnemy = unit.GetComponent<BattleUnitEnemy>();
+        _unitHighlight = FindObjectOfType<UnitHighlight>();
+        _isEnemy = _unit.GetComponent<BattleUnitEnemy>();
     }
-
-
+    
     public BattleUnitBase GetUnit()
     {
         if (unit == null)
@@ -64,15 +60,15 @@ public class UnitSlot : MonoBehaviour {
             int randomEnemy = Random.Range(0, UnitChoices.Length);
             Debug.Log(transform.name+" picked enemy: "+randomEnemy);
             unit = UnitChoices[randomEnemy];
-            if (unit)
-            {
-                unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
-            }
-            else
-            {
-                return null;
-            }
+            unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
         }
         return unit;
     }
+
+    public void SetUnit(BattleUnitBase unit)
+    {
+        _unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+    }
 }
+
+        return _unit;

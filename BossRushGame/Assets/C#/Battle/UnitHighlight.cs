@@ -54,9 +54,7 @@ public class UnitHighlight : MonoBehaviour
         }
         CurrentAbility = ability;
     }
-
     
-
     private void Start()
     {
         es = EventSystem.current;
@@ -151,8 +149,7 @@ public class UnitHighlight : MonoBehaviour
             currentHighlight = null;
         }
     }
-
-
+    
     /// <summary>
     /// Searches alive target from right
     /// </summary>
@@ -263,45 +260,14 @@ public class UnitHighlight : MonoBehaviour
         _showHighlights = false;
         currentHighlight = null;
     }
-
-    #region input shit 
-    //Input related shit
-    bool _lastInputAxisState;
-    bool _lastInputAxisStateInvert;
-
-    protected bool GetAxisAsKeyDown(string axisName, bool Invert = false)
+    
+    public void SetEnemyWave(GameObject[] enemies)
     {
-        if (!Invert)
+        for (int i = 0; i < enemies.Length; i++)
         {
-            var currentInputValue = Input.GetAxis(axisName) > 0.1;
-
-            // prevent keep returning true when axis still pressed.
-            if (currentInputValue && _lastInputAxisState)
-            {
-                return false;
-            }
-
-            _lastInputAxisState = currentInputValue;
-
-            return currentInputValue;
-        }
-        else
-        {
-            var currentInputValue = Input.GetAxis(axisName) < -0.1;
-
-            // prevent keep returning true when axis still pressed.
-            if (currentInputValue && _lastInputAxisStateInvert)
-            {
-                return false;
-            }
-
-            _lastInputAxisStateInvert = currentInputValue;
-
-            return currentInputValue;
+            unitSlots[i + 1].SetUnit(enemies[i].GetComponent<BattleUnitBase>());
         }
     }
-#endregion
-
 }
 
     
