@@ -58,5 +58,11 @@ public class BaseAbility : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void Retreat() { }
+    public virtual void Retreat()
+    {
+        if (Target.IsDead)
+        {
+            Target.GetComponentInChildren<AddRigidBodyToChildren>().ActivateCollapse();
+        }
+    }
 }

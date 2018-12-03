@@ -6,6 +6,8 @@ public class BattleUnitEnemy : BattleUnitBase
 {
     private BattleUnitPlayer _player;
 
+    public BaseAbility[] _abilities;
+
     protected override void Start()
     {
         base.Start();
@@ -20,7 +22,40 @@ public class BattleUnitEnemy : BattleUnitBase
 
     public void StartAnimation()
     {
+        StartCoroutine(MoveToPoint(_player.GetPointofAttack)); 
+    }
+
+    IEnumerator MoveToPoint(Vector3 point)
+    {
+        Vector3 startPos = transform.position;
+        Vector3 endPos = point;
+        Vector3 midpoint;
+
         _animator.Play("jump");
+
+        float timer = 0;
+        while(timer < 1)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPos, point, timer);
+            yield return new WaitForEndOfFrame();
+        }
+        timer = 0;
+        midpoint = new Vector3(point.x + 4f, startPos.y, startPos.z/2f);
+        while (timer < 1)
+        {
+            timer += Time.deltaTime / 0.5f;
+            transform.position = Vector3.Lerp(point, midpoint, timer);
+            yield return new WaitForEndOfFrame();
+        }
+        
+        timer = 0;
+        while (timer < 1)
+        {
+            timer += Time.deltaTime / 0.7f;
+            transform.position = Vector3.Lerp(midpoint, startPos, timer);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     #region Animation methods
@@ -55,7 +90,14 @@ public class BattleUnitEnemy : BattleUnitBase
         else
         {
             _player.CombatValues.TakeDamage(_combatValues.CurrentAP);
-            _player._animator.Play("Magician_TakeDamage");
+            if (_combatValues.CurrentAP < 5)
+            {
+                _player._animator.Play("Magician_TakeDamage");
+            }
+            else
+            {
+                _player._animator.Play("Magician_TakeAlotOfDamage");
+            }
         }
 
         _player.ClearInteract();

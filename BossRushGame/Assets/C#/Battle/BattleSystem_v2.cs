@@ -178,7 +178,7 @@ public class BattleSystem_v2 : MonoBehaviour
         {
             (GetUnitTurn() as BattleUnitEnemy).StartAnimation();
 
-            yield return new WaitForSecondsRealtime(1.2f);
+            yield return new WaitForSecondsRealtime(2.2f);
         }
     }
     

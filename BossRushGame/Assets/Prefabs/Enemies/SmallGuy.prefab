@@ -656,6 +656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4959791802428576}
   - component: {fileID: 95566620931571550}
+  - component: {fileID: 114280599503646932}
   m_Layer: 0
   m_Name: guard_model_rig
   m_TagString: Untagged
@@ -1427,10 +1428,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e68c2c990fb87449df5baf2ac11351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   isDoneForTurn: 0
   PointofAttack: {fileID: 1047489315425420}
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
   AbilityInUse: {fileID: 0}
+  _abilities: []
+--- !u!114 &114280599503646932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951785548723464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920346d4b0c9b83498e11fa2b48845e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transforms: []
+  done: 1
 --- !u!137 &137756542352417050
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

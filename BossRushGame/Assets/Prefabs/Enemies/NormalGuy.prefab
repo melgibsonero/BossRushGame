@@ -371,6 +371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4191459341069200}
   - component: {fileID: 95555832535215760}
+  - component: {fileID: 114611704804818414}
   m_Layer: 0
   m_Name: guard_model_rig
   m_TagString: Untagged
@@ -1134,7 +1135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270828181317854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.7909486, y: -1.1000003, z: -2.5668654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4191459341069200}
@@ -1373,7 +1374,7 @@ Animator:
   m_GameObject: {fileID: 1270828181317854}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6d60fd8c46f059d45bb29d294908edd0, type: 2}
+  m_Controller: {fileID: 9100000, guid: e4ffb914057785943a474d2cf2f5eb5b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1400,6 +1401,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114611704804818414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1362446102247234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920346d4b0c9b83498e11fa2b48845e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transforms: []
+  done: 1
 --- !u!114 &114658002460123152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1411,10 +1425,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e68c2c990fb87449df5baf2ac11351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   isDoneForTurn: 0
   PointofAttack: {fileID: 1599854181186904}
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
   AbilityInUse: {fileID: 0}
+  _abilities: []
 --- !u!114 &114914892028662748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1427,7 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 114172345529552960, guid: 1b32a92da15ace34c9df059608bf45c3, type: 2}
-  maxHP: 5
+  maxHP: 4
   maxMP: 0
   defaultAP: 2
   defaultDP: 0

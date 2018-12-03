@@ -22,6 +22,7 @@ public class BasicSlash : BaseAbility
 
     public override void Retreat()
     {
+        base.Retreat();
         StartCoroutine("RetreatBack");
         battleUnitAnimator.Play("MagicianWalk", 0);
     }
