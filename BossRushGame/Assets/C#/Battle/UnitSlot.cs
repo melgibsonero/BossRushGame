@@ -64,7 +64,14 @@ public class UnitSlot : MonoBehaviour {
             int randomEnemy = Random.Range(0, UnitChoices.Length);
             Debug.Log(transform.name+" picked enemy: "+randomEnemy);
             unit = UnitChoices[randomEnemy];
-            unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+            if (unit)
+            {
+                unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+            }
+            else
+            {
+                return null;
+            }
         }
         return unit;
     }

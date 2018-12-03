@@ -42,7 +42,7 @@ public class BattleSystem_v2 : MonoBehaviour
 
         foreach (BattleUnitBase unit in _units)
         {
-            if (unit.IsDead)
+            if (unit.IsDead ||!unit)
                 continue;
 
             if (unit is BattleUnitPlayer)

@@ -54,7 +54,7 @@ public class CharCombatValues : MonoBehaviour
 
     public void ShowDamageText(int damageTaken)
     {
-        var damageText = Instantiate(textMesh, transform);
+        var damageText = Instantiate(textMesh, GetComponent<BattleUnitBase>().GetPointofAttack, textMesh.transform.rotation, transform);
         if (damageTaken == 0)
         {
             damageText.text = "BLOCK";
