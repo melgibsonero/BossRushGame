@@ -61,7 +61,9 @@ public class UnitSlot : MonoBehaviour {
     {
         if (unit == null)
         {
-            unit = UnitChoices[Random.Range(0, UnitChoices.Length - 1)];
+            int randomEnemy = Random.Range(0, UnitChoices.Length);
+            Debug.Log(transform.name+" picked enemy: "+randomEnemy);
+            unit = UnitChoices[randomEnemy];
             unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
         }
         return unit;
