@@ -50,10 +50,12 @@ public class BattleUnitEnemy : BattleUnitBase
         if (!_player.failedInteract && _player.interacted)
         {
             Debug.Log("Player defended");
+            _player._animator.Play("Magician_Defend");
         }
         else
         {
             _player.CombatValues.TakeDamage(_combatValues.CurrentAP);
+            _player._animator.Play("Magician_TakeDamage");
         }
 
         _player.ClearInteract();

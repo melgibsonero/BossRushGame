@@ -8,7 +8,8 @@ public class BattleUnitBase : MonoBehaviour
     protected BattleSystem_v2 _battleSystem;
     protected CharCombatValues _combatValues;
     protected BattleStateMachine _bsMachine;
-    protected Animator _animator;
+    [HideInInspector]
+    public Animator _animator;
     public bool isDoneForTurn;
 
     [Tooltip("Where attacks are targetted to"), SerializeField]
