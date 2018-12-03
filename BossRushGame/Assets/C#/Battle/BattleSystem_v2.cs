@@ -12,8 +12,7 @@ public class BattleSystem_v2 : MonoBehaviour
     private int _playerCount, _enemyCount;
     
     public bool IsPlayerTurn { get { return _playerTurn; } }
-
-    public Transform unitHolderParent;
+    
     private BattleStateMachine bsMachine;
     private WaveManager _waveManager;
 
@@ -21,16 +20,13 @@ public class BattleSystem_v2 : MonoBehaviour
     {
         bsMachine = FindObjectOfType<BattleStateMachine>();
         _waveManager = FindObjectOfType<WaveManager>();
-        _unitSlots = new UnitSlot[unitHolderParent.childCount];
-        _units = new BattleUnitBase[unitHolderParent.childCount];
+        
+        UnitHighlight unitHighlight = FindObjectOfType<UnitHighlight>();
+        _unitSlots = unitHighlight.GetUnitSlots();
+        _units = new BattleUnitBase[_unitSlots.Length];
 
-        for (int i = 0; i < unitHolderParent.childCount; i++)
-        {
-            _unitSlots[i] = unitHolderParent.GetChild(i).GetComponent<UnitSlot>();
-            _units[i] = _unitSlots[i].GetUnit();
-            
-            _units[i].isDoneForTurn = _units[i] is BattleUnitEnemy;
-        }
+        _waveManager.Init(unitHighlight, this);
+        _waveManager.NextWave();
     }
 
     public void UpdateTurnLogic()
@@ -42,7 +38,7 @@ public class BattleSystem_v2 : MonoBehaviour
 
         foreach (BattleUnitBase unit in _units)
         {
-            if (unit.IsDead ||!unit)
+            if (!unit || unit.IsDead)
                 continue;
 
             if (unit is BattleUnitPlayer)
@@ -70,7 +66,7 @@ public class BattleSystem_v2 : MonoBehaviour
 
         foreach (BattleUnitBase unit in _units)
         {
-            if (unit.IsDead || unit.isDoneForTurn)
+            if (!unit || unit.IsDead || unit.isDoneForTurn)
                 continue;
 
             if (unit is BattleUnitPlayer && !_playerTurn)
@@ -117,15 +113,15 @@ public class BattleSystem_v2 : MonoBehaviour
     public BattleUnitBase GetUnitTurn()
     {
         // find valid unit
-        for (int i = 0; i < _unitSlots.Length; i++)
+        for (int i = 0; i < _units.Length; i++)
         {
-            if (_unitSlots[i].GetUnit().IsDead || _unitSlots[i].GetUnit().isDoneForTurn)
+            if (!_units[i] || _units[i].IsDead || _units[i].isDoneForTurn)
                 continue;
 
-            if (_playerTurn && _unitSlots[i].GetUnit() is BattleUnitPlayer)
-                return _unitSlots[i].GetUnit();
-            if (!_playerTurn && _unitSlots[i].GetUnit() is BattleUnitEnemy)
-                return _unitSlots[i].GetUnit();
+            if (_playerTurn && _units[i] is BattleUnitPlayer)
+                return _units[i];
+            if (!_playerTurn && _units[i] is BattleUnitEnemy)
+                return _units[i];
         }
 
         // if no valid unit
@@ -139,7 +135,7 @@ public class BattleSystem_v2 : MonoBehaviour
     {
         foreach (BattleUnitPlayer unit in _units)
         {
-            if (unit.IsDead)
+            if (!unit || unit.IsDead)
                 continue;
 
             return unit;
@@ -164,6 +160,14 @@ public class BattleSystem_v2 : MonoBehaviour
         GetPlayerUnit().AddActiveItem(ItemInstance.GetComponent<MonoBehaviour>());
 
         GetPlayerUnit().EndTurn();
+    }
+
+    public void UpdateUnits()
+    {
+        for (int i = 0; i < _unitSlots.Length; i++)
+        {
+            _units[i] = _unitSlots[i].GetUnit();
+        }
     }
     
     IEnumerator EnemyLoop()

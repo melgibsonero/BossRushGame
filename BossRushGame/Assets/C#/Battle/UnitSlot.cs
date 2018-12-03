@@ -13,6 +13,7 @@ public class UnitSlot : MonoBehaviour
 
     [SerializeField]
     private bool _isEnemy;
+    public bool IsEnemy { get { return _isEnemy; } }
 
     public Vector3 SpawnOffset;
     
@@ -20,7 +21,7 @@ public class UnitSlot : MonoBehaviour
     {
         get
         {
-            if (!GetUnit().IsDead && _unitHighlight._showHighlights)
+            if (_unit && !_unit.IsDead && _unitHighlight._showHighlights)
             {
                 if (_unitHighlight.HighlightAll)
                 {
@@ -47,28 +48,28 @@ public class UnitSlot : MonoBehaviour
         }
     }
 
-    public void Start()
+    public void Init(UnitHighlight unitHighlight)
     {
-        _unitHighlight = FindObjectOfType<UnitHighlight>();
-        _isEnemy = _unit.GetComponent<BattleUnitEnemy>();
+        _unitHighlight = unitHighlight;
+
+        if (!_isEnemy)
+        {
+            SetUnit(_unit);
+
+            AbilityButton[] abilityButtons = FindObjectsOfType<AbilityButton>();
+            foreach (AbilityButton abilityButton in abilityButtons)
+                abilityButton.SetPlayer(_unit as BattleUnitPlayer);
+        }
     }
     
     public BattleUnitBase GetUnit()
     {
-        if (unit == null)
-        {
-            int randomEnemy = Random.Range(0, UnitChoices.Length);
-            Debug.Log(transform.name+" picked enemy: "+randomEnemy);
-            unit = UnitChoices[randomEnemy];
-            unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
-        }
-        return unit;
+        return _unit;
     }
 
     public void SetUnit(BattleUnitBase unit)
     {
         _unit = Instantiate(unit, transform.position + SpawnOffset, transform.rotation, transform);
+        _unit.isDoneForTurn = _unit is BattleUnitEnemy;
     }
 }
-
-        return _unit;

@@ -7,29 +7,34 @@ public class WaveManager : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public GameObject[] rewardPrefabs;
 
+    private BattleSystem_v2 _battleSystem;
     private UnitHighlight _unitHighlight;
     private WaveBase _currentWave;
     private int _childIndex = -1;
 
-    private void Start()
+    public void Init(UnitHighlight unitHighlight, BattleSystem_v2 battleSystem)
     {
-        _unitHighlight = FindObjectOfType<UnitHighlight>();
+        _unitHighlight = unitHighlight;
+        _battleSystem = battleSystem;
     }
 
     public void NextWave()
     {
         _childIndex++;
-        if (_childIndex > transform.childCount)
+        if (_childIndex >= transform.childCount)
         {
             Debug.Log("Out of waves, reloading scene");
             GameManager.ReloadScene();
+            return;
         }
 
         _currentWave = transform.GetChild(_childIndex).GetComponent<WaveBase>();
-
-
+        
         if (_currentWave is WaveFight)
+        {
             _unitHighlight.SetEnemyWave(GetEnemyWave());
+            _battleSystem.UpdateUnits();
+        }
         else
         {
             Debug.Log("Skipped non fight wave!");
@@ -41,10 +46,10 @@ public class WaveManager : MonoBehaviour
     {
         return new GameObject[]
         {
-            enemyPrefabs[(int)(_currentWave as WaveFight).enemy1 - 1],
-            enemyPrefabs[(int)(_currentWave as WaveFight).enemy2 - 1],
-            enemyPrefabs[(int)(_currentWave as WaveFight).enemy3 - 1],
-            enemyPrefabs[(int)(_currentWave as WaveFight).enemy4 - 1]
+            enemyPrefabs[(int)(_currentWave as WaveFight).enemy1],
+            enemyPrefabs[(int)(_currentWave as WaveFight).enemy2],
+            enemyPrefabs[(int)(_currentWave as WaveFight).enemy3],
+            enemyPrefabs[(int)(_currentWave as WaveFight).enemy4]
         };
     }
 }

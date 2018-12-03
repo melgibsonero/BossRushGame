@@ -89,8 +89,6 @@ public class CharCombatValues : MonoBehaviour
         else
         {
             currentMP -= amount;
-            Debug.Log("Used mana for " + amount);
-            Debug.Log("Total mana: " + CurrentMP);
             return true;
         }
     }

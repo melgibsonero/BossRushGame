@@ -1151,7 +1151,7 @@ MonoBehaviour:
   _unit: {fileID: 0}
   leftUnitSlot: {fileID: 2136594897}
   rightUnitSlot: {fileID: 1683774497}
-  _isEnemy: 0
+  _isEnemy: 1
   SpawnOffset: {x: 0, y: -0.8, z: 1.5}
 --- !u!4 &151143637
 Transform:
@@ -4654,7 +4654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &502953928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6437,7 +6437,7 @@ MonoBehaviour:
   _unit: {fileID: 0}
   leftUnitSlot: {fileID: 1683774497}
   rightUnitSlot: {fileID: 1422642208}
-  _isEnemy: 0
+  _isEnemy: 1
   SpawnOffset: {x: 0, y: -0.8, z: -0.5}
 --- !u!4 &734748322
 Transform:
@@ -9043,6 +9043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1089082121}
+  - component: {fileID: 1089082122}
   m_Layer: 0
   m_Name: Units
   m_TagString: Untagged
@@ -9068,6 +9069,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089082122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1089082120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b6e45b81f43d3458d371006c9f96f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showHighlights: 1
+  HighlightAll: 0
+  HighlightEnemies: 0
+  HighlightTeam: 0
+  ReadInputs: 0
+  unitSlots: []
+  currentHighlight: {fileID: 0}
+  es: {fileID: 0}
+  CurrentAbility: {fileID: 0}
 --- !u!1 &1091861164
 GameObject:
   m_ObjectHideFlags: 0
@@ -16403,7 +16424,7 @@ MonoBehaviour:
   _unit: {fileID: 0}
   leftUnitSlot: {fileID: 734748321}
   rightUnitSlot: {fileID: 0}
-  _isEnemy: 0
+  _isEnemy: 1
   SpawnOffset: {x: 0, y: -0.8, z: -1.5}
 --- !u!1 &1431568742
 GameObject:
@@ -16763,7 +16784,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7a5f596665ace47ab8cb6966c75b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
+  enemyPrefabs:
+  - {fileID: 0}
+  - {fileID: 1508738059240432, guid: 0b2b07410f0c0074da13d4f2e0e66acf, type: 2}
+  - {fileID: 1270828181317854, guid: 4624842a2e735a64eb47429013acdffc, type: 2}
+  - {fileID: 1269021064422022, guid: 1176640c1f7dbee4890e64290df24f22, type: 2}
   rewardPrefabs: []
 --- !u!4 &1450660271
 Transform:
@@ -16777,6 +16802,7 @@ Transform:
   m_Children:
   - {fileID: 2114492445}
   - {fileID: 2124958318}
+  - {fileID: 1741265283}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19002,7 +19028,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1662627110}
-  - component: {fileID: 1662627111}
   - component: {fileID: 1662627109}
   - component: {fileID: 1662627113}
   - component: {fileID: 1662627112}
@@ -19026,7 +19051,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitSlots: []
   _units: []
-  unitHolderParent: {fileID: 1089082121}
 --- !u!4 &1662627110
 Transform:
   m_ObjectHideFlags: 0
@@ -19041,27 +19065,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1662627111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1662627108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b6e45b81f43d3458d371006c9f96f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _showHighlights: 1
-  HighlightAll: 0
-  HighlightEnemies: 0
-  HighlightTeam: 0
-  ReadInputs: 0
-  UnitsParent: {fileID: 1089082120}
-  unitSlots: []
-  currentHighlight: {fileID: 0}
-  es: {fileID: 0}
-  CurrentAbility: {fileID: 0}
 --- !u!114 &1662627112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19289,7 +19292,7 @@ MonoBehaviour:
   _unit: {fileID: 0}
   leftUnitSlot: {fileID: 151143636}
   rightUnitSlot: {fileID: 734748321}
-  _isEnemy: 0
+  _isEnemy: 1
   SpawnOffset: {x: 0, y: -0.8, z: 0.5}
 --- !u!1 &1706912462
 GameObject:
@@ -19651,6 +19654,50 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1732016255}
   m_CullTransparentMesh: 0
+--- !u!1 &1741265282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1741265283}
+  - component: {fileID: 1741265284}
+  m_Layer: 0
+  m_Name: Fight (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1741265283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741265282}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1450660271}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1741265284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741265282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3c652a889aec846a907247e66cba33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy1: 1
+  enemy2: 0
+  enemy3: 3
+  enemy4: 0
 --- !u!1 &1804441459
 GameObject:
   m_ObjectHideFlags: 0
@@ -27627,9 +27674,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3c652a889aec846a907247e66cba33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy1: 0
+  enemy1: 2
   enemy2: 0
-  enemy3: 0
+  enemy3: 1
   enemy4: 0
 --- !u!1 &2114821401
 GameObject:
@@ -27852,11 +27899,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15b9d3ba13cc524a9f3dbe2fe50be47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unit: {fileID: 0}
+  _unit: {fileID: 114216630878804036, guid: 81ff62d4f2ee54549982ca98b7f5a7db, type: 2}
   leftUnitSlot: {fileID: 0}
   rightUnitSlot: {fileID: 151143636}
   _isEnemy: 0
-  SpawnOffset: {x: 0, y: 1.5, z: 0}
+  SpawnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!4 &2136594898
 Transform:
   m_ObjectHideFlags: 0

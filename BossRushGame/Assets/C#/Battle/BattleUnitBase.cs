@@ -40,6 +40,11 @@ public class BattleUnitBase : MonoBehaviour
     public CharCombatValues CombatValues { get { return _combatValues; } }
     public bool IsDead { get { return _combatValues.IsDead; } }
 
+    private void Awake()
+    {
+        _combatValues = GetComponent<CharCombatValues>();
+    }
+
     protected virtual void Start()
     {
         if (PointofAttack == null)
@@ -48,7 +53,6 @@ public class BattleUnitBase : MonoBehaviour
         }
 
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
-        _combatValues = GetComponent<CharCombatValues>();
         _bsMachine = FindObjectOfType<BattleStateMachine>();
         _animator = GetComponent<Animator>();
 

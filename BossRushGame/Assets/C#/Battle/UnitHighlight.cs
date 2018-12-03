@@ -26,9 +26,7 @@ public class UnitHighlight : MonoBehaviour
     public bool HighlightTeam = false;
 
     public bool ReadInputs = false;
-
-    [SerializeField, Tooltip("Parent of Unit Holders")]
-    private GameObject UnitsParent;
+    
     [SerializeField]
     private UnitSlot[] unitSlots;
     [SerializeField]
@@ -60,7 +58,6 @@ public class UnitHighlight : MonoBehaviour
         es = EventSystem.current;
         _inputManager = FindObjectOfType<InputManager>();
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
-        unitSlots = UnitsParent.GetComponentsInChildren<UnitSlot>();
         bsMachine = FindObjectOfType<BattleStateMachine>();
     }
 
@@ -75,7 +72,7 @@ public class UnitHighlight : MonoBehaviour
             case Targets.enemy:
                 for(int i = 0; i<unitSlots.Length; i++)
                 {
-                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null &&
+                    if (unitSlots[i].IsEnemy && unitSlots[i].GetUnit() != null &&
                         !unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>().IsDead)
                     {
                         currentHighlight = unitSlots[i];
@@ -87,7 +84,7 @@ public class UnitHighlight : MonoBehaviour
             case Targets.teammate:
                 for (int i = 0; i < unitSlots.Length; i++)
                 {
-                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>() != null && 
+                    if (!unitSlots[i].IsEnemy && 
                         !unitSlots[i].GetUnit().GetComponent<BattleUnitPlayer>().IsDead)
                     {
                         currentHighlight = unitSlots[i];
@@ -99,7 +96,7 @@ public class UnitHighlight : MonoBehaviour
                 HighlightEnemies = true;
                 for (int i = 0; i < unitSlots.Length; i++)
                 {
-                    if (unitSlots[i].GetUnit().GetComponent<BattleUnitEnemy>() != null)
+                    if (unitSlots[i].IsEnemy)
                     {
                         currentHighlight = unitSlots[i];
                         break;
@@ -161,7 +158,7 @@ public class UnitHighlight : MonoBehaviour
         while (current.rightUnitSlot != null)
         {
             //If right of current is not dead, return that
-            if (!current.rightUnitSlot.GetUnit().IsDead)
+            if (current.rightUnitSlot.GetUnit() && !current.rightUnitSlot.GetUnit().IsDead)
             {
                 //Debug.Log("Found target");
                 return current.rightUnitSlot;
@@ -188,7 +185,7 @@ public class UnitHighlight : MonoBehaviour
         while (current.leftUnitSlot != null)
         {
             //If left of current is not dead, return that
-            if (!current.leftUnitSlot.GetUnit().IsDead)
+            if (current.leftUnitSlot.GetUnit() && !current.leftUnitSlot.GetUnit().IsDead)
             {
                 //Debug.Log("Found target");
                 return current.leftUnitSlot;
@@ -265,8 +262,23 @@ public class UnitHighlight : MonoBehaviour
     {
         for (int i = 0; i < enemies.Length; i++)
         {
-            unitSlots[i + 1].SetUnit(enemies[i].GetComponent<BattleUnitBase>());
+            if (enemies[i] != null)
+                unitSlots[i + 1].SetUnit(enemies[i].GetComponent<BattleUnitBase>());
         }
+    }
+
+    private void InitUnitSlots()
+    {
+        unitSlots = GetComponentsInChildren<UnitSlot>();
+        foreach (UnitSlot slot in unitSlots)
+            slot.Init(this);
+    }
+
+    public UnitSlot[] GetUnitSlots()
+    {
+        if (unitSlots.Length == 0) InitUnitSlots();
+
+        return unitSlots;
     }
 }
 

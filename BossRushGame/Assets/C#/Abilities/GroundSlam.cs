@@ -66,7 +66,6 @@ public class GroundSlam : BaseAbility
             Attacker.transform.position = Vector3.Lerp(endPos, startPos, timer);
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("finished" + startPos);
         EndTurn();
     }
 }

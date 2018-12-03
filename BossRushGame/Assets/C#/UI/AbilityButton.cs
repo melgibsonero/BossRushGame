@@ -23,7 +23,6 @@ public class AbilityButton : MonoBehaviour {
 	void Start () {
         _battleSystem = FindObjectOfType<BattleSystem_v2>();
         _unitHighlight = FindObjectOfType<UnitHighlight>();
-        _player = FindObjectOfType<BattleUnitPlayer>();
         _thisButton = GetComponent<Button>();
         _nameText = GetComponent<ButtonOnClickSetter>();
 
@@ -60,5 +59,10 @@ public class AbilityButton : MonoBehaviour {
         {
             Debug.Log("Not enough mana");
         }
+    }
+
+    public void SetPlayer(BattleUnitPlayer player)
+    {
+        _player = player;
     }
 }

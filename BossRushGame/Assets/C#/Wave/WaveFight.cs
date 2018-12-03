@@ -8,10 +8,8 @@ public class WaveFight : WaveBase
     public enum Enemy
     {
         None,
-        TinyGuy,
         SmallGuy,
         NormalGuy,
-        BigGuy,
         BossMan
     }
 }
