@@ -9,6 +9,8 @@ public class AddRigidBodyToChildren : MonoBehaviour {
     public bool done = true;
     private bool activated = false;
 
+    public int HowManyNonBoneParts = 3;
+
 	// Use this for initialization
 	void Start () {
         transforms = GetComponentsInChildren<Transform>();
@@ -18,11 +20,7 @@ public class AddRigidBodyToChildren : MonoBehaviour {
     {
         if (!activated)
         {
-            done = false;
-        }
-        else
-        {
-            Debug.Log("no more!");
+            done = false; 
         }
     }
 	
@@ -30,19 +28,31 @@ public class AddRigidBodyToChildren : MonoBehaviour {
 	void Update () {
         if (!done)
         {
+            if (GetComponent<Animator>()) GetComponent<Animator>().enabled = false;
             done = true;
-            for(int i = 3; i < transforms.Length; i++)
+            for(int i = HowManyNonBoneParts; i < transforms.Length; i++)
             {
                 transforms[i].gameObject.AddComponent<Rigidbody>();
-                transforms[i].gameObject.AddComponent<BoxCollider>();
+                transforms[i].gameObject.AddComponent<CapsuleCollider>();
+                transforms[i].parent = null;
 
-                BoxCollider box = transforms[i].GetComponent<BoxCollider>();
+                CapsuleCollider box = transforms[i].GetComponent<CapsuleCollider>();
                 Rigidbody rb = transforms[i].GetComponent<Rigidbody>();
-                box.size = new Vector3(0.01f, 0.04f, 0.01f);
+                box.radius = 0.05f / transforms[i].localScale.x;
+                box.height = 1f / transforms[i].localScale.y;
 
                 Destroy(box, 5f);
                 Destroy(rb, 5f);
             }
+            Invoke("CleanUp", 6f);
         }
 	}
+
+    void CleanUp()
+    {
+        for (int i = HowManyNonBoneParts; i < transforms.Length; i++)
+        {
+            transforms[i].parent = transform;
+        }
+    }
 }

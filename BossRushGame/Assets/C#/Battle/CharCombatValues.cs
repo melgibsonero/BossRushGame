@@ -4,6 +4,8 @@ using TMPro;
 
 public class CharCombatValues : MonoBehaviour
 {
+
+    public ItemWeapon.WeaponType weakness = ItemWeapon.WeaponType.None;
     
     public TextMeshPro textMesh;
 
@@ -38,9 +40,20 @@ public class CharCombatValues : MonoBehaviour
 
     #region HP methods
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, ItemWeapon.WeaponType type = ItemWeapon.WeaponType.None)
     {
-        _totalDamage = damage - currentDP;
+        int defPoint = currentDP;
+        //If weakness is not None, calculate weakness
+        if(weakness != ItemWeapon.WeaponType.None)
+        {
+            //If weakness is same as type, null defence
+            if(weakness == type)
+            {
+                defPoint = 0;
+            }
+        }
+
+        _totalDamage = damage - defPoint;
 
         if (_totalDamage > 0)
             currentHP -= _totalDamage;

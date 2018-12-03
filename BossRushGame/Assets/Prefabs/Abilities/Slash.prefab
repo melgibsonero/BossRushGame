@@ -59,4 +59,4 @@ MonoBehaviour:
   ManaCost: 0
   damage: 0
   poof: {fileID: 198316739385518130, guid: b85ae652125f4184589f78d2a6e71456, type: 2}
-  WalkUpOffset: {x: -2, y: 0, z: 0}
+  WalkUpOffset: {x: -4, y: 0, z: 0}

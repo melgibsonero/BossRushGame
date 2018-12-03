@@ -49,7 +49,7 @@ public class BaseAbility : MonoBehaviour
 
     public virtual void DealDamage()
     {
-        Target.GetComponent<CharCombatValues>().TakeDamage(damage);
+        Target.GetComponent<CharCombatValues>().TakeDamage(damage, attackType);
     }
 
     protected void EndTurn()
@@ -60,9 +60,13 @@ public class BaseAbility : MonoBehaviour
 
     public virtual void Retreat()
     {
-        if (Target.IsDead)
+    }
+
+    public void CollapseTarget(BattleUnitBase _target)
+    {
+        if (_target.IsDead)
         {
-            Target.GetComponentInChildren<AddRigidBodyToChildren>().ActivateCollapse();
+            _target.GetComponentInChildren<AddRigidBodyToChildren>().ActivateCollapse();
         }
     }
 }

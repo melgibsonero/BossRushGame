@@ -8,7 +8,9 @@ public class ItemWeapon : MonoBehaviour
     public enum WeaponType
     {
         Slash = 0,
-        Crush = 1
+        Crush = 1,
+        None = 3
+
     }
 
     public int damage;

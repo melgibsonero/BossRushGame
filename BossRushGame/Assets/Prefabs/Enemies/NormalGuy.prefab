@@ -1414,6 +1414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transforms: []
   done: 1
+  HowManyNonBoneParts: 3
 --- !u!114 &114658002460123152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1442,10 +1443,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e314109fcc35ca24585bb6b645da0211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weakness: 0
   textMesh: {fileID: 114172345529552960, guid: 1b32a92da15ace34c9df059608bf45c3, type: 2}
   maxHP: 4
   maxMP: 0
-  defaultAP: 2
+  defaultAP: 1
   defaultDP: 0
 --- !u!137 &137715060408961212
 SkinnedMeshRenderer:

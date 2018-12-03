@@ -116,6 +116,7 @@ public class BattleStateMachine : MonoBehaviour
             case MenuState.AbilityList:
                 currentState = MenuState.AbilityList;
                 // curve
+                panelCurve.WakeUp(show: false);
                 listCurve.WakeUp(show: true);
                 itemCurve.WakeUp(show: false, nullTarget: true);
                 // other

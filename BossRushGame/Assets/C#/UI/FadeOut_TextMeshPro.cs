@@ -27,7 +27,14 @@ public class FadeOut_TextMeshPro : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(timer<FadeoutTime) timer += Time.deltaTime;
+        if (timer < FadeoutTime)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            Invoke("Destroy", 2f);
+        }
         if (LookAtCamera) transform.rotation = FindObjectOfType<Camera>().transform.rotation;
         if(FadeoutOverTime) textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, (1 - timer/FadeoutTime));
         if(MoveUpwards) transform.localPosition = new Vector3(ogPos.x, ogPos.y + timer * UpwardMovementSpeed, ogPos.z);

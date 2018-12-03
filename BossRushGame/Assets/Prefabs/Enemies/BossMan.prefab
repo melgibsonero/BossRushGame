@@ -1373,7 +1373,7 @@ Animator:
   m_GameObject: {fileID: 1269021064422022}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6d60fd8c46f059d45bb29d294908edd0, type: 2}
+  m_Controller: {fileID: 9100000, guid: e4ffb914057785943a474d2cf2f5eb5b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1411,10 +1411,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e68c2c990fb87449df5baf2ac11351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   isDoneForTurn: 0
   PointofAttack: {fileID: 1211523467161452}
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
   AbilityInUse: {fileID: 0}
+  _abilities: []
 --- !u!114 &114688007742146654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1426,8 +1428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e314109fcc35ca24585bb6b645da0211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weakness: 3
   textMesh: {fileID: 114172345529552960, guid: 1b32a92da15ace34c9df059608bf45c3, type: 2}
-  maxHP: 20
+  maxHP: 5
   maxMP: 0
   defaultAP: 5
   defaultDP: 0

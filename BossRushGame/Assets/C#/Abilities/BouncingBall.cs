@@ -56,7 +56,7 @@ public class BouncingBall : BaseAbility {
 
     public override void DealDamage()
     {
-        Targets[currentTarget].GetComponent<CharCombatValues>().TakeDamage(damage);
+        Targets[currentTarget].GetComponent<CharCombatValues>().TakeDamage(damage, attackType);
         currentTarget++;
     }
 

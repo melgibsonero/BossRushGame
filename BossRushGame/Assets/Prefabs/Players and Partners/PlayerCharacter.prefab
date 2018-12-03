@@ -2651,6 +2651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd634809f3f04b48910ae9b538036eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   isDoneForTurn: 0
   PointofAttack: {fileID: 1122441811023126}
   Pointer: {fileID: 1158599336440608, guid: c384852939fae794cb09944ea86377db, type: 2}
@@ -2677,11 +2678,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e314109fcc35ca24585bb6b645da0211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weakness: 3
   textMesh: {fileID: 114172345529552960, guid: 1b32a92da15ace34c9df059608bf45c3, type: 2}
-  maxHP: 10
+  maxHP: 20
   maxMP: 10
   defaultAP: 1
-  defaultDP: 1
+  defaultDP: 0
 --- !u!114 &114540588963823846
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,6 +8,8 @@ public class BasicSlash : BaseAbility
     private Vector3 endPos;
 
     public ParticleSystem poof;
+
+    private bool teleport = false;
     
     [SerializeField]
     private Vector3 WalkUpOffset = new Vector3(-2, 0, 0);
@@ -22,7 +24,7 @@ public class BasicSlash : BaseAbility
 
     public override void Retreat()
     {
-        base.Retreat();
+        CollapseTarget(Target);
         StartCoroutine("RetreatBack");
         battleUnitAnimator.Play("MagicianWalk", 0);
     }
@@ -32,21 +34,26 @@ public class BasicSlash : BaseAbility
         float timer = 0;
         startPos = Attacker.transform.position;
         endPos = Target.transform.position + WalkUpOffset;
-        //float distance = Vector3.Distance(startPos, endPos) / 4f;
-        Instantiate(poof, startPos, poof.transform.rotation);
-        Attacker.transform.position = startPos;
-        Attacker.gameObject.SetActive(false);
+        if (poof)
+        {
+            Instantiate(poof, startPos, poof.transform.rotation);
+            Attacker.gameObject.SetActive(false);
+        }
+        Attacker.transform.position = startPos;        
         while (timer < 1)
         {
             
             timer += Time.deltaTime;
-            //Attacker.transform.position = Vector3.Lerp(startPos, endPos, timer / distance);
+            if(!poof) Attacker.transform.position = Vector3.Lerp(startPos, endPos, timer);
             yield return new WaitForEndOfFrame();
 
         }
-        Attacker.gameObject.SetActive(true);
         Attacker.transform.position = endPos;
-        Instantiate(poof, endPos, poof.transform.rotation);
+        if (poof)
+        {
+            Attacker.gameObject.SetActive(true);
+            Instantiate(poof, endPos, poof.transform.rotation);
+        }
         battleUnitAnimator.Play("DoubleStab", 0);
     }
 

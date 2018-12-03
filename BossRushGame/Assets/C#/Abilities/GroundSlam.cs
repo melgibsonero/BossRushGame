@@ -34,14 +34,15 @@ public class GroundSlam : BaseAbility
         {
             if (Targets[t] != null)
             {
-                Targets[t].GetComponent<CharCombatValues>().TakeDamage(damage+1);
+                Targets[t].GetComponent<CharCombatValues>().TakeDamage(damage+1, attackType);
+                CollapseTarget(Targets[t]);
                 yield return new WaitForSeconds(WaveSpeed);
             }
         }
     }
 
     public override void Retreat()
-    {
+    {        
         StartCoroutine("RetreatBack");
     }
 
